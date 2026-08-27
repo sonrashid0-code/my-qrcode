@@ -2,28 +2,53 @@
 
 const app = express();
 
+/*
+=====================================================
+RENDER PORT
+=====================================================
+*/
+
 const PORT = process.env.PORT || 5000;
+
+
+/*
+=====================================================
+MIDDLEWARE
+=====================================================
+*/
 
 app.use(express.json());
 
+app.use(express.urlencoded({
+    extended: true
+}));
+
 app.use(express.static(__dirname));
+
 
 /*
 =====================================================
 IN-MEMORY DATA
 =====================================================
-For now, students are stored while the server is running.
-Later we can move this to a permanent database.
 */
 
-const students = {};
+/*
+Student information is stored while the server is running.
+
+IMPORTANT:
+For a real production school system, we should later
+move this into a database so the data remains after
+a server restart.
+*/
+
+const students = [];
 
 const studentLocations = {};
 
 
 /*
 =====================================================
-HOME
+HOME / SERVER TEST
 =====================================================
 */
 
@@ -32,7 +57,7 @@ app.get("/api/status", (req, res) => {
     res.json({
         success: true,
         message: "School QR System server is running.",
-        students: Object.keys(students).length
+        students: students.length
     });
 
 });
@@ -40,172 +65,145 @@ app.get("/api/status", (req, res) => {
 
 /*
 =====================================================
-ADD STUDENT
+STUDENT REGISTRATION
 =====================================================
 */
 
 app.post("/api/students", (req, res) => {
 
-    const {
-        name,
-        id,
-        studentClass,
-        parentName,
-        parentPhone,
-        arrivalTime,
-        departureTime,
-        medicalInfo,
-        password,
-        tracking
-    } = req.body;
+    try {
+
+        const {
+            name,
+            id,
+            className,
+            parentName,
+            parentPhone,
+            arrivalTime,
+            departureTime,
+            medicalInfo,
+            password
+        } = req.body;
 
 
-    if (!name || !id || !password) {
+        /*
+        CHECK REQUIRED INFORMATION
+        */
 
-        return res.status(400).json({
+        if (!name || !id || !className || !password) {
 
-            success: false,
-
-            message:
-                "Student name, student ID and password are required."
-
-        });
-
-    }
-
-
-    const studentID =
-        String(id).trim().toUpperCase();
-
-
-    if (students[studentID]) {
-
-        return res.status(409).json({
-
-            success: false,
-
-            message:
-                "A student with this ID already exists."
-
-        });
-
-    }
-
-
-    students[studentID] = {
-
-        name: String(name).trim(),
-
-        id: studentID,
-
-        studentClass:
-            studentClass || "",
-
-        parentName:
-            parentName || "",
-
-        parentPhone:
-            parentPhone || "",
-
-        arrivalTime:
-            arrivalTime || "",
-
-        departureTime:
-            departureTime || "",
-
-        medicalInfo:
-            medicalInfo || "",
-
-        password:
-            String(password),
-
-        tracking:
-            tracking || "enabled",
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    res.json({
-
-        success: true,
-
-        message:
-            "Student created successfully.",
-
-        student: {
-
-            name:
-                students[studentID].name,
-
-            id:
-                students[studentID].id,
-
-            studentClass:
-                students[studentID].studentClass
-
-        }
-
-    });
-
-});
-
-
-/*
-=====================================================
-GET STUDENT
-=====================================================
-*/
-
-app.get(
-    "/api/students/:studentID",
-    (req, res) => {
-
-        const studentID =
-            req.params.studentID
-                .trim()
-                .toUpperCase();
-
-
-        const student =
-            students[studentID];
-
-
-        if (!student) {
-
-            return res.status(404).json({
-
+            return res.status(400).json({
                 success: false,
-
                 message:
-                    "Student not found."
-
+                    "Student name, ID, class and password are required."
             });
 
         }
 
 
         /*
-        NEVER send the password
-        when simply requesting student data.
+        CLEAN DATA
         */
 
-        res.json({
+        const studentID =
+            String(id).trim();
+
+
+        const studentName =
+            String(name).trim();
+
+
+        /*
+        CHECK DUPLICATE ID
+        */
+
+        const existingStudent =
+            students.find(
+                student =>
+                    student.id.toLowerCase() ===
+                    studentID.toLowerCase()
+            );
+
+
+        if (existingStudent) {
+
+            return res.status(409).json({
+                success: false,
+                message:
+                    "A student with this ID already exists."
+            });
+
+        }
+
+
+        /*
+        CREATE STUDENT
+        */
+
+        const student = {
+
+            name: studentName,
+
+            id: studentID,
+
+            className:
+                String(className).trim(),
+
+            parentName:
+                String(parentName || "").trim(),
+
+            parentPhone:
+                String(parentPhone || "").trim(),
+
+            arrivalTime:
+                String(arrivalTime || "").trim(),
+
+            departureTime:
+                String(departureTime || "").trim(),
+
+            medicalInfo:
+                String(medicalInfo || "").trim(),
+
+            password:
+                String(password),
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        /*
+        SAVE STUDENT
+        */
+
+        students.push(student);
+
+
+        console.log(
+            `Student registered: ${student.id}`
+        );
+
+
+        /*
+        DO NOT SEND PASSWORD BACK
+        */
+
+        res.status(201).json({
 
             success: true,
 
+            message:
+                "Student saved successfully.",
+
             student: {
 
-                name:
-                    student.name,
+                name: student.name,
 
-                id:
-                    student.id,
+                id: student.id,
 
-                studentClass:
-                    student.studentClass,
+                className:
+                    student.className,
 
                 parentName:
                     student.parentName,
@@ -221,9 +219,6 @@ app.get(
 
                 medicalInfo:
                     student.medicalInfo,
-
-                tracking:
-                    student.tracking,
 
                 createdAt:
                     student.createdAt
@@ -233,106 +228,510 @@ app.get(
         });
 
     }
-);
+
+    catch (error) {
+
+        console.error(
+            "Student registration error:",
+            error
+        );
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Unable to save student."
+
+        });
+
+    }
+
+});
 
 
 /*
 =====================================================
-PASSWORD VERIFICATION
+GET ALL STUDENTS
 =====================================================
 */
 
-app.post(
-    "/api/students/:studentID/login",
-    (req, res) => {
+app.get("/api/students", (req, res) => {
 
-        const studentID =
-            req.params.studentID
-                .trim()
-                .toUpperCase();
+    /*
+    NEVER SEND PASSWORDS TO THE BROWSER
+    */
 
+    const safeStudents =
+        students.map(student => ({
 
-        const password =
-            req.body.password;
+            name:
+                student.name,
 
+            id:
+                student.id,
 
-        const student =
-            students[studentID];
+            className:
+                student.className,
 
+            parentName:
+                student.parentName,
 
-        if (!student) {
+            parentPhone:
+                student.parentPhone,
 
-            return res.status(404).json({
+            arrivalTime:
+                student.arrivalTime,
 
-                success: false,
+            departureTime:
+                student.departureTime,
 
-                message:
-                    "Student not found."
+            medicalInfo:
+                student.medicalInfo,
 
-            });
+            createdAt:
+                student.createdAt
 
-        }
-
-
-        if (
-            typeof password !== "string" ||
-            password !== student.password
-        ) {
-
-            return res.status(401).json({
-
-                success: false,
-
-                message:
-                    "Incorrect password."
-
-            });
-
-        }
+        }));
 
 
-        /*
-        Password is correct.
-        Now return the student's information.
-        */
+    res.json({
 
-        res.json({
+        success: true,
 
-            success: true,
+        students:
+            safeStudents
+
+    });
+
+});
+
+
+/*
+=====================================================
+GET ONE STUDENT
+=====================================================
+*/
+
+app.get("/api/students/:studentID", (req, res) => {
+
+    const studentID =
+        String(
+            req.params.studentID || ""
+        ).trim();
+
+
+    const student =
+        students.find(
+            item =>
+                item.id.toLowerCase() ===
+                studentID.toLowerCase()
+        );
+
+
+    if (!student) {
+
+        return res.status(404).json({
+
+            success: false,
 
             message:
-                "Password accepted.",
+                "Student not found."
 
-            student: {
+        });
 
-                name:
-                    student.name,
+    }
 
-                id:
-                    student.id,
 
-                studentClass:
-                    student.studentClass,
+    /*
+    PASSWORD IS NOT SENT
+    */
 
-                parentName:
-                    student.parentName,
+    res.json({
 
-                parentPhone:
-                    student.parentPhone,
+        success: true,
 
-                arrivalTime:
-                    student.arrivalTime,
+        student: {
 
-                departureTime:
-                    student.departureTime,
+            name:
+                student.name,
 
-                medicalInfo:
-                    student.medicalInfo,
+            id:
+                student.id,
 
-                tracking:
-                    student.tracking
+            className:
+                student.className,
 
-            }
+            parentName:
+                student.parentName,
+
+            parentPhone:
+                student.parentPhone,
+
+            arrivalTime:
+                student.arrivalTime,
+
+            departureTime:
+                student.departureTime,
+
+            medicalInfo:
+                student.medicalInfo,
+
+            createdAt:
+                student.createdAt
+
+        }
+
+    });
+
+});
+
+
+/*
+=====================================================
+STUDENT PASSWORD LOGIN
+=====================================================
+*/
+
+app.post("/api/student-login", (req, res) => {
+
+    const {
+        studentID,
+        password
+    } = req.body;
+
+
+    if (!studentID || !password) {
+
+        return res.status(400).json({
+
+            success: false,
+
+            message:
+                "Student ID and password are required."
+
+        });
+
+    }
+
+
+    const student =
+        students.find(
+            item =>
+                item.id.toLowerCase() ===
+                String(studentID)
+                    .trim()
+                    .toLowerCase()
+        );
+
+
+    if (!student) {
+
+        return res.status(404).json({
+
+            success: false,
+
+            message:
+                "Student not found."
+
+        });
+
+    }
+
+
+    /*
+    CHECK PASSWORD
+    */
+
+    if (
+        String(password) !==
+        String(student.password)
+    ) {
+
+        return res.status(401).json({
+
+            success: false,
+
+            message:
+                "Incorrect password."
+
+        });
+
+    }
+
+
+    /*
+    LOGIN SUCCESSFUL
+
+    Password is deliberately NOT returned.
+    */
+
+    res.json({
+
+        success: true,
+
+        message:
+            "Password accepted.",
+
+        student: {
+
+            name:
+                student.name,
+
+            id:
+                student.id,
+
+            className:
+                student.className,
+
+            parentName:
+                student.parentName,
+
+            parentPhone:
+                student.parentPhone,
+
+            arrivalTime:
+                student.arrivalTime,
+
+            departureTime:
+                student.departureTime,
+
+            medicalInfo:
+                student.medicalInfo
+
+        }
+
+    });
+
+});
+
+
+/*
+=====================================================
+RECEIVE STUDENT LOCATION
+=====================================================
+*/
+
+app.post("/api/location", (req, res) => {
+
+    const {
+        studentID,
+        latitude,
+        longitude
+    } = req.body;
+
+
+    if (
+        !studentID ||
+        typeof latitude !== "number" ||
+        typeof longitude !== "number"
+    ) {
+
+        return res.status(400).json({
+
+            success: false,
+
+            message:
+                "Invalid location data."
+
+        });
+
+    }
+
+
+    /*
+    CHECK THAT STUDENT EXISTS
+    */
+
+    const student =
+        students.find(
+            item =>
+                item.id.toLowerCase() ===
+                String(studentID)
+                    .trim()
+                    .toLowerCase()
+        );
+
+
+    if (!student) {
+
+        return res.status(404).json({
+
+            success: false,
+
+            message:
+                "Student not found."
+
+        });
+
+    }
+
+
+    /*
+    SAVE LOCATION
+    */
+
+    studentLocations[student.id] = {
+
+        latitude,
+
+        longitude,
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+
+    console.log(
+        `Location received for ${student.id}:`,
+        latitude,
+        longitude
+    );
+
+
+    res.json({
+
+        success: true,
+
+        message:
+            "Location received."
+
+    });
+
+});
+
+
+/*
+=====================================================
+GET STUDENT LOCATION
+=====================================================
+*/
+
+app.get("/api/location/:studentID", (req, res) => {
+
+    const studentID =
+        String(
+            req.params.studentID || ""
+        ).trim();
+
+
+    const location =
+        studentLocations[studentID];
+
+
+    if (!location) {
+
+        return res.status(404).json({
+
+            success: false,
+
+            message:
+                "No location available."
+
+        });
+
+    }
+
+
+    res.json({
+
+        success: true,
+
+        studentID:
+
+            studentID,
+
+        location:
+
+            location
+
+    });
+
+});
+
+
+/*
+=====================================================
+DELETE STUDENT
+=====================================================
+*/
+
+app.delete("/api/students/:studentID", (req, res) => {
+
+    const studentID =
+        String(
+            req.params.studentID || ""
+        ).trim()
+        .toLowerCase();
+
+
+    const index =
+        students.findIndex(
+            student =>
+                student.id.toLowerCase() ===
+                studentID
+        );
+
+
+    if (index === -1) {
+
+        return res.status(404).json({
+
+            success: false,
+
+            message:
+                "Student not found."
+
+        });
+
+    }
+
+
+    const removedStudent =
+        students.splice(
+            index,
+            1
+        )[0];
+
+
+    /*
+    REMOVE LOCATION TOO
+    */
+
+    delete studentLocations[
+        removedStudent.id
+    ];
+
+
+    res.json({
+
+        success: true,
+
+        message:
+            "Student deleted successfully."
+
+    });
+
+});
+
+
+/*
+=====================================================
+UNKNOWN API ROUTE
+=====================================================
+*/
+
+app.use(
+    "/api",
+    (req, res) => {
+
+        return res.status(404).json({
+
+            success: false,
+
+            message:
+                "API endpoint not found."
 
         });
 
@@ -342,24 +741,18 @@ app.post(
 
 /*
 =====================================================
-UPDATE STUDENT
+START SERVER
 =====================================================
 */
 
-app.put(
-    "/api/students/:studentID",
-    (req, res) => {
+app.listen(
+    PORT,
+    "0.0.0.0",
+    () => {
 
-        const oldID =
-            req.params.studentID
-                .trim()
-                .toUpperCase();
+        console.log(
+            `School Tracking Server running on port ${PORT}`
+        );
 
-
-        const student =
-            students[oldID];
-
-
-        if (!student) {
-
-            return res.status(404).
+    }
+);
