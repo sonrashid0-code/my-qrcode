@@ -57,7 +57,10 @@ app.post("/api/students", (req, res) => {
             parentName,
             parentPhone,
             medicalInfo,
-            password
+            password,
+            attendance,
+            performance,
+            status
         } = req.body;
 
 
@@ -119,9 +122,14 @@ app.post("/api/students", (req, res) => {
             password:
                 String(password),
 
-            /*
-             * ARRIVAL IS EMPTY UNTIL QR IS SCANNED
-             */
+            attendance:
+                String(attendance || "").trim(),
+
+            performance:
+                String(performance || "").trim(),
+
+            status:
+                String(status || "ACTIVE").trim(),
 
             arrivalTime: null,
 
@@ -165,6 +173,12 @@ app.post("/api/students", (req, res) => {
                 parentPhone: student.parentPhone,
 
                 medicalInfo: student.medicalInfo,
+
+                attendance: student.attendance,
+
+                performance: student.performance,
+
+                status: student.status,
 
                 arrivalTime: student.arrivalTime,
 
@@ -223,6 +237,12 @@ app.get("/api/students", (req, res) => {
             parentPhone: student.parentPhone,
 
             medicalInfo: student.medicalInfo,
+
+            attendance: student.attendance,
+
+            performance: student.performance,
+
+            status: student.status,
 
             arrivalTime: student.arrivalTime,
 
@@ -300,6 +320,12 @@ app.get("/api/students/:studentID", (req, res) => {
 
             medicalInfo: student.medicalInfo,
 
+            attendance: student.attendance,
+
+            performance: student.performance,
+
+            status: student.status,
+
             arrivalTime: student.arrivalTime,
 
             arrivalDate: student.arrivalDate,
@@ -357,8 +383,8 @@ app.post("/api/scan/:studentID", (req, res) => {
         /*
          * SERVER TIME
          *
-         * The server determines the arrival time.
-         * The student's phone clock is NOT used.
+         * The server creates the arrival
+         * timestamp.
          */
 
         const now =
@@ -387,7 +413,7 @@ app.post("/api/scan/:studentID", (req, res) => {
 
 
         /*
-         * SAVE ARRIVAL INFORMATION
+         * SAVE ARRIVAL
          */
 
         student.arrivalTime =
@@ -405,16 +431,12 @@ app.post("/api/scan/:studentID", (req, res) => {
         );
 
 
-        /*
-         * SEND RESULT
-         */
-
         res.json({
 
             success: true,
 
             message:
-                "Arrival recorded successfully.",
+                "QR scan recorded successfully.",
 
             scan: {
 
@@ -442,6 +464,15 @@ app.post("/api/scan/:studentID", (req, res) => {
 
                 className:
                     student.className,
+
+                attendance:
+                    student.attendance,
+
+                performance:
+                    student.performance,
+
+                status:
+                    student.status,
 
                 arrivalTime:
                     student.arrivalTime,
@@ -569,6 +600,15 @@ app.post("/api/student-login", (req, res) => {
 
             medicalInfo:
                 student.medicalInfo,
+
+            attendance:
+                student.attendance,
+
+            performance:
+                student.performance,
+
+            status:
+                student.status,
 
             arrivalTime:
                 student.arrivalTime,
@@ -709,13 +749,9 @@ app.get("/api/location/:studentID", (req, res) => {
 
         success: true,
 
-        studentID:
+        studentID,
 
-            studentID,
-
-        location:
-
-            location
+        location
 
     });
 
