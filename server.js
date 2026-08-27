@@ -119,6 +119,10 @@ app.post("/api/students", (req, res) => {
             password:
                 String(password),
 
+            /*
+             * ARRIVAL IS EMPTY UNTIL QR IS SCANNED
+             */
+
             arrivalTime: null,
 
             arrivalDate: null,
@@ -314,7 +318,8 @@ app.get("/api/students/:studentID", (req, res) => {
 
 
 /* =====================================================
-   QR CODE SCAN / AUTOMATIC ARRIVAL
+   QR SCAN
+   AUTOMATIC ARRIVAL TIME
 ===================================================== */
 
 app.post("/api/scan/:studentID", (req, res) => {
@@ -350,11 +355,11 @@ app.post("/api/scan/:studentID", (req, res) => {
 
 
         /*
-        SERVER TIME
-
-        The server creates the timestamp.
-        We are NOT using the student's phone clock.
-        */
+         * SERVER TIME
+         *
+         * The server determines the arrival time.
+         * The student's phone clock is NOT used.
+         */
 
         const now =
             new Date();
@@ -382,8 +387,8 @@ app.post("/api/scan/:studentID", (req, res) => {
 
 
         /*
-        SAVE ARRIVAL
-        */
+         * SAVE ARRIVAL INFORMATION
+         */
 
         student.arrivalTime =
             arrivalTime;
@@ -401,15 +406,15 @@ app.post("/api/scan/:studentID", (req, res) => {
 
 
         /*
-        RETURN STUDENT INFORMATION
-        */
+         * SEND RESULT
+         */
 
         res.json({
 
             success: true,
 
             message:
-                "QR scan recorded successfully.",
+                "Arrival recorded successfully.",
 
             scan: {
 
@@ -726,7 +731,8 @@ app.delete("/api/students/:studentID", (req, res) => {
     const studentID =
         String(
             req.params.studentID || ""
-        ).trim()
+        )
+        .trim()
         .toLowerCase();
 
 
