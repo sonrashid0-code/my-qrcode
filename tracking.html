@@ -18,27 +18,27 @@
     >
 
 	<style type="text/css">
-.auto-style1 {
-	font-size: x-large;
-}
-.auto-style2 {
-	text-align: center;
-}
-.auto-style3 {
-	font-size: x-large;
-	text-align: center;
-}
-.auto-style4 {
-	font-size: large;
-}
-.auto-style5 {
-	font-size: medium;
-}
-.auto-style6 {
-	font-size: large;
-	font-weight: bold;
-}
-</style>
+	.auto-style1 {
+		font-size: x-large;
+	}
+	.auto-style2 {
+		text-align: center;
+	}
+	.auto-style3 {
+		font-size: x-large;
+		text-align: center;
+	}
+	.auto-style4 {
+		font-size: large;
+	}
+	.auto-style5 {
+		font-size: medium;
+	}
+	.auto-style6 {
+		font-size: large;
+		font-weight: bold;
+	}
+	</style>
 
 </head>
 
@@ -806,13 +806,15 @@
        AUTOMATIC UPDATES
        ===================================================== */
 
-    setInterval(
-        getStudentLocation,
-        5000
-    );
+ /* =====================================================
+   AUTOMATIC LIVE UPDATES
+   ===================================================== */
 
+getStudentLocation();
 
-    </script>
+setInterval(() => {
+    getStudentLocation();
+}, 5000);    </script>
 
 
 </body>
