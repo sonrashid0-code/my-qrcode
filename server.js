@@ -2,20 +2,12 @@
 
 const app = express();
 
-/*
-=====================================================
-RENDER PORT
-=====================================================
-*/
-
 const PORT = process.env.PORT || 5000;
 
 
-/*
-=====================================================
-MIDDLEWARE
-=====================================================
-*/
+/* =====================================================
+   MIDDLEWARE
+===================================================== */
 
 app.use(express.json());
 
@@ -26,31 +18,18 @@ app.use(express.urlencoded({
 app.use(express.static(__dirname));
 
 
-/*
-=====================================================
-IN-MEMORY DATA
-=====================================================
-*/
-
-/*
-Student information is stored while the server is running.
-
-IMPORTANT:
-For a real production school system, we should later
-move this into a database so the data remains after
-a server restart.
-*/
+/* =====================================================
+   DATA
+===================================================== */
 
 const students = [];
 
 const studentLocations = {};
 
 
-/*
-=====================================================
-HOME / SERVER TEST
-=====================================================
-*/
+/* =====================================================
+   SERVER STATUS
+===================================================== */
 
 app.get("/api/status", (req, res) => {
 
@@ -63,11 +42,9 @@ app.get("/api/status", (req, res) => {
 });
 
 
-/*
-=====================================================
-STUDENT REGISTRATION
-=====================================================
-*/
+/* =====================================================
+   REGISTER STUDENT
+===================================================== */
 
 app.post("/api/students", (req, res) => {
 
@@ -79,16 +56,10 @@ app.post("/api/students", (req, res) => {
             className,
             parentName,
             parentPhone,
-            arrivalTime,
-            departureTime,
             medicalInfo,
             password
         } = req.body;
 
-
-        /*
-        CHECK REQUIRED INFORMATION
-        */
 
         if (!name || !id || !className || !password) {
 
@@ -101,21 +72,12 @@ app.post("/api/students", (req, res) => {
         }
 
 
-        /*
-        CLEAN DATA
-        */
-
         const studentID =
             String(id).trim();
-
 
         const studentName =
             String(name).trim();
 
-
-        /*
-        CHECK DUPLICATE ID
-        */
 
         const existingStudent =
             students.find(
@@ -136,10 +98,6 @@ app.post("/api/students", (req, res) => {
         }
 
 
-        /*
-        CREATE STUDENT
-        */
-
         const student = {
 
             name: studentName,
@@ -155,27 +113,25 @@ app.post("/api/students", (req, res) => {
             parentPhone:
                 String(parentPhone || "").trim(),
 
-            arrivalTime:
-                String(arrivalTime || "").trim(),
-
-            departureTime:
-                String(departureTime || "").trim(),
-
             medicalInfo:
                 String(medicalInfo || "").trim(),
 
             password:
                 String(password),
 
+            arrivalTime: null,
+
+            arrivalDate: null,
+
+            lastScan: null,
+
+            departureTime: null,
+
             createdAt:
                 new Date().toISOString()
 
         };
 
-
-        /*
-        SAVE STUDENT
-        */
 
         students.push(student);
 
@@ -184,10 +140,6 @@ app.post("/api/students", (req, res) => {
             `Student registered: ${student.id}`
         );
 
-
-        /*
-        DO NOT SEND PASSWORD BACK
-        */
 
         res.status(201).json({
 
@@ -202,26 +154,23 @@ app.post("/api/students", (req, res) => {
 
                 id: student.id,
 
-                className:
-                    student.className,
+                className: student.className,
 
-                parentName:
-                    student.parentName,
+                parentName: student.parentName,
 
-                parentPhone:
-                    student.parentPhone,
+                parentPhone: student.parentPhone,
 
-                arrivalTime:
-                    student.arrivalTime,
+                medicalInfo: student.medicalInfo,
 
-                departureTime:
-                    student.departureTime,
+                arrivalTime: student.arrivalTime,
 
-                medicalInfo:
-                    student.medicalInfo,
+                arrivalDate: student.arrivalDate,
 
-                createdAt:
-                    student.createdAt
+                lastScan: student.lastScan,
+
+                departureTime: student.departureTime,
+
+                createdAt: student.createdAt
 
             }
 
@@ -250,47 +199,36 @@ app.post("/api/students", (req, res) => {
 });
 
 
-/*
-=====================================================
-GET ALL STUDENTS
-=====================================================
-*/
+/* =====================================================
+   GET ALL STUDENTS
+===================================================== */
 
 app.get("/api/students", (req, res) => {
-
-    /*
-    NEVER SEND PASSWORDS TO THE BROWSER
-    */
 
     const safeStudents =
         students.map(student => ({
 
-            name:
-                student.name,
+            name: student.name,
 
-            id:
-                student.id,
+            id: student.id,
 
-            className:
-                student.className,
+            className: student.className,
 
-            parentName:
-                student.parentName,
+            parentName: student.parentName,
 
-            parentPhone:
-                student.parentPhone,
+            parentPhone: student.parentPhone,
 
-            arrivalTime:
-                student.arrivalTime,
+            medicalInfo: student.medicalInfo,
 
-            departureTime:
-                student.departureTime,
+            arrivalTime: student.arrivalTime,
 
-            medicalInfo:
-                student.medicalInfo,
+            arrivalDate: student.arrivalDate,
 
-            createdAt:
-                student.createdAt
+            lastScan: student.lastScan,
+
+            departureTime: student.departureTime,
+
+            createdAt: student.createdAt
 
         }));
 
@@ -299,19 +237,16 @@ app.get("/api/students", (req, res) => {
 
         success: true,
 
-        students:
-            safeStudents
+        students: safeStudents
 
     });
 
 });
 
 
-/*
-=====================================================
-GET ONE STUDENT
-=====================================================
-*/
+/* =====================================================
+   GET ONE STUDENT
+===================================================== */
 
 app.get("/api/students/:studentID", (req, res) => {
 
@@ -343,42 +278,33 @@ app.get("/api/students/:studentID", (req, res) => {
     }
 
 
-    /*
-    PASSWORD IS NOT SENT
-    */
-
     res.json({
 
         success: true,
 
         student: {
 
-            name:
-                student.name,
+            name: student.name,
 
-            id:
-                student.id,
+            id: student.id,
 
-            className:
-                student.className,
+            className: student.className,
 
-            parentName:
-                student.parentName,
+            parentName: student.parentName,
 
-            parentPhone:
-                student.parentPhone,
+            parentPhone: student.parentPhone,
 
-            arrivalTime:
-                student.arrivalTime,
+            medicalInfo: student.medicalInfo,
 
-            departureTime:
-                student.departureTime,
+            arrivalTime: student.arrivalTime,
 
-            medicalInfo:
-                student.medicalInfo,
+            arrivalDate: student.arrivalDate,
 
-            createdAt:
-                student.createdAt
+            lastScan: student.lastScan,
+
+            departureTime: student.departureTime,
+
+            createdAt: student.createdAt
 
         }
 
@@ -387,11 +313,167 @@ app.get("/api/students/:studentID", (req, res) => {
 });
 
 
-/*
-=====================================================
-STUDENT PASSWORD LOGIN
-=====================================================
-*/
+/* =====================================================
+   QR CODE SCAN / AUTOMATIC ARRIVAL
+===================================================== */
+
+app.post("/api/scan/:studentID", (req, res) => {
+
+    try {
+
+        const studentID =
+            String(
+                req.params.studentID || ""
+            ).trim();
+
+
+        const student =
+            students.find(
+                item =>
+                    item.id.toLowerCase() ===
+                    studentID.toLowerCase()
+            );
+
+
+        if (!student) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message:
+                    "Student not found."
+
+            });
+
+        }
+
+
+        /*
+        SERVER TIME
+
+        The server creates the timestamp.
+        We are NOT using the student's phone clock.
+        */
+
+        const now =
+            new Date();
+
+
+        const arrivalTime =
+            now.toLocaleTimeString(
+                "en-UG",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                }
+            );
+
+
+        const arrivalDate =
+            now.toLocaleDateString(
+                "en-UG"
+            );
+
+
+        const scanTimestamp =
+            now.toISOString();
+
+
+        /*
+        SAVE ARRIVAL
+        */
+
+        student.arrivalTime =
+            arrivalTime;
+
+        student.arrivalDate =
+            arrivalDate;
+
+        student.lastScan =
+            scanTimestamp;
+
+
+        console.log(
+            `QR SCAN: ${student.id} - ${arrivalDate} ${arrivalTime}`
+        );
+
+
+        /*
+        RETURN STUDENT INFORMATION
+        */
+
+        res.json({
+
+            success: true,
+
+            message:
+                "QR scan recorded successfully.",
+
+            scan: {
+
+                studentID:
+                    student.id,
+
+                arrivalTime:
+                    student.arrivalTime,
+
+                arrivalDate:
+                    student.arrivalDate,
+
+                timestamp:
+                    student.lastScan
+
+            },
+
+            student: {
+
+                name:
+                    student.name,
+
+                id:
+                    student.id,
+
+                className:
+                    student.className,
+
+                arrivalTime:
+                    student.arrivalTime,
+
+                arrivalDate:
+                    student.arrivalDate
+
+            }
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "QR scan error:",
+            error
+        );
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Unable to record QR scan."
+
+        });
+
+    }
+
+});
+
+
+/* =====================================================
+   STUDENT PASSWORD LOGIN
+===================================================== */
 
 app.post("/api/student-login", (req, res) => {
 
@@ -439,10 +521,6 @@ app.post("/api/student-login", (req, res) => {
     }
 
 
-    /*
-    CHECK PASSWORD
-    */
-
     if (
         String(password) !==
         String(student.password)
@@ -459,12 +537,6 @@ app.post("/api/student-login", (req, res) => {
 
     }
 
-
-    /*
-    LOGIN SUCCESSFUL
-
-    Password is deliberately NOT returned.
-    */
 
     res.json({
 
@@ -490,14 +562,20 @@ app.post("/api/student-login", (req, res) => {
             parentPhone:
                 student.parentPhone,
 
+            medicalInfo:
+                student.medicalInfo,
+
             arrivalTime:
                 student.arrivalTime,
 
-            departureTime:
-                student.departureTime,
+            arrivalDate:
+                student.arrivalDate,
 
-            medicalInfo:
-                student.medicalInfo
+            lastScan:
+                student.lastScan,
+
+            departureTime:
+                student.departureTime
 
         }
 
@@ -506,11 +584,9 @@ app.post("/api/student-login", (req, res) => {
 });
 
 
-/*
-=====================================================
-RECEIVE STUDENT LOCATION
-=====================================================
-*/
+/* =====================================================
+   RECEIVE STUDENT LOCATION
+===================================================== */
 
 app.post("/api/location", (req, res) => {
 
@@ -539,10 +615,6 @@ app.post("/api/location", (req, res) => {
     }
 
 
-    /*
-    CHECK THAT STUDENT EXISTS
-    */
-
     const student =
         students.find(
             item =>
@@ -566,10 +638,6 @@ app.post("/api/location", (req, res) => {
 
     }
 
-
-    /*
-    SAVE LOCATION
-    */
 
     studentLocations[student.id] = {
 
@@ -602,11 +670,9 @@ app.post("/api/location", (req, res) => {
 });
 
 
-/*
-=====================================================
-GET STUDENT LOCATION
-=====================================================
-*/
+/* =====================================================
+   GET STUDENT LOCATION
+===================================================== */
 
 app.get("/api/location/:studentID", (req, res) => {
 
@@ -651,11 +717,9 @@ app.get("/api/location/:studentID", (req, res) => {
 });
 
 
-/*
-=====================================================
-DELETE STUDENT
-=====================================================
-*/
+/* =====================================================
+   DELETE STUDENT
+===================================================== */
 
 app.delete("/api/students/:studentID", (req, res) => {
 
@@ -695,10 +759,6 @@ app.delete("/api/students/:studentID", (req, res) => {
         )[0];
 
 
-    /*
-    REMOVE LOCATION TOO
-    */
-
     delete studentLocations[
         removedStudent.id
     ];
@@ -716,11 +776,9 @@ app.delete("/api/students/:studentID", (req, res) => {
 });
 
 
-/*
-=====================================================
-UNKNOWN API ROUTE
-=====================================================
-*/
+/* =====================================================
+   UNKNOWN API ROUTE
+===================================================== */
 
 app.use(
     "/api",
@@ -739,11 +797,9 @@ app.use(
 );
 
 
-/*
-=====================================================
-START SERVER
-=====================================================
-*/
+/* =====================================================
+   START SERVER
+===================================================== */
 
 app.listen(
     PORT,
