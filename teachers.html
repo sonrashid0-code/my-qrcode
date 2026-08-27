@@ -1,0 +1,1051 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Class Teacher | School QR System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .teacher-card {
+            margin-top: 30px;
+            padding: 28px;
+            border-radius: 22px;
+            border: 1px solid rgba(120,170,255,0.12);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(10,30,62,0.75),
+                    rgba(3,12,28,0.90)
+                );
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            margin-bottom: 7px;
+            color: #8da7ce;
+            font-weight: 800;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+
+            border: 1px solid rgba(120,170,255,0.15);
+
+            background: rgba(2,10,25,0.75);
+
+            color: #dbe9ff;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #70adff;
+        }
+
+        .password-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        .password-box input {
+            flex: 1;
+        }
+
+        .small-button {
+            padding: 0 15px;
+            border: 0;
+            border-radius: 12px;
+
+            background: rgba(76,139,255,0.15);
+
+            color: #70adff;
+
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .message {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 12px;
+
+            display: none;
+
+            text-align: center;
+
+            font-weight: 800;
+        }
+
+        .success {
+            display: block;
+            background: rgba(40,180,100,0.12);
+            color: #6ff0a0;
+        }
+
+        .error {
+            display: block;
+            background: rgba(255,70,70,0.12);
+            color: #ff8b8b;
+        }
+
+        .student-list {
+            margin-top: 25px;
+        }
+
+        .student-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 16px;
+
+            margin-top: 10px;
+
+            border-radius: 14px;
+
+            background: rgba(2,10,25,0.55);
+
+            border: 1px solid rgba(120,170,255,0.08);
+        }
+
+        .student-item strong {
+            color: #dbe9ff;
+        }
+
+        .student-item span {
+            color: #7187a9;
+            font-size: 13px;
+        }
+
+        @media(max-width:700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .student-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- BACKGROUND -->
+
+<div class="page-background">
+
+    <div class="background-grid"></div>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-glow glow-three"></div>
+
+    <div class="light-beam beam-one"></div>
+    <div class="light-beam beam-two"></div>
+
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+
+</div>
+
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <a href="index.html" class="brand">
+
+        <div style="font-size:x-large;text-align:center;">
+            QR
+        </div>
+
+        <div style="text-align:center;">
+
+            <strong>
+                <span style="font-size:x-large;">
+                    School QR System
+                </span>
+            </strong>
+
+            <span style="font-size:x-large;">
+                SMART STUDENT MANAGEMENT
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <nav style="text-align:center;">
+
+        <a href="index.html">
+            <span style="font-size:x-large;">Home</span>
+        </a>
+
+        <a href="students.html">
+            <span style="font-size:x-large;">Students</span>
+        </a>
+
+        <a href="qr-generator.html">
+            <span style="font-size:x-large;">QR Generator</span>
+        </a>
+
+        <a href="parent.html">
+            <span style="font-size:x-large;">Parents</span>
+        </a>
+
+        <a href="student.html">
+            <span style="font-size:x-large;">Student</span>
+        </a>
+
+        <a href="tracking.html">
+            <span style="font-size:x-large;">Tracking</span>
+        </a>
+
+        <a href="teacher.html"
+           class="nav-active">
+            <span style="font-size:x-large;">Teacher</span>
+        </a>
+
+    </nav>
+
+
+    <div class="system-online">
+
+        <span></span>
+
+        ONLINE
+
+    </div>
+
+</header>
+
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="small-label">
+
+            <span></span>
+
+            CLASS TEACHER SYSTEM
+
+        </div>
+
+
+        <h1 style="
+            margin-top:15px;
+            font-size:clamp(32px,5vw,50px);
+            letter-spacing:-2px;
+        ">
+
+            Student
+
+            <strong style="color:#70adff;">
+                Registration
+            </strong>
+
+        </h1>
+
+
+        <p style="
+            margin-top:12px;
+            max-width:650px;
+            color:#7187a9;
+            line-height:1.8;
+        ">
+
+            Create and manage student information
+            used by the School QR System.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- TEACHER FORM -->
+
+    <section class="teacher-card">
+
+
+        <div style="text-align:center;">
+
+            <div style="font-size:48px;">
+                👨‍🏫
+            </div>
+
+            <h2 style="margin-top:8px;">
+                Add Student
+            </h2>
+
+            <p style="
+                margin-top:8px;
+                color:#7187a9;
+            ">
+
+                Enter the student's official information
+                and create their private password.
+
+            </p>
+
+        </div>
+
+
+
+        <form id="studentForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Student Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        placeholder="Enter student name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- ID -->
+
+                <div class="form-group">
+
+                    <label>
+                        Student ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentID"
+                        placeholder="e.g. STU001"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- CLASS -->
+
+                <div class="form-group">
+
+                    <label>
+                        Class
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentClass"
+                        placeholder="e.g. Senior 3"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PARENT -->
+
+                <div class="form-group">
+
+                    <label>
+                        Parent / Guardian Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="parentName"
+                        placeholder="Enter parent name"
+                    >
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Parent Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="parentPhone"
+                        placeholder="Enter phone number"
+                    >
+
+                </div>
+
+
+
+                <!-- ARRIVAL -->
+
+                <div class="form-group">
+
+                    <label>
+                        Arrival Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="arrivalTime"
+                    >
+
+                </div>
+
+
+
+                <!-- DEPARTURE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Departure Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="departureTime"
+                    >
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Student Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="studentPassword"
+                            placeholder="Create password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="small-button"
+                            id="showPassword"
+                        >
+                            SHOW
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MEDICAL -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Medical Information
+                    </label>
+
+                    <textarea
+                        id="medicalInfo"
+                        placeholder="Enter important medical information"
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SAVE -->
+
+            <button
+                type="submit"
+                class="main-button"
+                style="
+                    width:100%;
+                    margin-top:25px;
+                    border:0;
+                "
+            >
+
+                💾 SAVE STUDENT
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+    </section>
+
+
+
+    <!-- STUDENTS -->
+
+    <section class="teacher-card student-list">
+
+
+        <div style="text-align:center;">
+
+            <div style="font-size:40px;">
+                📚
+            </div>
+
+            <h2 style="margin-top:8px;">
+                Registered Students
+            </h2>
+
+            <p style="
+                margin-top:8px;
+                color:#7187a9;
+            ">
+
+                Students currently stored in the
+                system.
+
+            </p>
+
+        </div>
+
+
+        <div id="studentList">
+
+            <p style="
+                margin-top:20px;
+                text-align:center;
+                color:#7187a9;
+            ">
+
+                Loading students...
+
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-brand">
+
+        <div style="font-size:large;">
+            QR
+        </div>
+
+        <div>
+
+            <strong>
+                <span style="font-size:large;">
+                    School QR System
+                </span>
+            </strong>
+
+            <span style="font-size:large;">
+                Smart Student Management
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-slogan">
+
+        Secure • Simple • Smart
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   PASSWORD SHOW / HIDE
+   ===================================================== */
+
+const passwordInput =
+    document.getElementById(
+        "studentPassword"
+    );
+
+const showPassword =
+    document.getElementById(
+        "showPassword"
+    );
+
+
+showPassword.addEventListener(
+    "click",
+    function() {
+
+        if (
+            passwordInput.type ===
+            "password"
+        ) {
+
+            passwordInput.type =
+                "text";
+
+            this.textContent =
+                "HIDE";
+
+        } else {
+
+            passwordInput.type =
+                "password";
+
+            this.textContent =
+                "SHOW";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+const form =
+    document.getElementById(
+        "studentForm"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        message.className =
+            "message";
+
+        message.style.display =
+            "block";
+
+        message.textContent =
+            "Saving student...";
+
+
+        const student = {
+
+            name:
+                document.getElementById(
+                    "studentName"
+                ).value.trim(),
+
+            id:
+                document.getElementById(
+                    "studentID"
+                ).value.trim(),
+
+            className:
+                document.getElementById(
+                    "studentClass"
+                ).value.trim(),
+
+            parentName:
+                document.getElementById(
+                    "parentName"
+                ).value.trim(),
+
+            parentPhone:
+                document.getElementById(
+                    "parentPhone"
+                ).value.trim(),
+
+            arrivalTime:
+                document.getElementById(
+                    "arrivalTime"
+                ).value,
+
+            departureTime:
+                document.getElementById(
+                    "departureTime"
+                ).value,
+
+            medicalInfo:
+                document.getElementById(
+                    "medicalInfo"
+                ).value.trim(),
+
+            password:
+                document.getElementById(
+                    "studentPassword"
+                ).value
+
+        };
+
+
+        try {
+
+
+            const response =
+                await fetch(
+                    "/api/students",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                student
+                            )
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to save student."
+                );
+
+            }
+
+
+            message.className =
+                "message success";
+
+            message.textContent =
+                "✅ Student saved successfully.";
+
+
+            form.reset();
+
+
+            loadStudents();
+
+
+        } catch(error) {
+
+
+            console.error(
+                error
+            );
+
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                "❌ " +
+                error.message;
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   LOAD STUDENTS
+   ===================================================== */
+
+async function loadStudents() {
+
+
+    const list =
+        document.getElementById(
+            "studentList"
+        );
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/api/students"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !data.students ||
+            data.students.length === 0
+        ) {
+
+            list.innerHTML = `
+
+                <p style="
+                    margin-top:20px;
+                    text-align:center;
+                    color:#7187a9;
+                ">
+
+                    No students registered yet.
+
+                </p>
+
+            `;
+
+            return;
+
+        }
+
+
+        list.innerHTML = "";
+
+
+        data.students.forEach(
+            student => {
+
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "student-item";
+
+
+                item.innerHTML = `
+
+                    <div>
+
+                        <strong>
+                            ${escapeHTML(student.name)}
+                        </strong>
+
+                        <br>
+
+                        <span>
+                            ID:
+                            ${escapeHTML(student.id)}
+                        </span>
+
+                        <br>
+
+                        <span>
+                            Class:
+                            ${escapeHTML(student.className || "--")}
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Arrival:
+                            ${escapeHTML(student.arrivalTime || "--")}
+                        </span>
+
+                        <br>
+
+                        <span>
+                            Departure:
+                            ${escapeHTML(student.departureTime || "--")}
+                        </span>
+
+                    </div>
+
+                `;
+
+
+                list.appendChild(
+                    item
+                );
+
+            }
+        );
+
+
+    } catch(error) {
+
+
+        list.innerHTML = `
+
+            <p style="
+                margin-top:20px;
+                text-align:center;
+                color:#ff8b8b;
+            ">
+
+                Unable to load students.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   BASIC HTML ESCAPE
+   ===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+loadStudents();
+
+</script>
+
+
+</body>
+
+</html>
