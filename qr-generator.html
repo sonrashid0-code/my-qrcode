@@ -1,0 +1,1310 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>QR Generator | School QR System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+   <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="page-background">
+
+    <div class="background-grid"></div>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-glow glow-three"></div>
+
+    <div class="light-beam beam-one"></div>
+    <div class="light-beam beam-two"></div>
+
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+
+</div>
+
+
+
+<header class="navbar">
+
+    <a href="index.html" class="brand">
+
+        <div class="brand-logo">
+            QR
+        </div>
+
+        <div class="brand-text">
+
+            <strong>
+                School QR System
+            </strong>
+
+            <span>
+                SMART STUDENT MANAGEMENT
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="students.html">
+            Students
+        </a>
+
+        <a href="qr-generator.html"
+           class="nav-active">
+            QR Generator
+        </a>
+
+        <a href="parent.html">
+            Parents
+        </a>
+
+        <a href="student.html">
+            Student
+        </a>
+
+        <a href="tracking.html">
+            Tracking
+        </a>
+
+    </nav>
+
+
+    <div class="system-online">
+
+        <span></span>
+
+        ONLINE
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <section class="page-header">
+
+        <div class="small-label">
+
+            <span></span>
+
+            QR MANAGEMENT
+
+        </div>
+
+
+        <h1 style="
+            margin-top:15px;
+            font-size:clamp(32px,5vw,50px);
+            letter-spacing:-2px;
+        ">
+
+            QR
+
+            <strong style="color:#70adff;">
+                Generator
+            </strong>
+
+        </h1>
+
+
+        <p style="
+            margin-top:12px;
+            max-width:650px;
+            color:#7187a9;
+            font-size:11px;
+            line-height:1.8;
+        ">
+
+            Generate a unique QR code for an
+            authorized student record.
+
+        </p>
+
+    </section>
+
+
+
+    <section style="
+
+        display:grid;
+
+        grid-template-columns:
+            minmax(0,0.9fr)
+            minmax(0,1.1fr);
+
+        gap:20px;
+
+        margin-top:30px;
+
+    ">
+
+
+        <!-- LEFT -->
+
+        <div style="
+
+            padding:30px;
+
+            border-radius:25px;
+
+            border:1px solid rgba(120,170,255,0.13);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16,39,80,0.76),
+                    rgba(5,15,34,0.92)
+                );
+
+        ">
+
+
+            <div style="
+
+                width:70px;
+                height:70px;
+
+                display:flex;
+                align-items:center;
+                justify-content:center;
+
+                border-radius:20px;
+
+                background:rgba(76,139,255,0.12);
+
+                font-size:28px;
+
+                margin-bottom:22px;
+
+            ">
+
+                🔲
+
+            </div>
+
+
+            <span style="
+                color:#659cff;
+                font-size:7px;
+                font-weight:900;
+                letter-spacing:1.2px;
+            ">
+
+                CREATE QR CODE
+
+            </span>
+
+
+            <h2 style="
+                margin-top:8px;
+                font-size:22px;
+            ">
+
+                Student QR
+
+            </h2>
+
+
+            <p style="
+                margin-top:9px;
+                color:#687f9f;
+                font-size:9px;
+                line-height:1.8;
+            ">
+
+                Select a registered student
+                and create their unique QR code.
+
+            </p>
+
+
+
+            <!-- STUDENT SELECT -->
+
+            <div style="
+                margin-top:25px;
+            ">
+
+                <label style="
+                    display:block;
+                    margin-bottom:7px;
+                    color:#89a1c4;
+                    font-size:9px;
+                    font-weight:700;
+                ">
+
+                    Select Student
+
+                </label>
+
+
+                <select
+                    id="studentSelect"
+                    style="
+
+                        width:100%;
+                        min-height:47px;
+
+                        padding:0 14px;
+
+                        border-radius:11px;
+
+                        border:1px solid
+                        rgba(120,170,255,0.13);
+
+                        background:#07152b;
+
+                        color:white;
+
+                    "
+                >
+
+                    <option value="">
+
+                        Select a student...
+
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- STUDENT ID -->
+
+            <div style="
+                margin-top:18px;
+            ">
+
+                <label style="
+                    display:block;
+                    margin-bottom:7px;
+                    color:#89a1c4;
+                    font-size:9px;
+                    font-weight:700;
+                ">
+
+                    Student ID
+
+                </label>
+
+
+                <input
+                    id="studentID"
+                    type="text"
+                    placeholder="Example: ST001"
+                    readonly
+                    style="
+
+                        width:100%;
+                        min-height:47px;
+
+                        padding:0 14px;
+
+                        border-radius:11px;
+
+                        border:1px solid
+                        rgba(120,170,255,0.13);
+
+                        background:rgba(2,10,25,0.65);
+
+                        color:white;
+
+                    "
+                >
+
+            </div>
+
+
+
+            <!-- GENERATE -->
+
+            <button
+                id="generateBtn"
+                class="main-button"
+                type="button"
+                style="
+                    width:100%;
+                    margin-top:20px;
+                    border:0;
+                "
+            >
+
+                GENERATE QR CODE
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+
+            <div
+                id="generatorMessage"
+                style="
+                    margin-top:15px;
+                    text-align:center;
+                    font-size:9px;
+                "
+            ></div>
+
+
+        </div>
+
+
+
+        <!-- RIGHT -->
+
+        <div style="
+
+            padding:30px;
+
+            border-radius:25px;
+
+            border:1px solid rgba(120,170,255,0.13);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(11,31,65,0.78),
+                    rgba(3,12,28,0.94)
+                );
+
+            position:relative;
+
+            overflow:hidden;
+
+        ">
+
+
+            <div style="
+
+                display:flex;
+                align-items:center;
+
+                gap:14px;
+
+                margin-bottom:22px;
+
+            ">
+
+
+                <div style="
+
+                    width:55px;
+                    height:55px;
+
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+
+                    border-radius:16px;
+
+                    background:
+                    rgba(76,139,255,0.12);
+
+                    font-size:22px;
+
+                ">
+
+                    📱
+
+                </div>
+
+
+                <div>
+
+                    <span style="
+                        color:#659cff;
+                        font-size:7px;
+                        font-weight:900;
+                        letter-spacing:1px;
+                    ">
+
+                        QR PREVIEW
+
+                    </span>
+
+
+                    <h2 style="
+                        margin-top:5px;
+                        font-size:20px;
+                    ">
+
+                        Scan Code
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QR -->
+
+            <div
+                id="qrcode"
+                style="
+
+                    min-height:290px;
+
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+
+                    padding:20px;
+
+                    border-radius:20px;
+
+                    background:
+                    rgba(255,255,255,0.97);
+
+                "
+            >
+
+                <div style="
+                    text-align:center;
+                    color:#71819a;
+                    font-family:Arial,sans-serif;
+                ">
+
+                    <div style="
+                        font-size:45px;
+                        margin-bottom:10px;
+                    ">
+
+                        🔲
+
+                    </div>
+
+
+                    <strong style="
+                        display:block;
+                        color:#33445e;
+                        font-size:14px;
+                    ">
+
+                        QR Code Preview
+
+                    </strong>
+
+
+                    <span style="
+                        display:block;
+                        margin-top:6px;
+                        font-size:10px;
+                    ">
+
+                        Select a student to generate
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STUDENT INFO -->
+
+            <div
+                id="qrStudentInfo"
+                style="
+                    margin-top:18px;
+                    display:none;
+                "
+            >
+
+                <div style="
+
+                    padding:17px;
+
+                    border-radius:15px;
+
+                    background:
+                    rgba(4,15,34,0.70);
+
+                ">
+
+                    <span style="
+                        color:#5f7697;
+                        font-size:7px;
+                        font-weight:900;
+                        letter-spacing:1px;
+                    ">
+
+                        GENERATED FOR
+
+                    </span>
+
+
+                    <strong
+                        id="qrStudentName"
+                        style="
+                            display:block;
+                            margin-top:7px;
+                            color:#dbe9ff;
+                            font-size:14px;
+                        "
+                    >
+                    </strong>
+
+
+                    <span
+                        id="qrStudentClass"
+                        style="
+                            display:block;
+                            margin-top:5px;
+                            color:#6f89ac;
+                            font-size:8px;
+                        "
+                    >
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DOWNLOAD -->
+
+            <button
+                id="downloadBtn"
+                type="button"
+                style="
+
+                    width:100%;
+
+                    min-height:45px;
+
+                    margin-top:12px;
+
+                    border-radius:11px;
+
+                    border:1px solid
+                    rgba(120,170,255,0.13);
+
+                    background:
+                    rgba(70,130,255,0.06);
+
+                    color:#86a0c5;
+
+                    font-family:inherit;
+
+                    font-size:8px;
+
+                    font-weight:900;
+
+                    cursor:pointer;
+
+                    display:none;
+
+                "
+            >
+
+                DOWNLOAD QR CODE
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <section class="section-title">
+
+        <h2>
+            How it works
+        </h2>
+
+        <p>
+            Create a QR code from a registered student.
+        </p>
+
+    </section>
+
+
+
+    <section class="home-info-grid">
+
+
+        <div class="info-panel">
+
+            <div class="info-panel-icon">
+                1️⃣
+            </div>
+
+            <div>
+
+                <span>
+                    STEP ONE
+                </span>
+
+                <h3>
+                    Select Student
+                </h3>
+
+                <p>
+                    Choose a student from the
+                    registered student directory.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="info-panel">
+
+            <div class="info-panel-icon">
+                2️⃣
+            </div>
+
+            <div>
+
+                <span>
+                    STEP TWO
+                </span>
+
+                <h3>
+                    Generate
+                </h3>
+
+                <p>
+                    Create a unique QR code
+                    associated with that student.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <section
+        class="status-card"
+        style="margin-top:20px;"
+    >
+
+        <div class="status-symbol">
+            🛡️
+        </div>
+
+
+        <div class="status-text">
+
+            <span>
+                SECURITY
+            </span>
+
+            <h3>
+                Student information remains protected
+            </h3>
+
+            <p>
+                The QR code contains an access reference
+                rather than displaying private information directly.
+            </p>
+
+        </div>
+
+
+        <div class="status-online">
+            SECURE
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    <div class="footer-brand">
+
+        <div class="footer-logo">
+            QR
+        </div>
+
+        <div>
+
+            <strong>
+                School QR System
+            </strong>
+
+            <span>
+                Smart Student Management
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-slogan">
+
+        Secure
+
+        <b>•</b>
+
+        Simple
+
+        <b>•</b>
+
+        Smart
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   QR GENERATOR
+   ===================================================== */
+
+
+let students = [];
+
+
+
+const studentSelect =
+    document.getElementById(
+        "studentSelect"
+    );
+
+
+const studentID =
+    document.getElementById(
+        "studentID"
+    );
+
+
+const generateBtn =
+    document.getElementById(
+        "generateBtn"
+    );
+
+
+const qrcode =
+    document.getElementById(
+        "qrcode"
+    );
+
+
+const message =
+    document.getElementById(
+        "generatorMessage"
+    );
+
+
+const studentInfo =
+    document.getElementById(
+        "qrStudentInfo"
+    );
+
+
+const studentName =
+    document.getElementById(
+        "qrStudentName"
+    );
+
+
+const studentClass =
+    document.getElementById(
+        "qrStudentClass"
+    );
+
+
+const downloadBtn =
+    document.getElementById(
+        "downloadBtn"
+    );
+
+
+
+/* =====================================================
+   LOAD STUDENTS
+   ===================================================== */
+
+function loadStudents() {
+
+    studentSelect.innerHTML = `
+        <option value="">
+            Select a student...
+        </option>
+    `;
+
+
+    try {
+
+        students =
+            JSON.parse(
+                localStorage.getItem(
+                    "schoolStudents"
+                )
+            ) || [];
+
+    }
+
+    catch(error) {
+
+        students = [];
+
+    }
+
+
+
+    /*
+       TEST STUDENT
+
+       If there are no registered students yet,
+       create one test student.
+    */
+
+    if (
+        !Array.isArray(students) ||
+        students.length === 0
+    ) {
+
+        students = [
+
+            {
+                id: "ST001",
+                name: "Demo Student",
+                className: "Senior 3"
+            }
+
+        ];
+
+        localStorage.setItem(
+            "schoolStudents",
+            JSON.stringify(students)
+        );
+
+    }
+
+
+
+    students.forEach(
+        function(student) {
+
+            if (!student.id) {
+                return;
+            }
+
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                student.id;
+
+
+            option.textContent =
+                (student.name || "Student")
+                +
+                " — "
+                +
+                student.id;
+
+
+            studentSelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   SELECT STUDENT
+   ===================================================== */
+
+studentSelect.addEventListener(
+    "change",
+    function() {
+
+        const selectedID =
+            this.value;
+
+
+        const student =
+            students.find(
+                function(item) {
+
+                    return String(item.id)
+                        .toLowerCase()
+                        ===
+                        String(selectedID)
+                        .toLowerCase();
+
+                }
+            );
+
+
+        if (!student) {
+
+            studentID.value = "";
+
+            studentInfo.style.display =
+                "none";
+
+            message.textContent =
+                "";
+
+            return;
+
+        }
+
+
+
+        studentID.value =
+            student.id;
+
+
+        studentName.textContent =
+            student.name || "Student";
+
+
+        studentClass.textContent =
+            "Student ID: "
+            +
+            student.id
+            +
+            " • Class: "
+            +
+            (
+                student.className
+                ||
+                student.class
+                ||
+                "Not specified"
+            );
+
+
+        studentInfo.style.display =
+            "block";
+
+
+        message.textContent =
+            "Student selected. Ready to generate.";
+
+
+        message.style.color =
+            "#6f9ff0";
+
+    }
+);
+
+
+
+/* =====================================================
+   GENERATE QR
+   ===================================================== */
+
+generateBtn.addEventListener(
+    "click",
+    function() {
+
+        const selectedID =
+            studentSelect.value;
+
+
+        if (!selectedID) {
+
+            message.textContent =
+                "Please select a student first.";
+
+
+            message.style.color =
+                "#ff9b9b";
+
+
+            return;
+
+        }
+
+
+
+        const student =
+            students.find(
+                function(item) {
+
+                    return String(item.id)
+                        .toLowerCase()
+                        ===
+                        String(selectedID)
+                        .toLowerCase();
+
+                }
+            );
+
+
+        if (!student) {
+
+            message.textContent =
+                "Student record could not be found.";
+
+
+            message.style.color =
+                "#ff9b9b";
+
+
+            return;
+
+        }
+
+
+
+        /*
+           QR DESTINATION
+
+           The QR opens the student's page
+           with that student's ID.
+        */
+
+        const qrData =
+            window.location.origin
+            +
+            "/student.html?id="
+            +
+            encodeURIComponent(
+                student.id
+            );
+
+
+
+        qrcode.innerHTML = "";
+
+
+
+        try {
+
+            new QRCode(
+                qrcode,
+                {
+
+                    text: qrData,
+
+                    width:230,
+
+                    height:230,
+
+                    colorDark:"#07152b",
+
+                    colorLight:"#ffffff",
+
+                    correctLevel:
+                        QRCode.CorrectLevel.H
+
+                }
+            );
+
+
+            message.textContent =
+                "✓ QR code generated successfully.";
+
+
+            message.style.color =
+                "#70d9ae";
+
+
+            downloadBtn.style.display =
+                "block";
+
+
+
+            studentInfo.style.display =
+                "block";
+
+
+            studentName.textContent =
+                student.name || "Student";
+
+
+            studentClass.textContent =
+                "Student ID: "
+                +
+                student.id
+                +
+                " • Class: "
+                +
+                (
+                    student.className
+                    ||
+                    student.class
+                    ||
+                    "Not specified"
+                );
+
+        }
+
+
+        catch(error) {
+
+            console.error(error);
+
+
+            message.textContent =
+                "QR generation failed. Check that qrcode.min.js is in your folder.";
+
+
+            message.style.color =
+                "#ff9b9b";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   DOWNLOAD QR
+   ===================================================== */
+
+downloadBtn.addEventListener(
+    "click",
+    function() {
+
+        const image =
+            qrcode.querySelector(
+                "img"
+            );
+
+
+        const canvas =
+            qrcode.querySelector(
+                "canvas"
+            );
+
+
+        let imageURL = null;
+
+
+        if (image) {
+
+            imageURL =
+                image.src;
+
+        }
+
+
+        else if (canvas) {
+
+            imageURL =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+        }
+
+
+
+        if (!imageURL) {
+
+            message.textContent =
+                "Generate a QR code first.";
+
+
+            message.style.color =
+                "#ff9b9b";
+
+
+            return;
+
+        }
+
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            imageURL;
+
+
+        link.download =
+            "student-"
+            +
+            studentID.value
+            +
+            "-qr-code.png";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+    }
+);
+
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+loadStudents();
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,724 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Student Location | School QR System</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style type="text/css">
+.auto-style1 {
+	font-size: x-large;
+}
+.auto-style2 {
+	text-align: center;
+}
+.auto-style3 {
+	font-size: x-large;
+	text-align: center;
+}
+.auto-style4 {
+	font-size: large;
+}
+.auto-style5 {
+	font-size: medium;
+}
+.auto-style6 {
+	font-size: large;
+	font-weight: bold;
+}
+.auto-style7 {
+	background-color: #FFFFFF;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page-background">
+
+    <div class="background-grid"></div>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-glow glow-three"></div>
+
+    <div class="light-beam beam-one"></div>
+    <div class="light-beam beam-two"></div>
+
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+
+    <div class="stars">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+</div>
+
+
+<header class="navbar">
+
+
+<a href="index.html" class="brand">
+
+    <div class="auto-style3">
+        QR
+    </div>
+
+    <div class="auto-style2">
+
+        <strong>
+            <span class="auto-style1">School QR System
+        </span>
+        </strong>
+
+        <span class="auto-style1">
+            SMART STUDENT MANAGEMENT
+        </span>
+
+    </div>
+
+</a>
+
+
+<nav class="auto-style2">
+
+    <a href="index.html">
+        <span class="auto-style1">Home
+    </span>
+    </a>
+
+    <a href="students.html">
+        <span class="auto-style1">Students
+    </span>
+    </a>
+
+    <a href="qr-generator.html">
+        <span class="auto-style1">QR Generator
+    </span>
+    </a>
+
+    <a href="parent.html">
+        <span class="auto-style1">Parents
+    </span>
+    </a>
+
+    <a href="student.html">
+        <span class="auto-style1">Student
+    </span>
+    </a>
+
+    <a href="tracking.html">
+        <span class="auto-style1">Tracking
+    </span>
+    </a>
+
+</nav>
+
+
+<div class="auto-style4">
+
+    ONLINE
+
+</div>
+
+
+</header>
+
+
+<main class="container">
+
+
+<section class="page-header">
+
+
+<div class="auto-style4">
+
+    STUDENT LOCATION
+
+</div>
+
+
+<h1 style="
+margin-top:15px;
+font-size:clamp(32px,5vw,50px);
+letter-spacing:-2px;
+">
+
+Share
+
+<strong style="color:#70adff;">
+Location
+</strong>
+
+</h1>
+
+
+<p style="
+margin-top:12px;
+max-width:650px;
+color:#7187a9;
+line-height:1.8;
+" class="auto-style4">
+
+This page sends the student's current device
+location to the tracking system.
+
+</p>
+
+
+</section>
+
+
+
+<section style="
+margin-top:30px;
+padding:28px;
+border-radius:22px;
+border:1px solid rgba(120,170,255,0.12);
+background:
+linear-gradient(
+145deg,
+rgba(10,30,62,0.75),
+rgba(3,12,28,0.90)
+);
+">
+
+
+<div style="
+text-align:center;
+">
+
+
+<div style="
+font-size:55px;
+">
+
+📍
+
+</div>
+
+
+<h2 style="
+margin-top:10px;
+">
+
+Location Sharing
+
+</h2>
+
+
+<p id="studentInfo" style="
+margin-top:8px;
+color:#7187a9;
+" class="auto-style4">
+
+Student ID: --
+
+</p>
+
+
+</div>
+
+
+
+<div style="
+margin-top:22px;
+padding:18px;
+border-radius:14px;
+background:rgba(2,10,25,0.55);
+">
+
+
+<span style="
+display:block;
+color:#607b9f;
+" class="auto-style5">
+
+	<strong><span class="auto-style7">STATUS
+
+</span></strong>
+
+</span>
+
+
+<strong
+id="status"
+style="
+display:block;
+margin-top:8px;
+color:#dbe9ff;
+font-size:15px;
+">
+
+Location sharing is OFF
+
+</strong>
+
+
+</div>
+
+
+
+<div style="
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-top:12px;
+">
+
+
+<div style="
+padding:17px;
+border-radius:14px;
+background:rgba(2,10,25,0.55);
+">
+
+
+<span style="
+display:block;
+color:#607b9f;
+font-weight:900;
+" class="auto-style4">
+
+LATITUDE
+
+</span>
+
+
+<strong
+id="latitude"
+style="
+display:block;
+margin-top:8px;
+color:#dbe9ff;
+" class="auto-style4">
+
+--
+
+</strong>
+
+
+</div>
+
+
+
+<div style="
+padding:17px;
+border-radius:14px;
+background:rgba(2,10,25,0.55);
+">
+
+
+<span style="
+display:block;
+color:#607b9f;
+font-weight:900;
+" class="auto-style4">
+
+LONGITUDE
+
+</span>
+
+
+<strong
+id="longitude"
+style="
+display:block;
+margin-top:8px;
+color:#dbe9ff;
+font-size:14px;
+">
+
+--
+
+</strong>
+
+
+</div>
+
+
+</div>
+
+
+
+<button
+id="locationButton"
+class="main-button"
+type="button"
+style="
+width:100%;
+margin-top:18px;
+border:0;
+">
+
+📍 START SHARING LOCATION
+
+<span>
+→
+</span>
+
+</button>
+
+
+
+<p style="
+margin-top:14px;
+color:#627c9f;
+line-height:1.7;
+text-align:center;
+" class="auto-style5">
+
+Location permission must be granted by the
+device owner before sharing can begin.
+
+</p>
+
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+
+<div class="footer-brand">
+
+
+<div class="auto-style4">
+QR
+</div>
+
+
+<div>
+
+<strong>
+	<span class="auto-style4">School QR System
+</span>
+</strong>
+
+<span class="auto-style4">
+Smart Student Management
+</span>
+
+</div>
+
+
+</div>
+
+
+
+<div class="footer-slogan">
+
+	<span class="auto-style4">Secure
+
+</span><span class="auto-style6">•</span><span class="auto-style4">
+
+Simple
+
+</span><span class="auto-style6">•</span><span class="auto-style4">
+
+Smart
+
+</span>
+
+</div>
+
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================================
+   STUDENT LOCATION SHARING
+   ===================================================== */
+
+
+/* GET STUDENT ID */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const studentID =
+    params.get("id");
+
+
+/* DISPLAY STUDENT ID */
+
+document.getElementById(
+    "studentInfo"
+).textContent =
+    "Student ID: " +
+    (studentID || "--");
+
+
+/* LOCATION WATCHER */
+
+let locationWatcher = null;
+
+
+/* BUTTON */
+
+document.getElementById(
+    "locationButton"
+).addEventListener(
+    "click",
+    function() {
+
+
+        const button =
+            document.getElementById(
+                "locationButton"
+            );
+
+
+        const status =
+            document.getElementById(
+                "status"
+            );
+
+
+        const latitude =
+            document.getElementById(
+                "latitude"
+            );
+
+
+        const longitude =
+            document.getElementById(
+                "longitude"
+            );
+
+
+        /* STOP SHARING */
+
+        if (locationWatcher !== null) {
+
+
+            navigator.geolocation.clearWatch(
+                locationWatcher
+            );
+
+
+            locationWatcher = null;
+
+
+            status.textContent =
+                "Location sharing is OFF";
+
+
+            button.innerHTML =
+                "📍 START SHARING LOCATION <span>→</span>";
+
+
+            return;
+
+        }
+
+
+        /* CHECK GPS SUPPORT */
+
+        if (!navigator.geolocation) {
+
+
+            status.textContent =
+                "GPS is not supported on this device.";
+
+
+            return;
+
+        }
+
+
+        /* CHECK STUDENT ID */
+
+        if (!studentID) {
+
+
+            status.textContent =
+                "Student ID is missing.";
+
+
+            return;
+
+        }
+
+
+        status.textContent =
+            "Requesting location permission...";
+
+
+        button.textContent =
+            "⏹ STOP SHARING";
+
+
+        /* START GPS */
+
+        locationWatcher =
+            navigator.geolocation.watchPosition(
+
+
+                function(position) {
+
+
+                    const lat =
+                        position.coords.latitude;
+
+
+                    const lng =
+                        position.coords.longitude;
+
+
+                    /* DISPLAY LOCATION */
+
+                    latitude.textContent =
+                        lat.toFixed(6);
+
+
+                    longitude.textContent =
+                        lng.toFixed(6);
+
+
+                    status.textContent =
+                        "🟢 Location sharing is ACTIVE";
+
+
+                    /* SEND LOCATION TO SERVER */
+
+                    fetch(
+                        "/api/location",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                studentID:
+                                    studentID,
+
+                                latitude:
+                                    lat,
+
+                                longitude:
+                                    lng
+
+                            })
+
+                        }
+                    )
+
+
+                    .then(
+                        response =>
+                            response.json()
+                    )
+
+
+                    .then(
+                        data => {
+
+                            console.log(
+                                "Location sent to server:",
+                                data
+                            );
+
+                        }
+                    )
+
+
+                    .catch(
+                        error => {
+
+                            console.error(
+                                "Location upload failed:",
+                                error
+                            );
+
+                        }
+                    );
+
+
+                },
+
+
+                function(error) {
+
+
+                    status.textContent =
+                        "Unable to access location.";
+
+
+                    button.innerHTML =
+                        "📍 START SHARING LOCATION <span>→</span>";
+
+
+                    locationWatcher = null;
+
+
+                    console.error(
+                        "GPS error:",
+                        error
+                    );
+
+
+                },
+
+
+                {
+
+                    enableHighAccuracy: true,
+
+                    maximumAge: 5000,
+
+                    timeout: 10000
+
+                }
+
+
+            );
+
+    }
+
+);
+
+
+</script>
+
+
+</body>
+
+</html>

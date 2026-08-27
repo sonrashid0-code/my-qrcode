@@ -1,0 +1,852 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Parent Area | School QR System</title>
+
+    <link rel="stylesheet" href="style.css">
+	<style type="text/css">
+.auto-style1 {
+	font-size: medium;
+}
+.auto-style2 {
+	font-size: small;
+}
+.auto-style3 {
+	font-size: large;
+}
+.auto-style4 {
+	font-size: large;
+	font-weight: bold;
+}
+.auto-style5 {
+	font-size: x-large;
+}
+.auto-style6 {
+	text-align: center;
+}
+.auto-style7 {
+	font-size: x-large;
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+    <!-- ================= BACKGROUND ================= -->
+
+    <div class="page-background">
+
+        <div class="background-grid"></div>
+
+        <div class="background-glow glow-one"></div>
+        <div class="background-glow glow-two"></div>
+        <div class="background-glow glow-three"></div>
+
+        <div class="light-beam beam-one"></div>
+        <div class="light-beam beam-two"></div>
+
+        <div class="circle circle-one"></div>
+        <div class="circle circle-two"></div>
+
+        <div class="stars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="brand">
+
+            <div class="auto-style7">
+                QR
+            </div>
+
+            <div class="auto-style6">
+                <strong><span class="auto-style5">School QR System</span></strong>
+                <span class="auto-style5">SMART STUDENT MANAGEMENT </span>
+            </div>
+
+        </a>
+
+
+        <nav class="auto-style6">
+
+            <a href="index.html">
+                <span class="auto-style5">Home
+            </span>
+            </a>
+
+            <a href="students.html">
+                <span class="auto-style5">Students
+            </span>
+            </a>
+
+            <a href="qr-generator.html">
+                <span class="auto-style5">QR Generator
+            </span>
+            </a>
+
+            <a href="parent.html" class="nav-active">
+                <span class="auto-style5">Parents
+            </span>
+            </a>
+
+            <a href="student.html">
+                <span class="auto-style5">Student
+            </span>
+            </a>
+
+        </nav>
+
+
+        <div class="system-online">
+            <span></span>
+            ONLINE
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div class="small-label">
+
+                <span></span>
+
+                PARENT PORTAL
+
+            </div>
+
+
+            <h1 style="
+                margin-top:15px;
+                font-size:clamp(32px,5vw,50px);
+                letter-spacing:-2px;
+            ">
+
+                Parent
+                <strong style="color:#70adff;">
+                    Area
+                </strong>
+
+            </h1>
+
+
+            <p style="
+                margin-top:12px;
+                max-width:650px;
+                color:#7187a9;
+                line-height:1.8;
+            " class="auto-style1">
+
+                A secure area where authorized parents
+                can access information about their
+                student's school progress.
+
+            </p>
+
+        </section>
+
+
+        <!-- ================= LOGIN PANEL ================= -->
+
+        <section style="
+            margin-top:30px;
+
+            display:grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(280px, 0.8fr);
+
+            gap:20px;
+        ">
+
+
+            <!-- LOGIN -->
+
+            <div style="
+                padding:30px;
+
+                border-radius:25px;
+
+                border:
+                    1px solid
+                    rgba(120,170,255,0.13);
+
+                background:
+                    linear-gradient(
+                        145deg,
+                        rgba(16,39,80,0.76),
+                        rgba(5,15,34,0.92)
+                    );
+
+                box-shadow:
+                    0 30px 80px
+                    rgba(0,0,0,0.25);
+            ">
+
+
+                <div style="margin-bottom:25px;">
+
+                    <span style="
+                        color:#659cff;
+                        font-weight:900;
+                        letter-spacing:1.2px;
+                    " class="auto-style2">
+
+                        AUTHORIZED ACCESS
+
+                    </span>
+
+
+                    <h2 style="
+                        margin-top:8px;
+                        font-size:22px;
+                    ">
+
+                        Parent Login
+
+                    </h2>
+
+
+                    <p style="
+                        margin-top:7px;
+                        color:#687f9f;
+                        line-height:1.7;
+                    " class="auto-style1">
+
+                        Enter the student's ID and
+                        authorized password to continue.
+
+                    </p>
+
+                </div>
+
+
+                <!-- STUDENT ID -->
+
+                <div style="margin-bottom:18px;">
+
+                    <span class="auto-style1">
+
+                    <label style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-weight:700;
+                    ">
+
+                        Student ID</label></span><label style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-size:9px;
+                        font-weight:700;
+                    ">
+
+                        </label>
+
+
+                    <input
+                        id="parentStudentID"
+                        type="text"
+                        placeholder="Example: ST001"
+                        style="
+                            width:100%;
+                            min-height:47px;
+                            padding:0 14px;
+                            border-radius:11px;
+                            border:
+                                1px solid
+                                rgba(120,170,255,0.13);
+                            outline:none;
+                            background:
+                                rgba(2,10,25,0.65);
+                            color:white;
+                        "
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div style="margin-bottom:20px;">
+
+                    <label style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-weight:700;
+                    " class="auto-style1">
+
+                        Password
+
+                    </label>
+
+
+                    <input
+                        id="parentPassword"
+                        type="password"
+                        placeholder="Enter password"
+                        style="
+                            width:100%;
+                            min-height:47px;
+                            padding:0 14px;
+                            border-radius:11px;
+                            border:
+                                1px solid
+                                rgba(120,170,255,0.13);
+                            outline:none;
+                            background:
+                                rgba(2,10,25,0.65);
+                            color:white;
+                        "
+                    >
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    id="parentLoginBtn"
+                    class="main-button"
+                    type="button"
+                    style="
+                        width:100%;
+                        border:0;
+                        cursor:pointer;
+                    "
+                >
+
+                    ACCESS STUDENT AREA
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+
+                <div
+                    id="parentMessage"
+                    style="
+                        margin-top:15px;
+                        text-align:center;
+                        font-size:9px;
+                    "
+                ></div>
+
+
+            </div>
+
+
+            <!-- SECURITY CARD -->
+
+            <div style="
+                min-height:400px;
+
+                padding:30px;
+
+                display:flex;
+
+                flex-direction:column;
+
+                justify-content:center;
+
+                border-radius:25px;
+
+                border:
+                    1px solid
+                    rgba(120,170,255,0.13);
+
+                background:
+                    linear-gradient(
+                        145deg,
+                        rgba(11,31,65,0.78),
+                        rgba(3,12,28,0.94)
+                    );
+
+                box-shadow:
+                    0 30px 80px
+                    rgba(0,0,0,0.28);
+
+                position:relative;
+
+                overflow:hidden;
+            ">
+
+
+                <div style="
+                    position:absolute;
+
+                    width:260px;
+
+                    height:260px;
+
+                    top:-120px;
+
+                    right:-100px;
+
+                    border-radius:50%;
+
+                    background:
+                        radial-gradient( circle, rgba(70,145,255,0.18), transparent 70% );
+                "></div>
+
+
+                <div style="
+                    width:70px;
+
+                    height:70px;
+
+                    display:flex;
+
+                    align-items:center;
+
+                    justify-content:center;
+
+                    border-radius:20px;
+
+                    background:
+                        rgba(76,139,255,0.12);
+
+                    border:
+                        1px solid
+                        rgba(100,160,255,0.16);
+
+                    font-size:30px;
+
+                    margin-bottom:22px;
+                ">
+
+                    🔐
+
+                </div>
+
+
+                <span style="
+                    color:#659cff;
+
+                    font-weight:900;
+
+                    letter-spacing:1.2px;
+                " class="auto-style2">
+
+                    SECURE PORTAL
+
+                </span>
+
+
+                <h2 style="
+                    margin-top:8px;
+
+                    font-size:22px;
+                ">
+
+                    Your child's
+                    <span style="color:#70adff;">
+                        information
+                    </span>
+
+                </h2>
+
+
+                <p style="
+                    margin-top:12px;
+
+                    color:#7187a9;
+
+                    line-height:1.9;
+                " class="auto-style3">
+
+                    Access may include authorized
+                    student information such as
+                    attendance and academic progress.
+
+                </p>
+
+
+                <div style="
+                    margin-top:25px;
+
+                    display:flex;
+
+                    flex-direction:column;
+
+                    gap:11px;
+                ">
+
+
+                    <div style="
+                        padding:12px 14px;
+
+                        border-radius:12px;
+
+                        background:
+                            rgba(7,20,43,0.7);
+
+                        border:
+                            1px solid
+                            rgba(120,170,255,0.08);
+
+                        color:#90a7c9;" class="auto-style3">
+
+                        ✓ Authorized access
+
+                    </div>
+
+
+                    <div style="
+                        padding:12px 14px;
+
+                        border-radius:12px;
+
+                        background:
+                            rgba(7,20,43,0.7);
+
+                        border:
+                            1px solid
+                            rgba(120,170,255,0.08);
+
+                        color:#90a7c9;" class="auto-style3">
+
+                        ✓ Student information
+
+                    </div>
+
+
+                    <div style="
+                        padding:12px 14px;
+
+                        border-radius:12px;
+
+                        background:
+                            rgba(7,20,43,0.7);
+
+                        border:
+                            1px solid
+                            rgba(120,170,255,0.08);
+
+                        color:#90a7c9;" class="auto-style3">
+
+                        ✓ Secure school portal
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= INFORMATION CARDS ================= -->
+
+        <section style="
+            margin-top:20px;
+        ">
+
+            <div class="home-info-grid">
+
+
+                <div class="info-panel">
+
+                    <div class="info-panel-icon">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <span>
+                            PERFORMANCE
+                        </span>
+
+                        <h3>
+                            Follow Progress
+                        </h3>
+
+                        <p class="auto-style3">
+                            View authorized information
+                            about a student's academic progress.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-panel">
+
+                    <div class="info-panel-icon">
+                        🕒
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ATTENDANCE
+                        </span>
+
+                        <h3>
+                            Stay Informed
+                        </h3>
+
+                        <p>
+                            <span class="auto-style3">Keep track of available
+                            attendance information</span>.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NOTICE ================= -->
+
+        <section style="
+            margin-top:20px;
+
+            padding:22px;
+
+            border-radius:20px;
+
+            border:
+                1px solid
+                rgba(120,170,255,0.1);
+
+            background:
+                rgba(6,18,39,0.72);
+
+            text-align:center;
+        ">
+
+            <div style="
+                font-size:20px;
+                margin-bottom:8px;
+            ">
+
+                🛡️
+
+            </div>
+
+
+            <h3 style="
+                font-size:14px;
+            ">
+
+                Privacy & Security
+
+            </h3>
+
+
+            <p style="
+                margin-top:7px;
+
+                color:#687f9f;
+
+                line-height:1.8;
+            " class="auto-style3">
+
+                Student information should only be
+                accessed by authorized users.
+
+            </p>
+
+        </section>
+
+
+        <!-- ================= STATUS ================= -->
+
+        <section
+            class="status-card"
+            style="margin-top:20px;"
+        >
+
+            <div class="status-symbol">
+                👨‍👩‍👧
+            </div>
+
+
+            <div class="status-text">
+
+                <span>
+                    PARENT SERVICE
+                </span>
+
+                <h3>
+                    Parent portal is ready
+                </h3>
+
+                <p class="auto-style3">
+                    Sign in using your authorized
+                    student credentials.
+                </p>
+
+            </div>
+
+
+            <div class="status-online">
+                READY
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <div class="auto-style3">
+                QR
+            </div>
+
+            <div>
+
+                <strong>
+                    <span class="auto-style3">School QR System
+                </span>
+                </strong>
+
+                <span class="auto-style3">
+                    Smart Student Management
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-slogan">
+
+            <span class="auto-style3">Secure
+
+            </span><span class="auto-style4">•</span><span class="auto-style3">
+
+            Simple
+
+            </span><span class="auto-style4">•</span><span class="auto-style3">
+
+            Smart
+
+        </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= LOGIN SCRIPT ================= -->
+
+    <script>
+
+        const loginButton =
+            document.getElementById(
+                "parentLoginBtn"
+            );
+
+
+        const message =
+            document.getElementById(
+                "parentMessage"
+            );
+
+
+        loginButton.addEventListener(
+            "click",
+            function () {
+
+                const studentID =
+                    document.getElementById(
+                        "parentStudentID"
+                    ).value.trim();
+
+
+                const password =
+                    document.getElementById(
+                        "parentPassword"
+                    ).value.trim();
+
+
+                if (!studentID || !password) {
+
+                    message.textContent =
+                        "Please enter Student ID and password.";
+
+                    message.style.color =
+                        "#ff9b9b";
+
+                    return;
+
+                }
+
+
+                /*
+                    This is the front-end interface.
+                    Real authentication should be
+                    connected to your database/server.
+                */
+
+
+                message.textContent =
+                    "Checking authorized access...";
+
+                message.style.color =
+                    "#70adff";
+
+
+                setTimeout(function () {
+
+                    message.textContent =
+                        "Login system ready. Connect your student database to verify accounts.";
+
+                    message.style.color =
+                        "#91a9c9";
+
+                }, 800);
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

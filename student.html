@@ -1,0 +1,1527 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Record | School QR System</title>
+
+    <link rel="stylesheet" href="style.css">
+	<style type="text/css">
+.auto-style1 {
+	font-size: large;
+}
+.auto-style2 {
+	font-size: large;
+	font-weight: bold;
+}
+.auto-style3 {
+	font-size: medium;
+}
+.auto-style4 {
+	font-size: x-large;
+}
+.auto-style5 {
+	text-align: center;
+}
+.auto-style6 {
+	font-size: x-large;
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND -->
+    <div class="page-background">
+
+        <div class="background-grid"></div>
+
+        <div class="background-glow glow-one"></div>
+        <div class="background-glow glow-two"></div>
+        <div class="background-glow glow-three"></div>
+
+        <div class="light-beam beam-one"></div>
+        <div class="light-beam beam-two"></div>
+
+        <div class="circle circle-one"></div>
+        <div class="circle circle-two"></div>
+
+        <div class="stars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <a href="index.html" class="brand">
+
+            <div class="auto-style6">
+                QR
+            </div>
+
+            <div class="auto-style5">
+                <strong><span class="auto-style4">School QR System</span></strong>
+                <span class="auto-style4">SMART STUDENT MANAGEMENT </span>
+            </div>
+
+        </a>
+
+
+        <nav class="auto-style5">
+
+            <a href="index.html">
+                <span class="auto-style4">Home
+            </span>
+            </a>
+
+            <a href="students.html">
+                <span class="auto-style4">Students
+            </span>
+            </a>
+
+            <a href="qr-generator.html">
+                <span class="auto-style4">QR Generator
+            </span>
+            </a>
+
+            <a href="parent.html">
+                <span class="auto-style4">Parents
+            </span>
+            </a>
+
+            <a href="student.html" class="nav-active">
+                <span class="auto-style4">Student</span>
+            </a>
+
+        </nav>
+
+
+        <div class="system-online">
+            <span></span>
+            ONLINE
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+        <section class="page-header">
+
+            <div class="small-label">
+                <span></span>
+                PROTECTED STUDENT AREA
+            </div>
+
+            <h1 style="
+                margin-top:15px;
+                font-size:clamp(32px,5vw,50px);
+                letter-spacing:-2px;
+            ">
+
+                Student
+                <strong style="color:#70adff;">
+                    Record
+                </strong>
+
+            </h1>
+
+            <p style="
+                margin-top:12px;
+                max-width:650px;
+                color:#7187a9;
+                line-height:1.8;
+            " class="auto-style1">
+
+                Securely access an authorized student's
+                information and school record.
+
+            </p>
+
+        </section>
+
+
+        <!-- LOGIN PANEL -->
+        <section
+            id="loginPanel"
+            style="
+                max-width:560px;
+                margin:35px auto 0;
+                padding:32px;
+                border-radius:25px;
+                border:1px solid rgba(120,170,255,0.13);
+                background:
+                    linear-gradient(
+                        145deg,
+                        rgba(16,39,80,0.78),
+                        rgba(4,13,31,0.94)
+                    );
+                box-shadow:
+                    0 30px 80px rgba(0,0,0,0.28);
+            "
+        >
+
+            <div style="
+                width:70px;
+                height:70px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                border-radius:20px;
+                background:rgba(76,139,255,0.12);
+                border:1px solid rgba(100,160,255,0.16);
+                font-size:28px;
+                margin-bottom:20px;
+            ">
+                🔐
+            </div>
+
+
+            <span style="
+                color:#659cff;
+                font-weight:900;
+                letter-spacing:1px;
+            " class="auto-style3">
+                AUTHORIZED ACCESS
+            </span>
+
+
+            <h2 style="
+                margin-top:8px;
+                font-size:22px;
+            ">
+                Student Login
+            </h2>
+
+
+            <p style="
+                margin-top:8px;
+                color:#687f9f;
+                line-height:1.8;
+            " class="auto-style1">
+                Enter the student's ID and password
+                to access the protected record.
+            </p>
+
+
+            <!-- STUDENT ID -->
+            <div style="margin-top:25px;">
+
+                <label
+                    for="loginID"
+                    style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-weight:700;
+                    " class="auto-style3"
+                >
+                    Student ID
+                </label>
+
+                <input
+                    id="loginID"
+                    type="text"
+                    placeholder="Example: ST001"
+                    style="
+                        width:100%;
+                        min-height:47px;
+                        padding:0 14px;
+                        border-radius:11px;
+                        border:1px solid rgba(120,170,255,0.13);
+                        background:rgba(2,10,25,0.65);
+                        color:white;
+                    "
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+            <div style="margin-top:16px;">
+
+                <label
+                    for="loginPassword"
+                    style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-weight:700;
+                    " class="auto-style3"
+                >
+                    Password
+                </label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Enter password"
+                    style="
+                        width:100%;
+                        min-height:47px;
+                        padding:0 14px;
+                        border-radius:11px;
+                        border:1px solid rgba(120,170,255,0.13);
+                        background:rgba(2,10,25,0.65);
+                        color:white;
+                    "
+                >
+
+            </div>
+
+
+            <button
+                id="loginButton"
+                class="main-button"
+                type="button"
+                style="
+                    width:100%;
+                    margin-top:20px;
+                    border:0;
+                "
+            >
+
+                ACCESS STUDENT RECORD
+
+                <span>→</span>
+
+            </button>
+
+
+            <div
+                id="loginMessage"
+                style="
+                    margin-top:15px;
+                    text-align:center;
+                    font-size:9px;
+                "
+            ></div>
+
+        </section>
+
+
+        <!-- STUDENT RECORD -->
+        <section
+            id="recordPanel"
+            style="
+                display:none;
+                margin-top:30px;
+            "
+        >
+
+
+            <!-- PROFILE HEADER -->
+            <div style="
+                padding:28px;
+                border-radius:25px;
+                border:1px solid rgba(120,170,255,0.13);
+                background:
+                    linear-gradient(
+                        145deg,
+                        rgba(16,39,80,0.78),
+                        rgba(4,13,31,0.94)
+                    );
+                box-shadow:0 30px 80px rgba(0,0,0,0.28);
+            ">
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:18px;
+                    flex-wrap:wrap;
+                ">
+
+
+                    <div style="
+                        width:80px;
+                        height:80px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        border-radius:22px;
+                        background:rgba(76,139,255,0.12);
+                        border:1px solid rgba(100,160,255,0.16);
+                        font-size:35px;
+                    ">
+                        🎓
+                    </div>
+
+
+                    <div style="flex:1;">
+
+                        <span style="
+                            color:#659cff;
+                            font-size:7px;
+                            font-weight:900;
+                            letter-spacing:1px;
+                        ">
+                            STUDENT PROFILE
+                        </span>
+
+                        <h2
+                            id="recordName"
+                            style="
+                                margin-top:6px;
+                                font-size:25px;
+                            "
+                        >
+                        </h2>
+
+                        <p
+                            id="recordClass"
+                            style="
+                                margin-top:6px;
+                                color:#7187a9;
+                                font-size:9px;
+                            "
+                        >
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="recordStatus"
+                        style="
+                            padding:9px 13px;
+                            border-radius:9px;
+                            background:rgba(60,210,145,0.08);
+                            color:#70d9ae;
+                            font-size:8px;
+                            font-weight:900;
+                        "
+                    >
+                        ACTIVE
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATION GRID -->
+            <div style="
+                display:grid;
+                grid-template-columns:repeat(2,1fr);
+                gap:15px;
+                margin-top:18px;
+            ">
+
+
+                <!-- STUDENT ID -->
+                <div class="info-panel">
+
+                    <div class="info-panel-icon">
+                        🆔
+                    </div>
+
+                    <div>
+
+                        <span>
+                            STUDENT ID
+                        </span>
+
+                        <h3 id="recordID">
+                        </h3>
+
+                        <p>
+                            Unique student identifier
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CLASS -->
+                <div class="info-panel">
+
+                    <div class="info-panel-icon">
+                        🏫
+                    </div>
+
+                    <div>
+
+                        <span>
+                            CLASS
+                        </span>
+
+                        <h3 id="recordClassCard">
+                        </h3>
+
+                        <p>
+                            Current class
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ATTENDANCE -->
+                <div class="info-panel">
+
+                    <div class="info-panel-icon">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ATTENDANCE
+                        </span>
+
+                        <h3 id="recordAttendance">
+                        </h3>
+
+                        <p>
+                            Attendance record
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ARRIVAL TIME -->
+                <div class="info-panel">
+
+                    <div class="info-panel-icon">
+                        🕐
+                    </div>
+
+                    <div>
+
+                        <span>
+                            ARRIVAL TIME
+                        </span>
+
+                        <h3 id="recordArrival">
+                            Not recorded
+                        </h3>
+
+                        <p id="recordArrivalDate">
+                            School arrival record
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PERFORMANCE -->
+            <div style="
+                margin-top:18px;
+                padding:25px;
+                border-radius:22px;
+                border:1px solid rgba(120,170,255,0.12);
+                background:
+                    linear-gradient( 145deg, rgba(10,30,62,0.75), rgba(3,12,28,0.90) );
+            ">
+
+                <span style="
+                    color:#659cff;
+                    font-size:7px;
+                    font-weight:900;
+                    letter-spacing:1px;
+                ">
+                    ACADEMIC PERFORMANCE
+                </span>
+
+                <h2 style="
+                    margin-top:7px;
+                    font-size:19px;
+                ">
+                    Performance
+                </h2>
+
+                <div
+                    id="recordPerformance"
+                    style="
+                        margin-top:15px;
+                        padding:17px;
+                        border-radius:13px;
+                        background:rgba(2,10,25,0.55);
+                        color:#91a8c7;
+                        font-size:10px;
+                        line-height:1.8;
+                    "
+                >
+                </div>
+
+            </div>
+
+
+            <!-- ARRIVAL SECTION -->
+            <div style="
+                margin-top:18px;
+                padding:25px;
+                border-radius:22px;
+                border:1px solid rgba(120,170,255,0.12);
+                background:
+                    linear-gradient( 145deg, rgba(10,30,62,0.75), rgba(3,12,28,0.90) );
+            ">
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:15px;
+                ">
+
+                    <div style="
+                        width:55px;
+                        height:55px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        border-radius:16px;
+                        background:rgba(76,139,255,0.12);
+                        font-size:22px;
+                    ">
+                        🕐
+                        <button
+    type="button"
+    onclick="openStudentTracking()"
+    class="main-button"
+    style="
+        width:100%;
+        margin-top:18px;
+        border:0;
+    "
+>
+    📍 TRACK THIS STUDENT
+    <span>→</span>
+</button>
+                    </div>
+
+                    <div>
+
+                        <span style="
+                            color:#659cff;
+                            font-size:7px;
+                            font-weight:900;
+                            letter-spacing:1px;
+                        ">
+                            ATTENDANCE TRACKING
+                        </span>
+
+                        <h2 style="
+                            margin-top:5px;
+                            font-size:18px;
+                        ">
+                            Arrival Information
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(2,1fr);
+                    gap:15px;
+                    margin-top:20px;
+                ">
+
+
+                    <div style="
+                        padding:17px;
+                        border-radius:14px;
+                        background:rgba(2,10,25,0.55);
+                    ">
+
+                        <span style="
+                            display:block;
+                            color:#607b9f;
+                            font-size:7px;
+                            font-weight:900;
+                        ">
+                            ARRIVAL TIME
+                        </span>
+
+                        <strong
+                            id="arrivalTimeLarge"
+                            style="
+                                display:block;
+                                margin-top:8px;
+                                color:#dbe9ff;
+                                font-size:20px;
+                            "
+                        >
+                            Not recorded
+                        </strong>
+
+                    </div>
+
+
+                    <div style="
+                        padding:17px;
+                        border-radius:14px;
+                        background:rgba(2,10,25,0.55);
+                    ">
+
+                        <span style="
+                            display:block;
+                            color:#607b9f;
+                            font-size:7px;
+                            font-weight:900;
+                        ">
+                            ARRIVAL DATE
+                        </span>
+
+                        <strong
+                            id="arrivalDateLarge"
+                            style="
+                                display:block;
+                                margin-top:8px;
+                                color:#dbe9ff;
+                                font-size:13px;
+                            "
+                        >
+                            Not recorded
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <p style="
+                    margin-top:15px;
+                    color:#627c9f;
+                    font-size:8px;
+                    line-height:1.7;
+                ">
+                    Arrival time can be recorded when the
+                    student's QR access is used by the school
+                    attendance system.
+                </p>
+
+            </div>
+<!-- STUDENT LIVE LOCATION -->
+<div style="
+    margin-top:18px;
+    padding:25px;
+    border-radius:22px;
+    border:1px solid rgba(120,170,255,0.12);
+    background:
+        linear-gradient( 145deg, rgba(10,30,62,0.75), rgba(3,12,28,0.90) );
+">
+
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:15px;
+    ">
+
+        <div style="
+            width:55px;
+            height:55px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:16px;
+            background:rgba(76,139,255,0.12);
+            font-size:22px;
+        ">
+            📍
+        </div>
+
+        <div>
+            <span style="
+                color:#659cff;
+                font-size:7px;
+                font-weight:900;
+                letter-spacing:1px;
+            ">
+                LIVE STUDENT TRACKING
+            </span>
+
+            <h2 style="
+                margin-top:5px;
+                font-size:18px;
+            ">
+                Current Location
+            </h2>
+        </div>
+
+    </div>
+
+
+    <!-- LOCATION STATUS -->
+
+    <div style="
+        margin-top:20px;
+        padding:17px;
+        border-radius:14px;
+        background:rgba(2,10,25,0.55);
+    ">
+
+        <span style="
+            display:block;
+            color:#607b9f;
+            font-size:7px;
+            font-weight:900;
+        ">
+            TRACKING STATUS
+        </span>
+
+        <strong
+            id="locationStatus"
+            style="
+                display:block;
+                margin-top:8px;
+                color:#dbe9ff;
+                font-size:15px;
+            "
+        >
+            Not tracking
+        </strong>
+
+    </div>
+
+
+    <!-- CURRENT LOCATION -->
+
+    <div style="
+        margin-top:12px;
+        padding:17px;
+        border-radius:14px;
+        background:rgba(2,10,25,0.55);
+    ">
+
+        <span style="
+            display:block;
+            color:#607b9f;
+            font-size:7px;
+            font-weight:900;
+        ">
+            CURRENT LOCATION
+        </span>
+
+        <strong
+            id="studentLocation"
+            style="
+                display:block;
+                margin-top:8px;
+                color:#dbe9ff;
+                font-size:14px;
+            "
+        >
+            Location not available
+        </strong>
+
+        <p
+            id="locationTime"
+            style="
+                margin-top:7px;
+                color:#627c9f;
+                font-size:8px;
+            "
+        >
+            Last updated: --
+        </p>
+
+    </div>
+
+
+    <!-- TRACK BUTTON -->
+
+    <button
+        id="trackButton"
+        type="button"
+        style="
+            width:100%;
+            min-height:47px;
+            margin-top:15px;
+            border:0;
+            border-radius:11px;
+            background:linear-gradient(
+                135deg,
+                #3978ff,
+                #5ca4ff
+            );
+            color:white;
+            font-family:inherit;
+            font-size:9px;
+            font-weight:900;
+            cursor:pointer;
+        "
+    >
+        📍 START TRACKING
+    </button>
+
+
+    <p style="
+        margin-top:13px;
+        color:#627c9f;
+        font-size:8px;
+        line-height:1.7;
+    ">
+        Location tracking requires permission from the
+        device using the student account.
+    </p>
+
+</div>
+
+            <!-- LOGOUT -->
+            <button
+                id="logoutButton"
+                type="button"
+                style="
+                    width:100%;
+                    min-height:45px;
+                    margin-top:18px;
+                    border-radius:11px;
+                    border:1px solid rgba(255,120,120,0.12);
+                    background:rgba(255,80,80,0.05);
+                    color:#d79696;
+                    font-family:inherit;
+                    font-size:8px;
+                    font-weight:900;
+                    cursor:pointer;
+                "
+            >
+                LOCK STUDENT RECORD
+            </button>
+
+
+        </section>
+
+
+        <!-- SECURITY -->
+        <section
+            class="status-card"
+            style="margin-top:20px;"
+        >
+
+            <div class="status-symbol">
+                🛡️
+            </div>
+
+            <div class="status-text">
+
+                <span>
+                    SECURITY
+                </span>
+
+                <h3>
+                    Protected student information
+                </h3>
+
+                <p class="auto-style1">
+                    Student records should only be accessed
+                    by authorized users.
+                </p>
+
+            </div>
+
+            <div class="status-online">
+                SECURE
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-brand">
+
+            <div class="auto-style1">
+                QR
+            </div>
+
+            <div>
+
+                <strong>
+                    <span class="auto-style1">School QR System
+                </span>
+                </strong>
+
+                <span class="auto-style1">
+                    Smart Student Management
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-slogan">
+
+            <span class="auto-style1">Secure
+            </span><span class="auto-style2">•</span><span class="auto-style1">
+            Simple
+            </span><span class="auto-style2">•</span><span class="auto-style1">
+            Smart
+
+        </span>
+
+        </div>
+
+    </footer>
+
+
+
+<script>
+
+/* =====================================================
+   STUDENT RECORD SYSTEM
+   ===================================================== */
+
+
+/* GET SAVED STUDENTS */
+
+let students =
+    JSON.parse(
+        localStorage.getItem(
+            "schoolStudents"
+        )
+    ) || [];
+
+
+
+/* ELEMENTS */
+
+const loginID =
+    document.getElementById(
+        "loginID"
+    );
+
+const loginPassword =
+    document.getElementById(
+        "loginPassword"
+    );
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+const loginMessage =
+    document.getElementById(
+        "loginMessage"
+    );
+
+const loginPanel =
+    document.getElementById(
+        "loginPanel"
+    );
+
+const recordPanel =
+    document.getElementById(
+        "recordPanel"
+    );
+
+
+
+/* =====================================================
+   URL STUDENT ID
+   ===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const urlStudentID =
+    params.get("id");
+
+
+
+/* PUT ID FROM QR INTO LOGIN */
+
+if (urlStudentID) {
+
+    loginID.value =
+        urlStudentID;
+
+}
+
+
+
+/* =====================================================
+   LOGIN
+   ===================================================== */
+
+loginButton.addEventListener(
+    "click",
+    function() {
+
+
+        const id =
+            loginID.value.trim();
+
+        const password =
+            loginPassword.value;
+
+
+        if (!id || !password) {
+
+            loginMessage.textContent =
+                "Please enter your Student ID and password.";
+
+            loginMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        /* REFRESH STUDENT DATA */
+
+        students =
+            JSON.parse(
+                localStorage.getItem(
+                    "schoolStudents"
+                )
+            ) || [];
+
+
+        const student =
+            students.find(
+                item =>
+                    item.id.toLowerCase()
+                    === id.toLowerCase()
+            );
+
+
+        if (!student) {
+
+            loginMessage.textContent =
+                "Student record not found.";
+
+            loginMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        if (
+            student.password !==
+            password
+        ) {
+
+            loginMessage.textContent =
+                "Incorrect password.";
+
+            loginMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        /* SUCCESS */
+
+        showStudentRecord(student);
+
+    }
+);
+
+
+
+/* =====================================================
+   SHOW RECORD
+   ===================================================== */
+
+function showStudentRecord(student) {
+
+
+    /*
+     * ARRIVAL TIME
+     *
+     * If this is the first authorized
+     * access and no arrival has been
+     * recorded, record the current
+     * local date and time.
+     */
+
+    if (!student.arrivalTime) {
+
+        const now =
+            new Date();
+
+
+        student.arrivalTime =
+            now.toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+
+        student.arrivalDate =
+            now.toLocaleDateString();
+
+
+        /*
+         * Save arrival information
+         */
+
+        const index =
+            students.findIndex(
+                item =>
+                    item.id ===
+                    student.id
+            );
+
+
+        if (index !== -1) {
+
+            students[index] =
+                student;
+
+        }
+
+
+        localStorage.setItem(
+            "schoolStudents",
+            JSON.stringify(
+                students
+            )
+        );
+
+    }
+
+
+
+    /* PROFILE */
+
+    document.getElementById(
+        "recordName"
+    ).textContent =
+        student.name;
+
+
+    document.getElementById(
+        "recordClass"
+    ).textContent =
+        "Student ID: " +
+        student.id +
+        "  •  Class: " +
+        student.className;
+
+
+    document.getElementById(
+        "recordID"
+    ).textContent =
+        student.id;
+
+
+    document.getElementById(
+        "recordClassCard"
+    ).textContent =
+        student.className;
+
+
+    document.getElementById(
+        "recordAttendance"
+    ).textContent =
+        student.attendance ||
+        "Not recorded";
+
+
+    document.getElementById(
+        "recordPerformance"
+    ).textContent =
+        student.performance ||
+        "No performance information recorded.";
+
+
+    document.getElementById(
+        "recordStatus"
+    ).textContent =
+        student.status;
+
+
+    /* ARRIVAL */
+
+    document.getElementById(
+        "recordArrival"
+    ).textContent =
+        student.arrivalTime ||
+        "Not recorded";
+
+
+    document.getElementById(
+        "recordArrivalDate"
+    ).textContent =
+        student.arrivalDate ||
+        "School arrival record";
+
+
+    document.getElementById(
+        "arrivalTimeLarge"
+    ).textContent =
+        student.arrivalTime ||
+        "Not recorded";
+
+
+    document.getElementById(
+        "arrivalDateLarge"
+    ).textContent =
+        student.arrivalDate ||
+        "Not recorded";
+
+
+    /* SWITCH PANELS */
+
+    loginPanel.style.display =
+        "none";
+
+
+    recordPanel.style.display =
+        "block";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =====================================================
+   LOCK RECORD
+   ===================================================== */
+
+document.getElementById(
+    "logoutButton"
+).addEventListener(
+    "click",
+    function() {
+
+
+        recordPanel.style.display =
+            "none";
+
+
+        loginPanel.style.display =
+            "block";
+
+
+        loginPassword.value =
+            "";
+
+
+        loginMessage.textContent =
+            "";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+);
+
+/* =====================================================
+   LIVE STUDENT LOCATION
+   ===================================================== */
+
+let locationWatcher = null;
+
+
+/* TRACK BUTTON */
+
+document.getElementById("trackButton").addEventListener(
+    "click",
+    function() {
+
+        const status =
+            document.getElementById("locationStatus");
+
+        const locationText =
+            document.getElementById("studentLocation");
+
+        const timeText =
+            document.getElementById("locationTime");
+
+        const button =
+            document.getElementById("trackButton");
+
+
+        /* STOP TRACKING */
+
+        if (locationWatcher !== null) {
+
+            navigator.geolocation.clearWatch(
+                locationWatcher
+            );
+
+            locationWatcher = null;
+
+            status.textContent =
+                "Tracking stopped";
+
+            button.textContent =
+                "📍 START TRACKING";
+
+            return;
+        }
+
+
+        /* CHECK SUPPORT */
+
+        if (!navigator.geolocation) {
+
+            status.textContent =
+                "Location is not supported";
+
+            locationText.textContent =
+                "This device does not support GPS.";
+
+            return;
+        }
+
+
+        status.textContent =
+            "Requesting location permission...";
+
+        button.textContent =
+            "⏹ STOP TRACKING";
+
+
+        /* START LOCATION WATCH */
+
+        locationWatcher =
+            navigator.geolocation.watchPosition(
+
+                function(position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    status.textContent =
+                        "🟢 Location tracking active";
+
+
+                    locationText.textContent =
+                        latitude.toFixed(6) +
+                        ", " +
+                        longitude.toFixed(6);
+
+
+                    timeText.textContent =
+                        "Last updated: " +
+                        new Date().toLocaleTimeString();
+
+                },
+
+
+                function(error) {
+
+                    status.textContent =
+                        "Location unavailable";
+
+                    button.textContent =
+                        "📍 START TRACKING";
+
+
+                    if (error.code === 1) {
+
+                        locationText.textContent =
+                            "Location permission was denied.";
+
+                    } else if (error.code === 2) {
+
+                        locationText.textContent =
+                            "Unable to determine location.";
+
+                    } else {
+
+                        locationText.textContent =
+                            "Location request timed out.";
+
+                    }
+
+                    locationWatcher = null;
+                },
+
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 5000,
+                    timeout: 10000
+                }
+            );
+
+    }
+);
+
+/* =====================================================
+   ENTER KEY LOGIN
+   ===================================================== */
+
+loginPassword.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            loginButton.click();
+
+        }
+
+    }
+);
+function openStudentTracking() {
+
+    const id =
+        document.getElementById("recordID").textContent.trim();
+
+    if (!id) {
+        return;
+    }
+
+    window.location.href =
+        "tracking.html?id=" +
+        encodeURIComponent(id);
+}
+</script>
+
+
+</body>
+
+</html>
