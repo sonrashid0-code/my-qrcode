@@ -1,91 +1,365 @@
 ﻿const express = require("express");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
 app.use(express.static(__dirname));
 
+/*
+=====================================================
+IN-MEMORY DATA
+=====================================================
+For now, students are stored while the server is running.
+Later we can move this to a permanent database.
+*/
+
+const students = {};
 
 const studentLocations = {};
 
 
-/* RECEIVE LOCATION */
+/*
+=====================================================
+HOME
+=====================================================
+*/
 
-app.post("/api/location", (req, res) => {
+app.get("/api/status", (req, res) => {
+
+    res.json({
+        success: true,
+        message: "School QR System server is running.",
+        students: Object.keys(students).length
+    });
+
+});
+
+
+/*
+=====================================================
+ADD STUDENT
+=====================================================
+*/
+
+app.post("/api/students", (req, res) => {
 
     const {
-        studentID,
-        latitude,
-        longitude
+        name,
+        id,
+        studentClass,
+        parentName,
+        parentPhone,
+        arrivalTime,
+        departureTime,
+        medicalInfo,
+        password,
+        tracking
     } = req.body;
 
-    if (
-        !studentID ||
-        typeof latitude !== "number" ||
-        typeof longitude !== "number"
-    ) {
+
+    if (!name || !id || !password) {
+
         return res.status(400).json({
+
             success: false,
-            message: "Invalid location data."
+
+            message:
+                "Student name, student ID and password are required."
+
         });
+
     }
 
-    studentLocations[studentID] = {
-        latitude,
-        longitude,
-        updatedAt: new Date().toISOString()
+
+    const studentID =
+        String(id).trim().toUpperCase();
+
+
+    if (students[studentID]) {
+
+        return res.status(409).json({
+
+            success: false,
+
+            message:
+                "A student with this ID already exists."
+
+        });
+
+    }
+
+
+    students[studentID] = {
+
+        name: String(name).trim(),
+
+        id: studentID,
+
+        studentClass:
+            studentClass || "",
+
+        parentName:
+            parentName || "",
+
+        parentPhone:
+            parentPhone || "",
+
+        arrivalTime:
+            arrivalTime || "",
+
+        departureTime:
+            departureTime || "",
+
+        medicalInfo:
+            medicalInfo || "",
+
+        password:
+            String(password),
+
+        tracking:
+            tracking || "enabled",
+
+        createdAt:
+            new Date().toISOString()
+
     };
 
-    console.log(
-        `Location received for ${studentID}:`,
-        latitude,
-        longitude
-    );
 
     res.json({
+
         success: true,
-        message: "Location received."
+
+        message:
+            "Student created successfully.",
+
+        student: {
+
+            name:
+                students[studentID].name,
+
+            id:
+                students[studentID].id,
+
+            studentClass:
+                students[studentID].studentClass
+
+        }
+
     });
 
 });
 
 
-/* GET LOCATION */
+/*
+=====================================================
+GET STUDENT
+=====================================================
+*/
 
-app.get("/api/location/:studentID", (req, res) => {
+app.get(
+    "/api/students/:studentID",
+    (req, res) => {
 
-    const studentID = req.params.studentID;
+        const studentID =
+            req.params.studentID
+                .trim()
+                .toUpperCase();
 
-    const location =
-        studentLocations[studentID];
 
-    if (!location) {
+        const student =
+            students[studentID];
 
-        return res.status(404).json({
-            success: false,
-            message: "No location available."
+
+        if (!student) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message:
+                    "Student not found."
+
+            });
+
+        }
+
+
+        /*
+        NEVER send the password
+        when simply requesting student data.
+        */
+
+        res.json({
+
+            success: true,
+
+            student: {
+
+                name:
+                    student.name,
+
+                id:
+                    student.id,
+
+                studentClass:
+                    student.studentClass,
+
+                parentName:
+                    student.parentName,
+
+                parentPhone:
+                    student.parentPhone,
+
+                arrivalTime:
+                    student.arrivalTime,
+
+                departureTime:
+                    student.departureTime,
+
+                medicalInfo:
+                    student.medicalInfo,
+
+                tracking:
+                    student.tracking,
+
+                createdAt:
+                    student.createdAt
+
+            }
+
         });
 
     }
-
-    res.json({
-        success: true,
-        studentID: studentID,
-        location: location
-    });
-
-});
+);
 
 
-/* START SERVER */
+/*
+=====================================================
+PASSWORD VERIFICATION
+=====================================================
+*/
 
-app.listen(PORT, "0.0.0.0", () => {
+app.post(
+    "/api/students/:studentID/login",
+    (req, res) => {
 
-    console.log(
-        `School Tracking Server running at http://localhost:${PORT}`
-    );
+        const studentID =
+            req.params.studentID
+                .trim()
+                .toUpperCase();
 
-});
+
+        const password =
+            req.body.password;
+
+
+        const student =
+            students[studentID];
+
+
+        if (!student) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message:
+                    "Student not found."
+
+            });
+
+        }
+
+
+        if (
+            typeof password !== "string" ||
+            password !== student.password
+        ) {
+
+            return res.status(401).json({
+
+                success: false,
+
+                message:
+                    "Incorrect password."
+
+            });
+
+        }
+
+
+        /*
+        Password is correct.
+        Now return the student's information.
+        */
+
+        res.json({
+
+            success: true,
+
+            message:
+                "Password accepted.",
+
+            student: {
+
+                name:
+                    student.name,
+
+                id:
+                    student.id,
+
+                studentClass:
+                    student.studentClass,
+
+                parentName:
+                    student.parentName,
+
+                parentPhone:
+                    student.parentPhone,
+
+                arrivalTime:
+                    student.arrivalTime,
+
+                departureTime:
+                    student.departureTime,
+
+                medicalInfo:
+                    student.medicalInfo,
+
+                tracking:
+                    student.tracking
+
+            }
+
+        });
+
+    }
+);
+
+
+/*
+=====================================================
+UPDATE STUDENT
+=====================================================
+*/
+
+app.put(
+    "/api/students/:studentID",
+    (req, res) => {
+
+        const oldID =
+            req.params.studentID
+                .trim()
+                .toUpperCase();
+
+
+        const student =
+            students[oldID];
+
+
+        if (!student) {
+
+            return res.status(404).
