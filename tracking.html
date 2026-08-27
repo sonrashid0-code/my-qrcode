@@ -12,809 +12,1284 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <!-- LEAFLET MAP -->
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     >
 
-	<style type="text/css">
-	.auto-style1 {
-		font-size: x-large;
-	}
-	.auto-style2 {
-		text-align: center;
-	}
-	.auto-style3 {
-		font-size: x-large;
-		text-align: center;
-	}
-	.auto-style4 {
-		font-size: large;
-	}
-	.auto-style5 {
-		font-size: medium;
-	}
-	.auto-style6 {
-		font-size: large;
-		font-weight: bold;
-	}
-	</style>
+    <style>
+
+        .auto-style1 {
+            font-size: x-large;
+        }
+
+        .auto-style2 {
+            text-align: center;
+        }
+
+        .auto-style3 {
+            font-size: x-large;
+            text-align: center;
+        }
+
+        .auto-style4 {
+            font-size: large;
+        }
+
+        .auto-style5 {
+            font-size: medium;
+        }
+
+        .auto-style6 {
+            font-size: large;
+            font-weight: bold;
+        }
+
+        /* MAP */
+
+        #mapArea {
+            width: 100%;
+            height: 400px;
+            margin-top: 18px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(120,170,255,0.12);
+        }
+
+        /* YOU ARE HERE MARKER */
+
+        .you-marker {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #1976ff;
+            border: 4px solid white;
+            box-shadow:
+                0 0 0 6px rgba(25,118,255,0.25),
+                0 0 20px rgba(25,118,255,0.7);
+        }
+
+    </style>
 
 </head>
 
 
 <body>
 
-    <div class="page-background">
 
-        <div class="background-grid"></div>
+<!-- BACKGROUND -->
 
-        <div class="background-glow glow-one"></div>
-        <div class="background-glow glow-two"></div>
-        <div class="background-glow glow-three"></div>
+<div class="page-background">
 
-        <div class="light-beam beam-one"></div>
-        <div class="light-beam beam-two"></div>
+    <div class="background-grid"></div>
 
-        <div class="circle circle-one"></div>
-        <div class="circle circle-two"></div>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-glow glow-three"></div>
 
-    </div>
+    <div class="light-beam beam-one"></div>
+    <div class="light-beam beam-two"></div>
+
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+
+</div>
 
 
-    <header class="navbar">
 
-        <a href="index.html" class="brand">
+<!-- NAVBAR -->
 
-            <div class="auto-style3">
-                QR
-            </div>
+<header class="navbar">
 
-            <div class="auto-style2">
+    <a href="index.html" class="brand">
 
-                <strong>
-                    <span class="auto-style1">School QR System
-                </span>
-                </strong>
+        <div class="auto-style3">
+            QR
+        </div>
 
+        <div class="auto-style2">
+
+            <strong>
                 <span class="auto-style1">
-                    SMART STUDENT MANAGEMENT
+                    School QR System
                 </span>
+            </strong>
 
-            </div>
-
-        </a>
-
-
-        <nav class="auto-style2">
-
-            <a href="index.html"><span class="auto-style1">Home</span></a>
-
-            <a href="students.html"><span class="auto-style1">Students</span></a>
-
-            <a href="qr-generator.html">
-                <span class="auto-style1">QR Generator
+            <span class="auto-style1">
+                SMART STUDENT MANAGEMENT
             </span>
-            </a>
-
-            <a href="parent.html">
-                <span class="auto-style1">Parents
-            </span>
-            </a>
-
-            <a href="student.html">
-                <span class="auto-style1">Student
-            </span>
-            </a>
-
-            <a href="tracking.html"
-               class="nav-active">
-                <span class="auto-style1">Tracking
-            </span>
-            </a>
-
-        </nav>
-
-
-        <div class="system-online">
-
-            <span></span>
-
-            ONLINE
 
         </div>
 
-    </header>
+    </a>
+
+
+    <nav class="auto-style2">
+
+        <a href="index.html">
+            <span class="auto-style1">Home</span>
+        </a>
+
+        <a href="students.html">
+            <span class="auto-style1">Students</span>
+        </a>
+
+        <a href="qr-generator.html">
+            <span class="auto-style1">QR Generator</span>
+        </a>
+
+        <a href="parent.html">
+            <span class="auto-style1">Parents</span>
+        </a>
+
+        <a href="student.html">
+            <span class="auto-style1">Student</span>
+        </a>
+
+        <a href="tracking.html"
+           class="nav-active">
+            <span class="auto-style1">Tracking</span>
+        </a>
+
+    </nav>
+
+
+    <div class="system-online">
+
+        <span></span>
+
+        ONLINE
+
+    </div>
+
+</header>
 
 
 
-    <main class="container">
+<!-- MAIN -->
+
+<main class="container">
 
 
-        <section class="page-header">
+    <!-- HEADER -->
 
-            <div class="small-label">
+    <section class="page-header">
 
-                <span></span>
+        <div class="small-label">
 
-                LIVE LOCATION SYSTEM
+            <span></span>
+
+            LIVE LOCATION SYSTEM
+
+        </div>
+
+
+        <h1 style="
+            margin-top:15px;
+            font-size:clamp(32px,5vw,50px);
+            letter-spacing:-2px;
+        ">
+
+            Student
+
+            <strong style="color:#70adff;">
+                Tracking
+            </strong>
+
+        </h1>
+
+
+        <p style="
+            margin-top:12px;
+            max-width:650px;
+            color:#7187a9;
+            line-height:1.8;
+        "
+        class="auto-style4">
+
+            Monitor the authorized student's current
+            location and tracking status.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- STUDENT INFORMATION -->
+
+    <section style="
+        margin-top:30px;
+        padding:25px;
+        border-radius:22px;
+        border:1px solid rgba(120,170,255,0.12);
+        background:
+        linear-gradient(
+            145deg,
+            rgba(10,30,62,0.75),
+            rgba(3,12,28,0.90)
+        );
+    ">
+
+
+        <div style="
+            display:flex;
+            align-items:center;
+            gap:15px;
+        ">
+
+
+            <div style="
+                width:55px;
+                height:55px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                border-radius:16px;
+                background:rgba(76,139,255,0.12);
+                font-size:22px;
+            ">
+                👤
+            </div>
+
+
+            <div>
+
+                <span style="
+                    color:#659cff;
+                    font-weight:900;
+                    letter-spacing:1px;
+                "
+                class="auto-style5">
+
+                    STUDENT INFORMATION
+
+                </span>
+
+
+                <h2
+                    id="studentName"
+                    style="
+                        margin-top:5px;
+                        font-size:19px;
+                    "
+                >
+
+                    Student
+
+                </h2>
+
+
+                <p
+                    id="studentID"
+                    style="
+                        margin-top:5px;
+                        color:#7187a9;
+                        font-size:14px;
+                    "
+                >
+
+                    Student ID: --
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STATUS -->
+
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:12px;
+            margin-top:20px;
+        ">
+
+
+            <div style="
+                padding:16px;
+                border-radius:14px;
+                background:rgba(2,10,25,0.55);
+            ">
+
+                <span style="
+                    display:block;
+                    color:#607b9f;
+                    font-weight:900;
+                "
+                class="auto-style5">
+
+                    TRACKING STATUS
+
+                </span>
+
+
+                <strong
+                    id="trackingStatus"
+                    style="
+                        display:block;
+                        margin-top:8px;
+                        color:#dbe9ff;
+                        font-size:14px;
+                    "
+                >
+
+                    Waiting
+
+                </strong>
 
             </div>
 
 
-            <h1 style="
-                margin-top:15px;
-                font-size:clamp(32px,5vw,50px);
-                letter-spacing:-2px;
+
+            <div style="
+                padding:16px;
+                border-radius:14px;
+                background:rgba(2,10,25,0.55);
             ">
 
-                Student
+                <span style="
+                    display:block;
+                    color:#607b9f;
+                    font-weight:900;
+                "
+                class="auto-style5">
 
-                <strong style="color:#70adff;">
-                    Tracking
+                    LAST UPDATED
+
+                </span>
+
+
+                <strong
+                    id="lastUpdated"
+                    style="
+                        display:block;
+                        margin-top:8px;
+                        color:#dbe9ff;
+                        font-size:14px;
+                    "
+                >
+
+                    --
+
                 </strong>
 
-            </h1>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LOCATION -->
+
+    <section style="
+        margin-top:18px;
+        padding:25px;
+        border-radius:22px;
+        border:1px solid rgba(120,170,255,0.12);
+        background:
+        linear-gradient(
+            145deg,
+            rgba(10,30,62,0.75),
+            rgba(3,12,28,0.90)
+        );
+    ">
+
+
+        <span style="
+            color:#659cff;
+            font-weight:900;
+            letter-spacing:1px;
+        "
+        class="auto-style5">
+
+            CURRENT LOCATION
+
+        </span>
+
+
+        <h2 style="
+            margin-top:7px;
+            font-size:19px;
+        ">
+
+            📍 Student Position
+
+        </h2>
+
+
+
+        <!-- STUDENT COORDINATES -->
+
+        <div style="
+            margin-top:18px;
+            padding:18px;
+            border-radius:14px;
+            background:rgba(2,10,25,0.65);
+        ">
+
+
+            <p style="
+                color:#607b9f;
+            "
+            class="auto-style5">
+
+                STUDENT LATITUDE
+
+            </p>
+
+
+            <strong
+                id="latitude"
+                style="
+                    display:block;
+                    margin-top:5px;
+                    color:#dbe9ff;
+                    font-size:16px;
+                "
+            >
+
+                --
+
+            </strong>
+
+
+
+            <p style="
+                margin-top:14px;
+                color:#607b9f;
+            "
+            class="auto-style5">
+
+                STUDENT LONGITUDE
+
+            </p>
+
+
+            <strong
+                id="longitude"
+                style="
+                    display:block;
+                    margin-top:5px;
+                    color:#dbe9ff;
+                    font-size:16px;
+                "
+            >
+
+                --
+
+            </strong>
+
+        </div>
+
+
+
+        <!-- MAP -->
+
+        <div id="mapArea"></div>
+
+
+
+        <!-- LIVE TRACKING -->
+
+        <button
+            id="startTracking"
+            class="main-button"
+            type="button"
+            style="
+                width:100%;
+                margin-top:18px;
+                border:0;
+            "
+        >
+
+            📍 START LIVE TRACKING
+
+            <span>
+                →
+            </span>
+
+        </button>
+
+
+
+        <!-- MY LOCATION -->
+
+        <button
+            id="myLocationButton"
+            class="main-button"
+            type="button"
+            style="
+                width:100%;
+                margin-top:10px;
+                border:0;
+            "
+        >
+
+            🔵 SHOW MY LOCATION
+
+            <span>
+                →
+            </span>
+
+        </button>
+
+
+
+        <!-- MY COORDINATES -->
+
+        <div style="
+            margin-top:18px;
+            padding:18px;
+            border-radius:14px;
+            background:rgba(25,118,255,0.08);
+            border:1px solid rgba(25,118,255,0.15);
+        ">
+
+            <p style="
+                color:#659cff;
+                font-weight:900;
+            "
+            class="auto-style5">
+
+                🔵 YOUR CURRENT LOCATION
+
+            </p>
 
 
             <p style="
                 margin-top:12px;
-                max-width:650px;
-                color:#7187a9;
-                line-height:1.8;
-            " class="auto-style4">
+                color:#607b9f;
+            "
+            class="auto-style5">
 
-                Monitor the authorized student's current
-                location and tracking status.
+                YOUR LATITUDE
 
             </p>
 
-        </section>
+
+            <strong
+                id="myLatitude"
+                style="
+                    display:block;
+                    margin-top:5px;
+                    color:#dbe9ff;
+                    font-size:16px;
+                "
+            >
+
+                --
+
+            </strong>
+
+
+            <p style="
+                margin-top:14px;
+                color:#607b9f;
+            "
+            class="auto-style5">
+
+                YOUR LONGITUDE
+
+            </p>
+
+
+            <strong
+                id="myLongitude"
+                style="
+                    display:block;
+                    margin-top:5px;
+                    color:#dbe9ff;
+                    font-size:16px;
+                "
+            >
+
+                --
+
+            </strong>
+
+        </div>
+
+
+    </section>
 
 
 
-        <section style="
-            margin-top:30px;
-            padding:25px;
-            border-radius:22px;
-            border:1px solid rgba(120,170,255,0.12);
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(10,30,62,0.75),
-                    rgba(3,12,28,0.90)
-                );
-        ">
+    <!-- SECURITY -->
+
+    <section
+        class="status-card"
+        style="margin-top:20px;"
+    >
+
+        <div class="status-symbol">
+            🛡️
+        </div>
 
 
-            <div style="
-                display:flex;
-                align-items:center;
-                gap:15px;
-            ">
+        <div class="status-text">
 
-
-                <div style="
-                    width:55px;
-                    height:55px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    border-radius:16px;
-                    background:rgba(76,139,255,0.12);
-                    font-size:22px;
-                ">
-                    👤
-                </div>
-
-
-                <div>
-
-                    <span style="
-                        color:#659cff;
-                        font-weight:900;
-                        letter-spacing:1px;
-                    " class="auto-style5">
-                        STUDENT INFORMATION</span><span style="
-                        color:#659cff;
-                        font-size:7px;
-                        font-weight:900;
-                        letter-spacing:1px;
-                    ">
-                        </span>
-
-
-                    <h2
-                        id="studentName"
-                        style="
-                            margin-top:5px;
-                            font-size:19px;
-                        "
-                    >
-                        Student
-                    </h2>
-
-
-                    <p
-                        id="studentID"
-                        style="
-                            margin-top:5px;
-                            color:#7187a9;
-                            font-size:9px;
-                        "
-                    >
-                        <span class="auto-style5">Student ID: --</span>
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div style="
-                display:grid;
-                grid-template-columns:repeat(2,1fr);
-                gap:12px;
-                margin-top:20px;
-            ">
-
-
-                <div style="
-                    padding:16px;
-                    border-radius:14px;
-                    background:rgba(2,10,25,0.55);
-                ">
-
-                    <span style="
-                        display:block;
-                        color:#607b9f;
-                        font-weight:900;
-                    " class="auto-style5">
-                        TRACKING STATUS
-                    </span>
-
-
-                    <strong
-                        id="trackingStatus"
-                        style="
-                            display:block;
-                            margin-top:8px;
-                            color:#dbe9ff;
-                            font-size:14px;
-                        "
-                    >
-                        Waiting
-                    </strong>
-
-                </div>
-
-
-                <div style="
-                    padding:16px;
-                    border-radius:14px;
-                    background:rgba(2,10,25,0.55);
-                ">
-
-                    <span style="
-                        display:block;
-                        color:#607b9f;
-                        font-weight:900;
-                    " class="auto-style5">
-                        LAST UPDATED
-                    </span>
-
-
-                    <strong
-                        id="lastUpdated"
-                        style="
-                            display:block;
-                            margin-top:8px;
-                            color:#dbe9ff;
-                            font-size:14px;
-                        "
-                    >
-                        --
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <section style="
-            margin-top:18px;
-            padding:25px;
-            border-radius:22px;
-            border:1px solid rgba(120,170,255,0.12);
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(10,30,62,0.75),
-                    rgba(3,12,28,0.90)
-                );
-        ">
-
-
-            <span style="
-                color:#659cff;
-                font-weight:900;
-                letter-spacing:1px;
-            " class="auto-style5">
-                CURRENT LOCATION
+            <span>
+                SECURITY
             </span>
 
+            <h3>
+                Authorized tracking only
+            </h3>
 
-            <h2 style="
-                margin-top:7px;
-                font-size:19px;
-            ">
-                📍 Student Position
-            </h2>
+            <p class="auto-style4">
 
+                Student location should only be
+                viewed by authorized users.
 
-
-            <div style="
-                margin-top:18px;
-                padding:18px;
-                border-radius:14px;
-                background:rgba(2,10,25,0.65);
-            ">
-
-
-                <p style="
-                    color:#607b9f;
-                    " class="auto-style5">
-                    LATITUDE
-                </p>
-
-
-                <strong
-                    id="latitude"
-                    style="
-                        display:block;
-                        margin-top:5px;
-                        color:#dbe9ff;
-                        font-size:16px;
-                    "
-                >
-                    --
-                </strong>
-
-
-                <p style="
-                    margin-top:14px;
-                    color:#607b9f;
-                    " class="auto-style4">
-                    LONGITUDE
-                </p>
-
-
-                <strong
-                    id="longitude"
-                    style="
-                        display:block;
-                        margin-top:5px;
-                        color:#dbe9ff;
-                        font-size:16px;
-                    "
-                >
-                    --
-                </strong>
-
-            </div>
-
-
-
-            <!-- REAL MAP -->
-
-            <div
-                id="mapArea"
-                style="
-                    width:100%;
-                    height:400px;
-                    margin-top:18px;
-                    border-radius:16px;
-                    overflow:hidden;
-                    border:1px solid rgba(120,170,255,0.12);
-                "
-            >
-
-            </div>
-
-
-
-            <button
-                id="startTracking"
-                class="main-button"
-                type="button"
-                style="
-                    width:100%;
-                    margin-top:18px;
-                    border:0;
-                "
-            >
-
-                📍 START LIVE TRACKING
-
-                <span>
-                    →
-                </span>
-
-            </button>
-
-
-        </section>
-
-
-
-        <section
-            class="status-card"
-            style="margin-top:20px;"
-        >
-
-            <div class="status-symbol">
-                🛡️
-            </div>
-
-
-            <div class="status-text">
-
-                <span>
-                    SECURITY
-                </span>
-
-                <h3>
-                    Authorized tracking only
-                </h3>
-
-                <p class="auto-style4">
-                    Student location should only be
-                    viewed by authorized users.
-                </p>
-
-            </div>
-
-
-            <div class="status-online">
-                SECURE
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-
-    <footer>
-
-        <div class="footer-brand">
-
-            <div class="auto-style4">
-                QR
-            </div>
-
-            <div>
-
-                <strong>
-                    <span class="auto-style4">School QR System
-                </span>
-                </strong>
-
-                <span class="auto-style4">
-                    Smart Student Management
-                </span>
-
-            </div>
+            </p>
 
         </div>
 
 
-        <div class="footer-slogan">
+        <div class="status-online">
+            SECURE
+        </div>
 
-            <span class="auto-style4">Secure
-            </span><span class="auto-style6">•</span><span class="auto-style4">
-            Simple
-            </span><span class="auto-style6">•</span><span class="auto-style4">
-            Smart
+    </section>
 
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-brand">
+
+        <div class="auto-style4">
+            QR
+        </div>
+
+        <div>
+
+            <strong>
+                <span class="auto-style4">
+                    School QR System
+                </span>
+            </strong>
+
+            <span class="auto-style4">
+                Smart Student Management
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-slogan">
+
+        <span class="auto-style4">
+            Secure
         </span>
 
-        </div>
+        <span class="auto-style6">
+            •
+        </span>
 
-    </footer>
+        <span class="auto-style4">
+            Simple
+        </span>
+
+        <span class="auto-style6">
+            •
+        </span>
+
+        <span class="auto-style4">
+            Smart
+        </span>
+
+    </div>
+
+</footer>
 
 
 
-    <!-- LEAFLET MAP LIBRARY -->
+<!-- LEAFLET -->
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-    </script>
-
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 
-    <script>
 
-    /* =====================================================
-       STUDENT TRACKING
-       ===================================================== */
+<script>
+
+/* =====================================================
+   GET STUDENT ID
+   ===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const studentID =
+    params.get("id");
 
 
-    const params =
-        new URLSearchParams(
-            window.location.search
+
+/* =====================================================
+   STUDENT INFORMATION
+   ===================================================== */
+
+const students =
+    JSON.parse(
+        localStorage.getItem(
+            "schoolStudents"
+        )
+    ) || [];
+
+
+const student =
+    students.find(
+        item =>
+            item.id &&
+            item.id.toLowerCase()
+            ===
+            (studentID || "").toLowerCase()
+    );
+
+
+if (student) {
+
+    document.getElementById(
+        "studentName"
+    ).textContent =
+        student.name;
+
+
+    document.getElementById(
+        "studentID"
+    ).textContent =
+        "Student ID: " +
+        student.id;
+
+}
+
+
+
+/* =====================================================
+   MAP VARIABLES
+   ===================================================== */
+
+let studentMap = null;
+
+let studentMarker = null;
+
+let myLocationMarker = null;
+
+
+
+/* =====================================================
+   CREATE MAP
+   ===================================================== */
+
+function createMap(
+    latitude,
+    longitude
+) {
+
+    if (!studentMap) {
+
+        studentMap =
+            L.map(
+                "mapArea"
+            ).setView(
+                [
+                    latitude,
+                    longitude
+                ],
+                16
+            );
+
+
+        L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+
+                maxZoom: 19,
+
+                attribution:
+                    "&copy; OpenStreetMap contributors"
+
+            }
+        ).addTo(
+            studentMap
         );
-
-
-    const studentID =
-        params.get("id");
-
-
-    /* =====================================================
-       STUDENT INFORMATION
-       ===================================================== */
-
-    const students =
-        JSON.parse(
-            localStorage.getItem(
-                "schoolStudents"
-            )
-        ) || [];
-
-
-    const student =
-        students.find(
-            item =>
-                item.id &&
-                item.id.toLowerCase()
-                ===
-                (studentID || "").toLowerCase()
-        );
-
-
-    if (student) {
-
-        document.getElementById(
-            "studentName"
-        ).textContent =
-            student.name;
-
-
-        document.getElementById(
-            "studentID"
-        ).textContent =
-            "Student ID: " + student.id;
 
     }
 
-
-
-    /* =====================================================
-       MAP
-       ===================================================== */
-
-    let studentMap = null;
-
-    let studentMarker = null;
+}
 
 
 
-    function createStudentMap(
+/* =====================================================
+   CREATE / UPDATE STUDENT MARKER
+   ===================================================== */
+
+function updateStudentMarker(
+    latitude,
+    longitude
+) {
+
+    createMap(
         latitude,
         longitude
-    ) {
+    );
 
 
-        if (!studentMap) {
+    if (!studentMarker) {
 
-
-            studentMap =
-                L.map("mapArea")
-                .setView(
-                    [
-                        latitude,
-                        longitude
-                    ],
-                    16
-                );
-
-
-            L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {
-
-                    maxZoom: 19,
-
-                    attribution:
-                        "&copy; OpenStreetMap contributors"
-
-                }
-            ).addTo(studentMap);
-
-
-            studentMarker =
-                L.marker(
-                    [
-                        latitude,
-                        longitude
-                    ]
-                ).addTo(studentMap);
-
-
-            studentMarker
-                .bindPopup(
-                    "📍 Student location"
-                )
-                .openPopup();
-
-
-        } else {
-
-
-            studentMarker.setLatLng(
+        studentMarker =
+            L.marker(
                 [
                     latitude,
                     longitude
                 ]
+            ).addTo(
+                studentMap
             );
 
 
-            studentMap.setView(
-                [
-                    latitude,
-                    longitude
-                ]
+        studentMarker
+            .bindPopup(
+                "📍 STUDENT LOCATION"
             );
 
-        }
+    } else {
+
+        studentMarker.setLatLng(
+            [
+                latitude,
+                longitude
+            ]
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   GET STUDENT LOCATION FROM SERVER
+   ===================================================== */
+
+function getStudentLocation() {
+
+    if (!studentID) {
+
+        document.getElementById(
+            "trackingStatus"
+        ).textContent =
+            "Student ID missing";
+
+        return;
 
     }
 
 
+    fetch(
+        "/api/location/" +
+        encodeURIComponent(
+            studentID
+        )
+    )
 
-    /* =====================================================
-       GET STUDENT LOCATION FROM SERVER
-       ===================================================== */
 
-    function getStudentLocation() {
+    .then(
+        response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Location unavailable"
+                );
+
+            }
+
+            return response.json();
+
+        }
+    )
 
 
-        if (!studentID) {
+    .then(
+        data => {
+
+            const location =
+                data.location;
+
+
+            /*
+             * STUDENT COORDINATES
+             */
+
+            document.getElementById(
+                "latitude"
+            ).textContent =
+                location.latitude.toFixed(6);
+
+
+            document.getElementById(
+                "longitude"
+            ).textContent =
+                location.longitude.toFixed(6);
+
+
+            /*
+             * STATUS
+             */
 
             document.getElementById(
                 "trackingStatus"
             ).textContent =
-                "Student ID missing";
-
-            return;
-
-        }
+                "🟢 LIVE";
 
 
-        fetch(
-            "/api/location/" +
-            encodeURIComponent(
-                studentID
-            )
-        )
+            document.getElementById(
+                "lastUpdated"
+            ).textContent =
+                new Date(
+                    location.updatedAt
+                ).toLocaleTimeString();
 
 
-        .then(
-            response => {
+            /*
+             * UPDATE STUDENT MARKER
+             */
 
-                if (!response.ok) {
+            updateStudentMarker(
+                location.latitude,
+                location.longitude
+            );
 
-                    throw new Error(
-                        "Location unavailable"
+
+            /*
+             * IF MY LOCATION EXISTS,
+             * KEEP BOTH MARKERS VISIBLE
+             */
+
+            if (myLocationMarker) {
+
+                const studentPosition =
+                    L.latLng(
+                        location.latitude,
+                        location.longitude
                     );
 
-                }
 
-                return response.json();
-
-            }
-        )
+                const myPosition =
+                    myLocationMarker.getLatLng();
 
 
-        .then(
-            data => {
+                const bounds =
+                    L.latLngBounds([
+                        studentPosition,
+                        myPosition
+                    ]);
 
 
-                const location =
-                    data.location;
-
-
-                document.getElementById(
-                    "latitude"
-                ).textContent =
-                    location.latitude.toFixed(6);
-
-
-                document.getElementById(
-                    "longitude"
-                ).textContent =
-                    location.longitude.toFixed(6);
-
-
-                document.getElementById(
-                    "trackingStatus"
-                ).textContent =
-                    "🟢 LIVE";
-
-
-                document.getElementById(
-                    "lastUpdated"
-                ).textContent =
-                    new Date(
-                        location.updatedAt
-                    ).toLocaleTimeString();
-
-
-                createStudentMap(
-                    location.latitude,
-                    location.longitude
+                studentMap.fitBounds(
+                    bounds,
+                    {
+                        padding: [
+                            50,
+                            50
+                        ]
+                    }
                 );
 
-
             }
-        )
+
+        }
+    )
 
 
-        .catch(
-            error => {
+    .catch(
+        error => {
 
-                document.getElementById(
-                    "trackingStatus"
-                ).textContent =
-                    "Waiting for location...";
-
-            }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       TRACKING BUTTON
-       ===================================================== */
-
-    document.getElementById(
-        "startTracking"
-    ).addEventListener(
-        "click",
-        function() {
-
-
-            getStudentLocation();
-
-
-            this.innerHTML =
-                "🟢 LIVE TRACKING ACTIVE";
-
+            document.getElementById(
+                "trackingStatus"
+            ).textContent =
+                "Waiting for location...";
 
         }
     );
 
+}
 
 
-    /* =====================================================
-       AUTOMATIC UPDATES
-       ===================================================== */
 
- /* =====================================================
+/* =====================================================
+   SHOW MY LOCATION
+   ===================================================== */
+
+function showMyLocation() {
+
+    if (!navigator.geolocation) {
+
+        alert(
+            "Location is not supported on this device."
+        );
+
+        return;
+
+    }
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+
+            /*
+             * CREATE MAP
+             */
+
+            createMap(
+                latitude,
+                longitude
+            );
+
+
+            /*
+             * REMOVE OLD MY LOCATION MARKER
+             */
+
+            if (myLocationMarker) {
+
+                studentMap.removeLayer(
+                    myLocationMarker
+                );
+
+            }
+
+
+            /*
+             * BLUE YOU ARE HERE ICON
+             */
+
+            const myIcon =
+                L.divIcon({
+
+                    className:
+                        "my-location-icon",
+
+                    html:
+                        '<div class="you-marker"></div>',
+
+                    iconSize:
+                        [
+                            22,
+                            22
+                        ],
+
+                    iconAnchor:
+                        [
+                            11,
+                            11
+                        ]
+
+                });
+
+
+            /*
+             * CREATE YOUR MARKER
+             */
+
+            myLocationMarker =
+                L.marker(
+                    [
+                        latitude,
+                        longitude
+                    ],
+                    {
+                        icon:
+                            myIcon
+                    }
+                ).addTo(
+                    studentMap
+                );
+
+
+            myLocationMarker
+                .bindPopup(
+                    "🔵 YOU ARE HERE"
+                );
+
+
+            /*
+             * SHOW YOUR COORDINATES
+             */
+
+            document.getElementById(
+                "myLatitude"
+            ).textContent =
+                latitude.toFixed(6);
+
+
+            document.getElementById(
+                "myLongitude"
+            ).textContent =
+                longitude.toFixed(6);
+
+
+            /*
+             * SHOW BOTH YOU AND STUDENT
+             */
+
+            if (studentMarker) {
+
+                const studentPosition =
+                    studentMarker.getLatLng();
+
+
+                const myPosition =
+                    myLocationMarker.getLatLng();
+
+
+                const bounds =
+                    L.latLngBounds([
+                        studentPosition,
+                        myPosition
+                    ]);
+
+
+                studentMap.fitBounds(
+                    bounds,
+                    {
+                        padding:
+                            [
+                                50,
+                                50
+                            ]
+                    }
+                );
+
+            } else {
+
+                studentMap.setView(
+                    [
+                        latitude,
+                        longitude
+                    ],
+                    17
+                );
+
+            }
+
+        },
+
+
+        function(error) {
+
+            alert(
+                "Unable to get your location. Please allow location permission."
+            );
+
+            console.error(
+                "GPS error:",
+                error
+            );
+
+        },
+
+
+        {
+
+            enableHighAccuracy:
+                true,
+
+            timeout:
+                10000,
+
+            maximumAge:
+                5000
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   START LIVE TRACKING BUTTON
+   ===================================================== */
+
+document.getElementById(
+    "startTracking"
+).addEventListener(
+    "click",
+    function() {
+
+        getStudentLocation();
+
+
+        this.innerHTML =
+            "🟢 LIVE TRACKING ACTIVE";
+
+    }
+);
+
+
+
+/* =====================================================
+   SHOW MY LOCATION BUTTON
+   ===================================================== */
+
+document.getElementById(
+    "myLocationButton"
+).addEventListener(
+    "click",
+    function() {
+
+        showMyLocation();
+
+    }
+);
+
+
+
+/* =====================================================
    AUTOMATIC LIVE UPDATES
    ===================================================== */
 
 getStudentLocation();
 
-setInterval(() => {
-    getStudentLocation();
-}, 5000);    </script>
+
+setInterval(
+    function() {
+
+        getStudentLocation();
+
+    },
+    5000
+);
+
+
+</script>
 
 
 </body>
