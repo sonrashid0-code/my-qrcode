@@ -1108,14 +1108,10 @@ generateBtn.addEventListener(
            with that student's ID.
         */
 
-        const qrData =
-            window.location.origin
-            +
-            "/student.html?id="
-            +
-            encodeURIComponent(
-                student.id
-            );
+       const qrData = new URL(
+    "student.html?id=" + encodeURIComponent(student.id),
+    window.location.href
+).href;
 
 
 
