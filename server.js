@@ -1,8 +1,69 @@
-﻿const express = require("express");
+// server.js
+
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+
+
+/* =====================================================
+   DATABASE
+===================================================== */
+
+const DATA_FILE = path.join(__dirname, "students.json");
+
+function loadStudents() {
+
+    try {
+
+        if (!fs.existsSync(DATA_FILE)) {
+
+            fs.writeFileSync(
+                DATA_FILE,
+                JSON.stringify([], null, 2)
+            );
+
+        }
+
+        return JSON.parse(
+            fs.readFileSync(
+                DATA_FILE,
+                "utf8"
+            )
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not load students:",
+            error
+        );
+
+        return [];
+    }
+}
+
+
+function saveStudents() {
+
+    fs.writeFileSync(
+        DATA_FILE,
+        JSON.stringify(
+            students,
+            null,
+            2
+        )
+    );
+
+}
+
+
+const students = loadStudents();
+
+const studentLocations = {};
 
 
 /* =====================================================
@@ -16,15 +77,6 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.static(__dirname));
-
-
-/* =====================================================
-   DATA
-===================================================== */
-
-const students = [];
-
-const studentLocations = {};
 
 
 /* =====================================================
@@ -146,6 +198,9 @@ app.post("/api/students", (req, res) => {
 
 
         students.push(student);
+
+        // SAVE STUDENT
+        saveStudents();
 
 
         console.log(
@@ -380,12 +435,7 @@ app.post("/api/scan/:studentID", (req, res) => {
         }
 
 
-        /*
-         * SERVER TIME
-         *
-         * The server creates the arrival
-         * timestamp.
-         */
+        /* SERVER TIME */
 
         const now =
             new Date();
@@ -412,9 +462,7 @@ app.post("/api/scan/:studentID", (req, res) => {
             now.toISOString();
 
 
-        /*
-         * SAVE ARRIVAL
-         */
+        /* SAVE ARRIVAL */
 
         student.arrivalTime =
             arrivalTime;
@@ -424,6 +472,10 @@ app.post("/api/scan/:studentID", (req, res) => {
 
         student.lastScan =
             scanTimestamp;
+
+
+        // SAVE UPDATED ARRIVAL
+        saveStudents();
 
 
         console.log(
@@ -799,6 +851,10 @@ app.delete("/api/students/:studentID", (req, res) => {
             index,
             1
         )[0];
+
+
+    // SAVE AFTER DELETE
+    saveStudents();
 
 
     delete studentLocations[
