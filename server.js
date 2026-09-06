@@ -443,22 +443,19 @@ app.post("/api/scan/:studentID", (req, res) => {
         const now =
             new Date();
 
+const now = new Date();
 
-        const arrivalTime =
-            now.toLocaleTimeString(
-                "en-UG",
-                {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit"
-                }
-            );
+const arrivalTime = now.toLocaleTimeString("en-UG", {
+  timeZone: "Africa/Kampala",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: true
+});
 
-
-        const arrivalDate =
-            now.toLocaleDateString(
-                "en-UG"
-            );
+const arrivalDate = now.toLocaleDateString("en-UG", {
+  timeZone: "Africa/Kampala"
+});
 
 
         const scanTimestamp =
