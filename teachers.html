@@ -398,21 +398,28 @@
 
                 <!-- CLASS -->
 
-                <div class="form-group">
-
-                    <label>
-                        Class
-                    </label>
-
-                    <input
-                        type="text"
-                        id="studentClass"
-                        placeholder="e.g. Senior 3"
-                        required
-                    >
+               <select id="studentClass" required>
+    <option value="">Select class</option>
+    <option value="S1">S1</option>
+    <option value="S2">S2</option>
+    <option value="S3">S3</option>
+    <option value="S4">S4</option>
+    <option value="S5">S5</option>
+    <option value="S6">S6</option>
+</select>
 
                 </div>
+<!-- SUBJECTS / COMBINATION -->
 
+<div class="form-group full" id="subjectSection" style="display:none;">
+
+    <label>
+        Subjects / Combination
+    </label>
+
+    <div id="subjectOptions"></div>
+
+</div>
 
 
                 <!-- PARENT -->
@@ -1034,7 +1041,197 @@ function escapeHTML(value) {
         );
 
 }
+/* =====================================================
+   CLASS → SUBJECTS / COMBINATIONS
+   ===================================================== */
 
+const classSelect = document.getElementById("studentClass");
+const subjectSection = document.getElementById("subjectSection");
+const subjectOptions = document.getElementById("subjectOptions");
+
+const lowerSubjects = [
+    "English Language",
+    "Mathematics",
+    "Biology",
+    "Chemistry",
+    "Physics",
+    "Geography",
+    "History & Political Education",
+    "Entrepreneurship",
+    "Kiswahili",
+    "Physical Education",
+    "Religious Education",
+    "Literature"
+];
+
+const s3s4Subjects = [
+    "English Language",
+    "Mathematics",
+    "Biology",
+    "Chemistry",
+    "Physics",
+    "Geography",
+    "History & Political Education",
+    "Elective 1",
+    "Elective 2"
+];
+
+const scienceSubjects = [
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Agriculture",
+    "ICT",
+    "Subsidiary Mathematics",
+    "General Paper"
+];
+
+const artsSubjects = [
+    "History",
+    "Geography",
+    "Economics",
+    "Literature",
+    "Entrepreneurship",
+    "Religious Education",
+    "Kiswahili",
+    "French",
+    "German",
+    "Arabic",
+    "Chinese",
+    "Art & Design",
+    "General Paper"
+];
+
+
+function createSubjectInputs(subjects) {
+
+    subjectOptions.innerHTML = "";
+
+    subjects.forEach((subject, index) => {
+
+        const box = document.createElement("div");
+
+        box.style.cssText = `
+            display:grid;
+            grid-template-columns:1fr 130px;
+            gap:12px;
+            align-items:center;
+            margin-top:10px;
+        `;
+
+        box.innerHTML = `
+
+            <label style="
+                margin:0;
+                padding:12px;
+                border-radius:10px;
+                background:rgba(2,10,25,0.55);
+                border:1px solid rgba(120,170,255,0.08);
+            ">
+                ${escapeHTML(subject)}
+            </label>
+
+            <input
+                type="text"
+                class="subject-mark"
+                data-subject="${escapeHTML(subject)}"
+                placeholder="Mark / Grade"
+            >
+
+        `;
+
+        subjectOptions.appendChild(box);
+
+    });
+}
+
+
+function showSeniorSubjects() {
+
+    const className = classSelect.value;
+
+    subjectSection.style.display = "block";
+
+    if (className === "S1" || className === "S2") {
+
+        createSubjectInputs(lowerSubjects);
+
+    }
+
+    else if (className === "S3" || className === "S4") {
+
+        createSubjectInputs(s3s4Subjects);
+
+    }
+
+    else if (className === "S5" || className === "S6") {
+
+        subjectOptions.innerHTML = `
+
+            <div style="
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:15px;
+                margin-top:10px;
+            ">
+
+                <button
+                    type="button"
+                    class="small-button"
+                    id="scienceButton"
+                    style="padding:18px;"
+                >
+                    🔬 SCIENCE
+                </button>
+
+                <button
+                    type="button"
+                    class="small-button"
+                    id="artsButton"
+                    style="padding:18px;"
+                >
+                    🎨 ARTS
+                </button>
+
+            </div>
+
+            <div
+                id="combinationArea"
+                style="margin-top:20px;"
+            ></div>
+
+        `;
+
+        document.getElementById("scienceButton")
+            .addEventListener("click", function() {
+
+                createSubjectInputs(scienceSubjects);
+
+            });
+
+        document.getElementById("artsButton")
+            .addEventListener("click", function() {
+
+                createSubjectInputs(artsSubjects);
+
+            });
+
+    }
+
+    else {
+
+        subjectSection.style.display = "none";
+        subjectOptions.innerHTML = "";
+
+    }
+}
+
+
+classSelect.addEventListener(
+    "change",
+    showSeniorSubjects
+);
 
 
 /* =====================================================
