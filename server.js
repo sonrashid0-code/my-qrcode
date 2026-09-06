@@ -440,9 +440,6 @@ app.post("/api/scan/:studentID", (req, res) => {
 
         /* SERVER TIME */
 
-        const now =
-            new Date();
-
 const now = new Date();
 
 const arrivalTime = now.toLocaleTimeString("en-UG", {
