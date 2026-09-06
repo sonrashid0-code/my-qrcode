@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -235,7 +235,7 @@
         </a>
 
         <a href="students.html">
-            <span style="font-size:x-large;">Students</span>
+            <span style="font-size:x-large;">teacher</span>
         </a>
 
         <a href="qr-generator.html">
@@ -881,7 +881,7 @@ async function loadStudents() {
 
         const response =
             await fetch(
-                "/api/students"
+                "http://localhost:5000/api/students"
             );
 
 
