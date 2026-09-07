@@ -440,7 +440,7 @@ app.post("/api/scan/:studentID", (req, res) => {
 
         /* SERVER TIME */
 
-const now = new Date();
+      const now = new Date();
 
 const arrivalTime = now.toLocaleTimeString("en-UG", {
   timeZone: "Africa/Kampala",
@@ -453,7 +453,6 @@ const arrivalTime = now.toLocaleTimeString("en-UG", {
 const arrivalDate = now.toLocaleDateString("en-UG", {
   timeZone: "Africa/Kampala"
 });
-
 
         const scanTimestamp =
             now.toISOString();
@@ -676,7 +675,50 @@ app.post("/api/student-login", (req, res) => {
     });
 
 });
+app.post("/api/change-password", (req, res) => {
+    const { studentId, currentPassword, newPassword } = req.body;
 
+    if (!studentId || !currentPassword || !newPassword) {
+        return res.status(400).json({
+            success: false,
+            message: "All password fields are required."
+        });
+    }
+
+    if (newPassword.length < 4) {
+        return res.status(400).json({
+            success: false,
+            message: "New password must be at least 4 characters."
+        });
+    }
+
+    const student = students.find(
+        s => s.id.toLowerCase() === studentId.toLowerCase()
+    );
+
+    if (!student) {
+        return res.status(404).json({
+            success: false,
+            message: "Student not found."
+        });
+    }
+
+    if (student.password !== currentPassword) {
+        return res.status(401).json({
+            success: false,
+            message: "Current password is incorrect."
+        });
+    }
+
+    student.password = newPassword;
+
+    saveStudents();
+
+    res.json({
+        success: true,
+        message: "Password changed successfully."
+    });
+});
 
 /* =====================================================
    RECEIVE STUDENT LOCATION
