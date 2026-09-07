@@ -1,55 +1,74 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Student Record | School QR System</title>
 
     <link rel="stylesheet" href="style.css">
-	<style type="text/css">
-.auto-style1 {
-	font-size: large;
-}
-.auto-style2 {
-	font-size: large;
-	font-weight: bold;
-}
-.auto-style3 {
-	font-size: medium;
-}
-.auto-style4 {
-	font-size: x-large;
-}
-.auto-style5 {
-	text-align: center;
-}
-.auto-style6 {
-	font-size: x-large;
-	text-align: center;
-}
-</style>
+
+    <style type="text/css">
+
+        .auto-style1 {
+            font-size: large;
+        }
+
+        .auto-style2 {
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .auto-style3 {
+            font-size: medium;
+        }
+
+        .auto-style4 {
+            font-size: x-large;
+        }
+
+        .auto-style5 {
+            text-align: center;
+        }
+
+        .auto-style6 {
+            font-size: x-large;
+            text-align: center;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
     <!-- BACKGROUND -->
+
     <div class="page-background">
 
         <div class="background-grid"></div>
 
         <div class="background-glow glow-one"></div>
+
         <div class="background-glow glow-two"></div>
+
         <div class="background-glow glow-three"></div>
 
         <div class="light-beam beam-one"></div>
+
         <div class="light-beam beam-two"></div>
 
         <div class="circle circle-one"></div>
+
         <div class="circle circle-two"></div>
 
         <div class="stars">
+
             <span></span>
             <span></span>
             <span></span>
@@ -59,12 +78,15 @@
             <span></span>
             <span></span>
             <span></span>
+            <span></span>
+
         </div>
 
     </div>
 
 
     <!-- NAVIGATION -->
+
     <header class="navbar">
 
         <a href="index.html" class="brand">
@@ -74,8 +96,17 @@
             </div>
 
             <div class="auto-style5">
-                <strong><span class="auto-style4">School QR System</span></strong>
-                <span class="auto-style4">SMART STUDENT MANAGEMENT </span>
+
+                <strong>
+                    <span class="auto-style4">
+                        School QR System
+                    </span>
+                </strong>
+
+                <span class="auto-style4">
+                    SMART STUDENT MANAGEMENT
+                </span>
+
             </div>
 
         </a>
@@ -84,51 +115,80 @@
         <nav class="auto-style5">
 
             <a href="index.html">
-                <span class="auto-style4">Home
-            </span>
+
+                <span class="auto-style4">
+                    Home
+                </span>
+
             </a>
 
-            <a href="students.html">
-                <span class="auto-style4">Students
-            </span>
+
+            <a href="teacher.html">
+
+                <span class="auto-style4">
+                    Teacher
+                </span>
+
             </a>
+
 
             <a href="qr-generator.html">
-                <span class="auto-style4">QR Generator
-            </span>
+
+                <span class="auto-style4">
+                    QR Generator
+                </span>
+
             </a>
+
 
             <a href="parent.html">
-                <span class="auto-style4">Parents
-            </span>
+
+                <span class="auto-style4">
+                    Parents
+                </span>
+
             </a>
 
+
             <a href="student.html" class="nav-active">
-                <span class="auto-style4">Student</span>
+
+                <span class="auto-style4">
+                    Student
+                </span>
+
             </a>
 
         </nav>
 
 
         <div class="system-online">
+
             <span></span>
+
             ONLINE
+
         </div>
 
     </header>
 
 
     <!-- MAIN -->
+
     <main class="container">
 
 
         <!-- PAGE HEADER -->
+
         <section class="page-header">
 
             <div class="small-label">
+
                 <span></span>
+
                 PROTECTED STUDENT AREA
+
             </div>
+
 
             <h1 style="
                 margin-top:15px;
@@ -137,18 +197,21 @@
             ">
 
                 Student
+
                 <strong style="color:#70adff;">
                     Record
                 </strong>
 
             </h1>
 
+
             <p style="
                 margin-top:12px;
                 max-width:650px;
                 color:#7187a9;
                 line-height:1.8;
-            " class="auto-style1">
+            "
+            class="auto-style1">
 
                 Securely access an authorized student's
                 information and school record.
@@ -159,6 +222,7 @@
 
 
         <!-- LOGIN PANEL -->
+
         <section
             id="loginPanel"
             style="
@@ -190,7 +254,9 @@
                 font-size:28px;
                 margin-bottom:20px;
             ">
+
                 🔐
+
             </div>
 
 
@@ -198,8 +264,11 @@
                 color:#659cff;
                 font-weight:900;
                 letter-spacing:1px;
-            " class="auto-style3">
+            "
+            class="auto-style3">
+
                 AUTHORIZED ACCESS
+
             </span>
 
 
@@ -207,7 +276,9 @@
                 margin-top:8px;
                 font-size:22px;
             ">
+
                 Student Login
+
             </h2>
 
 
@@ -215,13 +286,17 @@
                 margin-top:8px;
                 color:#687f9f;
                 line-height:1.8;
-            " class="auto-style1">
+            "
+            class="auto-style1">
+
                 Enter the student's ID and password
                 to access the protected record.
+
             </p>
 
 
             <!-- STUDENT ID -->
+
             <div style="margin-top:25px;">
 
                 <label
@@ -231,10 +306,14 @@
                         margin-bottom:7px;
                         color:#89a1c4;
                         font-weight:700;
-                    " class="auto-style3"
+                    "
+                    class="auto-style3"
                 >
+
                     Student ID
+
                 </label>
+
 
                 <input
                     id="loginID"
@@ -255,6 +334,7 @@
 
 
             <!-- PASSWORD -->
+
             <div style="margin-top:16px;">
 
                 <label
@@ -264,10 +344,14 @@
                         margin-bottom:7px;
                         color:#89a1c4;
                         font-weight:700;
-                    " class="auto-style3"
+                    "
+                    class="auto-style3"
                 >
+
                     Password
+
                 </label>
+
 
                 <input
                     id="loginPassword"
@@ -286,6 +370,8 @@
 
             </div>
 
+
+            <!-- LOGIN BUTTON -->
 
             <button
                 id="loginButton"
@@ -318,6 +404,7 @@
 
 
         <!-- STUDENT RECORD -->
+
         <section
             id="recordPanel"
             style="
@@ -328,6 +415,7 @@
 
 
             <!-- PROFILE HEADER -->
+
             <div style="
                 padding:28px;
                 border-radius:25px;
@@ -360,7 +448,9 @@
                         border:1px solid rgba(100,160,255,0.16);
                         font-size:35px;
                     ">
+
                         🎓
+
                     </div>
 
 
@@ -372,8 +462,11 @@
                             font-weight:900;
                             letter-spacing:1px;
                         ">
+
                             STUDENT PROFILE
+
                         </span>
+
 
                         <h2
                             id="recordName"
@@ -383,6 +476,7 @@
                             "
                         >
                         </h2>
+
 
                         <p
                             id="recordClass"
@@ -408,7 +502,9 @@
                             font-weight:900;
                         "
                     >
+
                         ACTIVE
+
                     </div>
 
                 </div>
@@ -417,6 +513,7 @@
 
 
             <!-- INFORMATION GRID -->
+
             <div style="
                 display:grid;
                 grid-template-columns:repeat(2,1fr);
@@ -426,6 +523,7 @@
 
 
                 <!-- STUDENT ID -->
+
                 <div class="info-panel">
 
                     <div class="info-panel-icon">
@@ -451,6 +549,7 @@
 
 
                 <!-- CLASS -->
+
                 <div class="info-panel">
 
                     <div class="info-panel-icon">
@@ -476,6 +575,7 @@
 
 
                 <!-- ATTENDANCE -->
+
                 <div class="info-panel">
 
                     <div class="info-panel-icon">
@@ -501,6 +601,7 @@
 
 
                 <!-- ARRIVAL TIME -->
+
                 <div class="info-panel">
 
                     <div class="info-panel-icon">
@@ -530,13 +631,18 @@
 
 
             <!-- PERFORMANCE -->
+
             <div style="
                 margin-top:18px;
                 padding:25px;
                 border-radius:22px;
                 border:1px solid rgba(120,170,255,0.12);
                 background:
-                    linear-gradient( 145deg, rgba(10,30,62,0.75), rgba(3,12,28,0.90) );
+                    linear-gradient(
+                        145deg,
+                        rgba(10,30,62,0.75),
+                        rgba(3,12,28,0.90)
+                    );
             ">
 
                 <span style="
@@ -545,15 +651,21 @@
                     font-weight:900;
                     letter-spacing:1px;
                 ">
+
                     ACADEMIC PERFORMANCE
+
                 </span>
+
 
                 <h2 style="
                     margin-top:7px;
                     font-size:19px;
                 ">
+
                     Performance
+
                 </h2>
+
 
                 <div
                     id="recordPerformance"
@@ -573,13 +685,18 @@
 
 
             <!-- ARRIVAL SECTION -->
+
             <div style="
                 margin-top:18px;
                 padding:25px;
                 border-radius:22px;
                 border:1px solid rgba(120,170,255,0.12);
                 background:
-                    linear-gradient( 145deg, rgba(10,30,62,0.75), rgba(3,12,28,0.90) );
+                    linear-gradient(
+                        145deg,
+                        rgba(10,30,62,0.75),
+                        rgba(3,12,28,0.90)
+                    );
             ">
 
                 <div style="
@@ -598,21 +715,11 @@
                         background:rgba(76,139,255,0.12);
                         font-size:22px;
                     ">
+
                         🕐
-                        <button
-    type="button"
-    onclick="openStudentTracking()"
-    class="main-button"
-    style="
-        width:100%;
-        margin-top:18px;
-        border:0;
-    "
->
-    📍 TRACK THIS STUDENT
-    <span>→</span>
-</button>
+
                     </div>
+
 
                     <div>
 
@@ -622,14 +729,19 @@
                             font-weight:900;
                             letter-spacing:1px;
                         ">
+
                             ATTENDANCE TRACKING
+
                         </span>
+
 
                         <h2 style="
                             margin-top:5px;
                             font-size:18px;
                         ">
+
                             Arrival Information
+
                         </h2>
 
                     </div>
@@ -657,8 +769,11 @@
                             font-size:7px;
                             font-weight:900;
                         ">
+
                             ARRIVAL TIME
+
                         </span>
+
 
                         <strong
                             id="arrivalTimeLarge"
@@ -669,7 +784,9 @@
                                 font-size:20px;
                             "
                         >
+
                             Not recorded
+
                         </strong>
 
                     </div>
@@ -687,8 +804,11 @@
                             font-size:7px;
                             font-weight:900;
                         ">
+
                             ARRIVAL DATE
+
                         </span>
+
 
                         <strong
                             id="arrivalDateLarge"
@@ -699,7 +819,9 @@
                                 font-size:13px;
                             "
                         >
+
                             Not recorded
+
                         </strong>
 
                     </div>
@@ -713,179 +835,419 @@
                     font-size:8px;
                     line-height:1.7;
                 ">
-                    Arrival time can be recorded when the
-                    student's QR access is used by the school
-                    attendance system.
+
+                    Arrival time is automatically recorded when
+                    the student's QR access is successfully used.
+
                 </p>
 
             </div>
-<!-- STUDENT LIVE LOCATION -->
-<div style="
-    margin-top:18px;
-    padding:25px;
-    border-radius:22px;
-    border:1px solid rgba(120,170,255,0.12);
-    background:
-        linear-gradient( 145deg, rgba(10,30,62,0.75), rgba(3,12,28,0.90) );
-">
 
-    <div style="
-        display:flex;
-        align-items:center;
-        gap:15px;
-    ">
 
-        <div style="
-            width:55px;
-            height:55px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:16px;
-            background:rgba(76,139,255,0.12);
-            font-size:22px;
-        ">
-            📍
-        </div>
+            <!-- STUDENT LIVE LOCATION -->
 
-        <div>
-            <span style="
-                color:#659cff;
-                font-size:7px;
-                font-weight:900;
-                letter-spacing:1px;
+            <div style="
+                margin-top:18px;
+                padding:25px;
+                border-radius:22px;
+                border:1px solid rgba(120,170,255,0.12);
+                background:
+                    linear-gradient(
+                        145deg,
+                        rgba(10,30,62,0.75),
+                        rgba(3,12,28,0.90)
+                    );
             ">
-                LIVE STUDENT TRACKING
-            </span>
-
-            <h2 style="
-                margin-top:5px;
-                font-size:18px;
-            ">
-                Current Location
-            </h2>
-        </div>
-
-    </div>
 
 
-    <!-- LOCATION STATUS -->
-
-    <div style="
-        margin-top:20px;
-        padding:17px;
-        border-radius:14px;
-        background:rgba(2,10,25,0.55);
-    ">
-
-        <span style="
-            display:block;
-            color:#607b9f;
-            font-size:7px;
-            font-weight:900;
-        ">
-            TRACKING STATUS
-        </span>
-
-        <strong
-            id="locationStatus"
-            style="
-                display:block;
-                margin-top:8px;
-                color:#dbe9ff;
-                font-size:15px;
-            "
-        >
-            Not tracking
-        </strong>
-
-    </div>
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:15px;
+                ">
 
 
-    <!-- CURRENT LOCATION -->
+                    <div style="
+                        width:55px;
+                        height:55px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        border-radius:16px;
+                        background:rgba(76,139,255,0.12);
+                        font-size:22px;
+                    ">
 
-    <div style="
-        margin-top:12px;
-        padding:17px;
-        border-radius:14px;
-        background:rgba(2,10,25,0.55);
-    ">
+                        📍
 
-        <span style="
-            display:block;
-            color:#607b9f;
-            font-size:7px;
-            font-weight:900;
-        ">
-            CURRENT LOCATION
-        </span>
-
-        <strong
-            id="studentLocation"
-            style="
-                display:block;
-                margin-top:8px;
-                color:#dbe9ff;
-                font-size:14px;
-            "
-        >
-            Location not available
-        </strong>
-
-        <p
-            id="locationTime"
-            style="
-                margin-top:7px;
-                color:#627c9f;
-                font-size:8px;
-            "
-        >
-            Last updated: --
-        </p>
-
-    </div>
+                    </div>
 
 
-    <!-- TRACK BUTTON -->
+                    <div>
 
-    <button
-        id="trackButton"
-        type="button"
-        style="
-            width:100%;
-            min-height:47px;
-            margin-top:15px;
-            border:0;
-            border-radius:11px;
-            background:linear-gradient(
-                135deg,
-                #3978ff,
-                #5ca4ff
-            );
-            color:white;
-            font-family:inherit;
-            font-size:9px;
-            font-weight:900;
-            cursor:pointer;
-        "
-    >
-        📍 START TRACKING
-    </button>
+                        <span style="
+                            color:#659cff;
+                            font-size:7px;
+                            font-weight:900;
+                            letter-spacing:1px;
+                        ">
+
+                            LIVE STUDENT TRACKING
+
+                        </span>
 
 
-    <p style="
-        margin-top:13px;
-        color:#627c9f;
-        font-size:8px;
-        line-height:1.7;
-    ">
-        Location tracking requires permission from the
-        device using the student account.
-    </p>
+                        <h2 style="
+                            margin-top:5px;
+                            font-size:18px;
+                        ">
 
-</div>
+                            Current Location
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION STATUS -->
+
+                <div style="
+                    margin-top:20px;
+                    padding:17px;
+                    border-radius:14px;
+                    background:rgba(2,10,25,0.55);
+                ">
+
+                    <span style="
+                        display:block;
+                        color:#607b9f;
+                        font-size:7px;
+                        font-weight:900;
+                    ">
+
+                        TRACKING STATUS
+
+                    </span>
+
+
+                    <strong
+                        id="locationStatus"
+                        style="
+                            display:block;
+                            margin-top:8px;
+                            color:#dbe9ff;
+                            font-size:15px;
+                        "
+                    >
+
+                        Not tracking
+
+                    </strong>
+
+                </div>
+
+
+                <!-- CURRENT LOCATION -->
+
+                <div style="
+                    margin-top:12px;
+                    padding:17px;
+                    border-radius:14px;
+                    background:rgba(2,10,25,0.55);
+                ">
+
+                    <span style="
+                        display:block;
+                        color:#607b9f;
+                        font-size:7px;
+                        font-weight:900;
+                    ">
+
+                        CURRENT LOCATION
+
+                    </span>
+
+
+                    <strong
+                        id="studentLocation"
+                        style="
+                            display:block;
+                            margin-top:8px;
+                            color:#dbe9ff;
+                            font-size:14px;
+                        "
+                    >
+
+                        Location not available
+
+                    </strong>
+
+
+                    <p
+                        id="locationTime"
+                        style="
+                            margin-top:7px;
+                            color:#627c9f;
+                            font-size:8px;
+                        "
+                    >
+
+                        Last updated: --
+
+                    </p>
+
+                </div>
+
+
+                <!-- TRACK BUTTON -->
+
+                <button
+                    id="trackButton"
+                    type="button"
+                    style="
+                        width:100%;
+                        min-height:47px;
+                        margin-top:15px;
+                        border:0;
+                        border-radius:11px;
+                        background:linear-gradient(
+                            135deg,
+                            #3978ff,
+                            #5ca4ff
+                        );
+                        color:white;
+                        font-family:inherit;
+                        font-size:9px;
+                        font-weight:900;
+                        cursor:pointer;
+                    "
+                >
+
+                    📍 START LIVE TRACKING
+
+                </button>
+
+
+                <p style="
+                    margin-top:13px;
+                    color:#627c9f;
+                    font-size:8px;
+                    line-height:1.7;
+                ">
+
+                    Location tracking requires permission from the
+                    device using the student account.
+
+                </p>
+
+            </div>
+
+
+            <!-- CHANGE PASSWORD -->
+
+            <div
+                style="
+                    margin-top:18px;
+                    padding:25px;
+                    border-radius:22px;
+                    border:1px solid rgba(120,170,255,0.12);
+                    background:
+                        linear-gradient(
+                            145deg,
+                            rgba(10,30,62,0.75),
+                            rgba(3,12,28,0.90)
+                        );
+                "
+            >
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:15px;
+                ">
+
+                    <div style="
+                        width:55px;
+                        height:55px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        border-radius:16px;
+                        background:rgba(76,139,255,0.12);
+                        font-size:22px;
+                    ">
+
+                        🔐
+
+                    </div>
+
+
+                    <div>
+
+                        <span style="
+                            color:#659cff;
+                            font-size:7px;
+                            font-weight:900;
+                            letter-spacing:1px;
+                        ">
+
+                            ACCOUNT SECURITY
+
+                        </span>
+
+
+                        <h2 style="
+                            margin-top:5px;
+                            font-size:18px;
+                        ">
+
+                            Change Password
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CURRENT PASSWORD -->
+
+                <div style="margin-top:20px;">
+
+                    <label style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-weight:700;
+                    ">
+
+                        Current Password
+
+                    </label>
+
+
+                    <input
+                        id="currentPassword"
+                        type="password"
+                        placeholder="Enter current password"
+                        style="
+                            width:100%;
+                            min-height:47px;
+                            padding:0 14px;
+                            border-radius:11px;
+                            border:1px solid rgba(120,170,255,0.13);
+                            background:rgba(2,10,25,0.65);
+                            color:white;
+                        "
+                    >
+
+                </div>
+
+
+                <!-- NEW PASSWORD -->
+
+                <div style="margin-top:14px;">
+
+                    <label style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-weight:700;
+                    ">
+
+                        New Password
+
+                    </label>
+
+
+                    <input
+                        id="newPassword"
+                        type="password"
+                        placeholder="Enter new password"
+                        style="
+                            width:100%;
+                            min-height:47px;
+                            padding:0 14px;
+                            border-radius:11px;
+                            border:1px solid rgba(120,170,255,0.13);
+                            background:rgba(2,10,25,0.65);
+                            color:white;
+                        "
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div style="margin-top:14px;">
+
+                    <label style="
+                        display:block;
+                        margin-bottom:7px;
+                        color:#89a1c4;
+                        font-weight:700;
+                    ">
+
+                        Confirm New Password
+
+                    </label>
+
+
+                    <input
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="Confirm new password"
+                        style="
+                            width:100%;
+                            min-height:47px;
+                            padding:0 14px;
+                            border-radius:11px;
+                            border:1px solid rgba(120,170,255,0.13);
+                            background:rgba(2,10,25,0.65);
+                            color:white;
+                        "
+                    >
+
+                </div>
+
+
+                <button
+                    id="changePasswordButton"
+                    type="button"
+                    class="main-button"
+                    style="
+                        width:100%;
+                        margin-top:18px;
+                        border:0;
+                    "
+                    onclick="changePassword()"
+                >
+
+                    CHANGE PASSWORD
+
+                    <span>→</span>
+
+                </button>
+
+
+                <div
+                    id="passwordMessage"
+                    style="
+                        margin-top:13px;
+                        text-align:center;
+                        font-size:9px;
+                        line-height:1.6;
+                    "
+                ></div>
+
+            </div>
+
 
             <!-- LOGOUT -->
+
             <button
                 id="logoutButton"
                 type="button"
@@ -903,7 +1265,9 @@
                     cursor:pointer;
                 "
             >
+
                 LOCK STUDENT RECORD
+
             </button>
 
 
@@ -911,6 +1275,7 @@
 
 
         <!-- SECURITY -->
+
         <section
             class="status-card"
             style="margin-top:20px;"
@@ -919,6 +1284,7 @@
             <div class="status-symbol">
                 🛡️
             </div>
+
 
             <div class="status-text">
 
@@ -931,14 +1297,19 @@
                 </h3>
 
                 <p class="auto-style1">
+
                     Student records should only be accessed
                     by authorized users.
+
                 </p>
 
             </div>
 
+
             <div class="status-online">
+
                 SECURE
+
             </div>
 
         </section>
@@ -948,6 +1319,7 @@
 
 
     <!-- FOOTER -->
+
     <footer>
 
         <div class="footer-brand">
@@ -956,12 +1328,17 @@
                 QR
             </div>
 
+
             <div>
 
                 <strong>
-                    <span class="auto-style1">School QR System
-                </span>
+
+                    <span class="auto-style1">
+                        School QR System
+                    </span>
+
                 </strong>
+
 
                 <span class="auto-style1">
                     Smart Student Management
@@ -974,329 +1351,436 @@
 
         <div class="footer-slogan">
 
-            <span class="auto-style1">Secure
-            </span><span class="auto-style2">•</span><span class="auto-style1">
-            Simple
-            </span><span class="auto-style2">•</span><span class="auto-style1">
-            Smart
+            <span class="auto-style1">
+                Secure
+            </span>
 
-        </span>
+            <span class="auto-style2">
+                •
+            </span>
+
+            <span class="auto-style1">
+                Simple
+            </span>
+
+            <span class="auto-style2">
+                •
+            </span>
+
+            <span class="auto-style1">
+                Smart
+            </span>
 
         </div>
 
     </footer>
 
 
-
 <script>
 
-/* =====================================================
-   STUDENT RECORD SYSTEM
-   ===================================================== */
+
+let currentStudent = null;
+
+let locationWatcher = null;
 
 
-/* GET SAVED STUDENTS */
-
-let students =
-    JSON.parse(
-        localStorage.getItem(
-            "schoolStudents"
-        )
-    ) || [];
-
-
-
-/* ELEMENTS */
+// ===============================
+// GET ELEMENTS
+// ===============================
 
 const loginID =
-    document.getElementById(
-        "loginID"
-    );
+    document.getElementById("loginID");
+
 
 const loginPassword =
-    document.getElementById(
-        "loginPassword"
-    );
+    document.getElementById("loginPassword");
+
 
 const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
+    document.getElementById("loginButton");
+
 
 const loginMessage =
-    document.getElementById(
-        "loginMessage"
-    );
+    document.getElementById("loginMessage");
+
 
 const loginPanel =
-    document.getElementById(
-        "loginPanel"
-    );
+    document.getElementById("loginPanel");
+
 
 const recordPanel =
-    document.getElementById(
-        "recordPanel"
-    );
+    document.getElementById("recordPanel");
 
 
+const recordName =
+    document.getElementById("recordName");
 
-/* =====================================================
-   URL STUDENT ID
-   ===================================================== */
+
+const recordClass =
+    document.getElementById("recordClass");
+
+
+const recordStatus =
+    document.getElementById("recordStatus");
+
+
+const recordID =
+    document.getElementById("recordID");
+
+
+const recordClassCard =
+    document.getElementById("recordClassCard");
+
+
+const recordAttendance =
+    document.getElementById("recordAttendance");
+
+
+const recordArrival =
+    document.getElementById("recordArrival");
+
+
+const recordArrivalDate =
+    document.getElementById("recordArrivalDate");
+
+
+const recordPerformance =
+    document.getElementById("recordPerformance");
+
+
+const arrivalTimeLarge =
+    document.getElementById("arrivalTimeLarge");
+
+
+const arrivalDateLarge =
+    document.getElementById("arrivalDateLarge");
+
+
+const locationStatus =
+    document.getElementById("locationStatus");
+
+
+const studentLocation =
+    document.getElementById("studentLocation");
+
+
+const locationTime =
+    document.getElementById("locationTime");
+
+
+const trackButton =
+    document.getElementById("trackButton");
+
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+// ===============================
+// GET STUDENT ID FROM QR CODE
+//
+// Example:
+// student.html?id=ST001
+// ===============================
 
 const params =
-    new URLSearchParams(
-        window.location.search
-    );
+    new URLSearchParams(window.location.search);
+
 
 const urlStudentID =
     params.get("id");
 
 
-
-/* PUT ID FROM QR INTO LOGIN */
-
 if (urlStudentID) {
 
-    loginID.value =
-        urlStudentID;
+    loginID.value = urlStudentID;
 
 }
 
 
+// ===============================
+// MESSAGE
+// ===============================
 
-/* =====================================================
-   LOGIN
-   ===================================================== */
+function showMessage(message, type = "error") {
+
+    if (!loginMessage) return;
+
+
+    loginMessage.textContent =
+        message;
+
+
+    if (type === "success") {
+
+        loginMessage.style.color =
+            "#00ff99";
+
+    } else {
+
+        loginMessage.style.color =
+            "#ff4d6d";
+
+    }
+
+}
+
+
+// ===============================
+// LOGIN
+// ===============================
 
 loginButton.addEventListener(
     "click",
-    function() {
+    async function () {
 
-
-        const id =
+        const studentID =
             loginID.value.trim();
+
 
         const password =
             loginPassword.value;
 
 
-        if (!id || !password) {
+        if (!studentID || !password) {
 
-            loginMessage.textContent =
-                "Please enter your Student ID and password.";
-
-            loginMessage.style.color =
-                "#ff9b9b";
+            showMessage(
+                "Please enter Student ID and password."
+            );
 
             return;
 
         }
 
 
-        /* REFRESH STUDENT DATA */
-
-        students =
-            JSON.parse(
-                localStorage.getItem(
-                    "schoolStudents"
-                )
-            ) || [];
+        loginButton.disabled = true;
 
 
-        const student =
-            students.find(
-                item =>
-                    item.id.toLowerCase()
-                    === id.toLowerCase()
+        loginButton.innerHTML =
+            "CHECKING... <span>→</span>";
+
+
+        try {
+
+
+            // ===============================
+            // LOGIN REQUEST
+            // ===============================
+
+            const response =
+                await fetch(
+                    "/api/student-login",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            studentID:
+                                studentID,
+
+                            password:
+                                password
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Invalid Student ID or password."
+                );
+
+            }
+
+
+            // ===============================
+            // SAVE LOGGED-IN STUDENT
+            // ===============================
+
+            currentStudent =
+                data.student;
+
+
+            // ===============================
+            // AUTOMATIC ARRIVAL SCAN
+            // ===============================
+
+            try {
+
+                const scanResponse =
+                    await fetch(
+                        "/api/scan/" +
+                        encodeURIComponent(
+                            currentStudent.id
+                        ),
+                        {
+                            method: "POST"
+                        }
+                    );
+
+
+                const scanData =
+                    await scanResponse.json();
+
+
+                if (
+                    scanResponse.ok &&
+                    scanData.student
+                ) {
+
+                    currentStudent = {
+
+                        ...currentStudent,
+
+                        ...scanData.student
+
+                    };
+
+
+                    console.log(
+                        "Automatic arrival recorded:",
+
+                        currentStudent.arrivalTime,
+
+                        currentStudent.arrivalDate
+                    );
+
+                }
+
+            }
+            catch (scanError) {
+
+                console.error(
+                    "Automatic arrival recording failed:",
+                    scanError
+                );
+
+            }
+
+
+            // ===============================
+            // LOGIN SUCCESS
+            // ===============================
+
+            showMessage(
+                "Login successful.",
+                "success"
             );
 
 
-        if (!student) {
+            setTimeout(
+                () => {
 
-            loginMessage.textContent =
-                "Student record not found.";
+                    showStudentRecord(
+                        currentStudent
+                    );
 
-            loginMessage.style.color =
-                "#ff9b9b";
+                },
+                300
+            );
 
-            return;
 
         }
+        catch (error) {
+
+            console.error(error);
 
 
-        if (
-            student.password !==
-            password
-        ) {
-
-            loginMessage.textContent =
-                "Incorrect password.";
-
-            loginMessage.style.color =
-                "#ff9b9b";
-
-            return;
+            showMessage(
+                error.message ||
+                "Unable to connect to the school server."
+            );
 
         }
+        finally {
+
+            loginButton.disabled =
+                false;
 
 
-        /* SUCCESS */
+            loginButton.innerHTML =
+                "ACCESS STUDENT RECORD <span>→</span>";
 
-        showStudentRecord(student);
+        }
 
     }
 );
 
 
-
-/* =====================================================
-   SHOW RECORD
-   ===================================================== */
+// ===============================
+// SHOW STUDENT INFORMATION
+// ===============================
 
 function showStudentRecord(student) {
 
-
-    /*
-     * ARRIVAL TIME
-     *
-     * If this is the first authorized
-     * access and no arrival has been
-     * recorded, record the current
-     * local date and time.
-     */
-
-    if (!student.arrivalTime) {
-
-        const now =
-            new Date();
+    if (!student) return;
 
 
-        student.arrivalTime =
-            now.toLocaleTimeString(
-                [],
-                {
-                    hour: "2-digit",
-                    minute: "2-digit"
-                }
-            );
+    recordName.textContent =
+        student.name || "-";
 
 
-        student.arrivalDate =
-            now.toLocaleDateString();
+    recordClass.textContent =
+        student.className || "-";
 
 
-        /*
-         * Save arrival information
-         */
-
-        const index =
-            students.findIndex(
-                item =>
-                    item.id ===
-                    student.id
-            );
+    recordStatus.textContent =
+        student.status || "Active";
 
 
-        if (index !== -1) {
-
-            students[index] =
-                student;
-
-        }
+    recordID.textContent =
+        student.id || "-";
 
 
-        localStorage.setItem(
-            "schoolStudents",
-            JSON.stringify(
-                students
-            )
-        );
-
-    }
+    recordClassCard.textContent =
+        student.className || "-";
 
 
-
-    /* PROFILE */
-
-    document.getElementById(
-        "recordName"
-    ).textContent =
-        student.name;
+    recordAttendance.textContent =
+        student.attendance !== undefined
+            ? student.attendance
+            : "0";
 
 
-    document.getElementById(
-        "recordClass"
-    ).textContent =
-        "Student ID: " +
-        student.id +
-        "  •  Class: " +
-        student.className;
+    recordPerformance.textContent =
+        student.performance !== undefined
+            ? student.performance
+            : "-";
 
 
-    document.getElementById(
-        "recordID"
-    ).textContent =
-        student.id;
-
-
-    document.getElementById(
-        "recordClassCard"
-    ).textContent =
-        student.className;
-
-
-    document.getElementById(
-        "recordAttendance"
-    ).textContent =
-        student.attendance ||
-        "Not recorded";
-
-
-    document.getElementById(
-        "recordPerformance"
-    ).textContent =
-        student.performance ||
-        "No performance information recorded.";
-
-
-    document.getElementById(
-        "recordStatus"
-    ).textContent =
-        student.status;
-
-
-    /* ARRIVAL */
-
-    document.getElementById(
-        "recordArrival"
-    ).textContent =
+    recordArrival.textContent =
         student.arrivalTime ||
         "Not recorded";
 
 
-    document.getElementById(
-        "recordArrivalDate"
-    ).textContent =
+    recordArrivalDate.textContent =
         student.arrivalDate ||
-        "School arrival record";
+        "Not recorded";
 
 
-    document.getElementById(
-        "arrivalTimeLarge"
-    ).textContent =
+    arrivalTimeLarge.textContent =
         student.arrivalTime ||
         "Not recorded";
 
 
-    document.getElementById(
-        "arrivalDateLarge"
-    ).textContent =
+    arrivalDateLarge.textContent =
         student.arrivalDate ||
-        "Not recorded";
+        "Arrival not recorded";
 
-
-    /* SWITCH PANELS */
 
     loginPanel.style.display =
         "none";
@@ -1306,24 +1790,220 @@ function showStudentRecord(student) {
         "block";
 
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    showMessage("");
 
 }
 
 
+// ===============================
+// TRACK STUDENT LOCATION
+// ===============================
 
-/* =====================================================
-   LOCK RECORD
-   ===================================================== */
-
-document.getElementById(
-    "logoutButton"
-).addEventListener(
+trackButton.addEventListener(
     "click",
-    function() {
+    function () {
+
+
+        if (!currentStudent) {
+
+            locationStatus.textContent =
+                "Please login first.";
+
+            return;
+
+        }
+
+
+        if (!navigator.geolocation) {
+
+            locationStatus.textContent =
+                "Location is not supported on this device.";
+
+            return;
+
+        }
+
+
+        locationStatus.textContent =
+            "Starting live tracking...";
+
+
+        trackButton.disabled =
+            true;
+
+
+        trackButton.textContent =
+            "TRACKING...";
+
+
+        locationWatcher =
+            navigator.geolocation.watchPosition(
+
+                async function (position) {
+
+
+                    const latitude =
+                        position.coords.latitude;
+
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    // ===============================
+                    // SHOW LOCATION ON PAGE
+                    // ===============================
+
+                    studentLocation.textContent =
+                        latitude.toFixed(6) +
+                        ", " +
+                        longitude.toFixed(6);
+
+
+                    const now =
+                        new Date();
+
+
+                    locationTime.textContent =
+                        "Updated: " +
+                        now.toLocaleTimeString();
+
+
+                    locationStatus.textContent =
+                        "LIVE TRACKING ACTIVE";
+
+
+                    // ===============================
+                    // SEND LOCATION TO SERVER
+                    // ===============================
+
+                    try {
+
+                        await fetch(
+                            "/api/location",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    studentID:
+                                        currentStudent.id,
+
+                                    latitude:
+                                        latitude,
+
+                                    longitude:
+                                        longitude
+
+                                })
+
+                            }
+                        );
+
+                    }
+                    catch (error) {
+
+                        console.log(
+                            "Location server update failed:",
+                            error
+                        );
+
+                    }
+
+                },
+
+
+                function (error) {
+
+                    console.error(error);
+
+
+                    locationStatus.textContent =
+                        "Unable to get your location.";
+
+
+                    trackButton.disabled =
+                        false;
+
+
+                    trackButton.textContent =
+                        "📍 START LIVE TRACKING";
+
+                },
+
+
+                {
+
+                    enableHighAccuracy: true,
+
+                    maximumAge: 5000,
+
+                    timeout: 10000
+
+                }
+
+            );
+
+    }
+);
+
+
+// ===============================
+// OPEN TRACKING PAGE
+// ===============================
+
+function openStudentTracking() {
+
+    if (!currentStudent) {
+
+        alert(
+            "Please login first."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "tracking.html?id=" +
+        encodeURIComponent(
+            currentStudent.id
+        );
+
+}
+
+
+// ===============================
+// LOGOUT / LOCK
+// ===============================
+
+logoutButton.addEventListener(
+    "click",
+    function () {
+
+
+        if (locationWatcher !== null) {
+
+            navigator.geolocation.clearWatch(
+                locationWatcher
+            );
+
+            locationWatcher = null;
+
+        }
+
+
+        currentStudent = null;
+
+
+        loginPassword.value = "";
 
 
         recordPanel.style.display =
@@ -1334,171 +2014,44 @@ document.getElementById(
             "block";
 
 
-        loginPassword.value =
-            "";
+        locationStatus.textContent =
+            "Tracking is currently off.";
 
 
-        loginMessage.textContent =
-            "";
+        studentLocation.textContent =
+            "Location unavailable";
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-/* =====================================================
-   LIVE STUDENT LOCATION
-   ===================================================== */
-
-let locationWatcher = null;
+        locationTime.textContent =
+            "Not tracking";
 
 
-/* TRACK BUTTON */
-
-document.getElementById("trackButton").addEventListener(
-    "click",
-    function() {
-
-        const status =
-            document.getElementById("locationStatus");
-
-        const locationText =
-            document.getElementById("studentLocation");
-
-        const timeText =
-            document.getElementById("locationTime");
-
-        const button =
-            document.getElementById("trackButton");
+        trackButton.disabled =
+            false;
 
 
-        /* STOP TRACKING */
-
-        if (locationWatcher !== null) {
-
-            navigator.geolocation.clearWatch(
-                locationWatcher
-            );
-
-            locationWatcher = null;
-
-            status.textContent =
-                "Tracking stopped";
-
-            button.textContent =
-                "📍 START TRACKING";
-
-            return;
-        }
+        trackButton.textContent =
+            "📍 START LIVE TRACKING";
 
 
-        /* CHECK SUPPORT */
-
-        if (!navigator.geolocation) {
-
-            status.textContent =
-                "Location is not supported";
-
-            locationText.textContent =
-                "This device does not support GPS.";
-
-            return;
-        }
-
-
-        status.textContent =
-            "Requesting location permission...";
-
-        button.textContent =
-            "⏹ STOP TRACKING";
-
-
-        /* START LOCATION WATCH */
-
-        locationWatcher =
-            navigator.geolocation.watchPosition(
-
-                function(position) {
-
-                    const latitude =
-                        position.coords.latitude;
-
-                    const longitude =
-                        position.coords.longitude;
-
-
-                    status.textContent =
-                        "🟢 Location tracking active";
-
-
-                    locationText.textContent =
-                        latitude.toFixed(6) +
-                        ", " +
-                        longitude.toFixed(6);
-
-
-                    timeText.textContent =
-                        "Last updated: " +
-                        new Date().toLocaleTimeString();
-
-                },
-
-
-                function(error) {
-
-                    status.textContent =
-                        "Location unavailable";
-
-                    button.textContent =
-                        "📍 START TRACKING";
-
-
-                    if (error.code === 1) {
-
-                        locationText.textContent =
-                            "Location permission was denied.";
-
-                    } else if (error.code === 2) {
-
-                        locationText.textContent =
-                            "Unable to determine location.";
-
-                    } else {
-
-                        locationText.textContent =
-                            "Location request timed out.";
-
-                    }
-
-                    locationWatcher = null;
-                },
-
-                {
-                    enableHighAccuracy: true,
-                    maximumAge: 5000,
-                    timeout: 10000
-                }
-            );
+        showMessage(
+            "Student area locked.",
+            "success"
+        );
 
     }
 );
 
-/* =====================================================
-   ENTER KEY LOGIN
-   ===================================================== */
+
+// ===============================
+// ENTER KEY LOGIN
+// ===============================
 
 loginPassword.addEventListener(
     "keydown",
-    function(event) {
+    function (event) {
 
-        if (
-            event.key ===
-            "Enter"
-        ) {
+        if (event.key === "Enter") {
 
             loginButton.click();
 
@@ -1506,19 +2059,187 @@ loginPassword.addEventListener(
 
     }
 );
-function openStudentTracking() {
 
-    const id =
-        document.getElementById("recordID").textContent.trim();
 
-    if (!id) {
+// ===============================
+// CHANGE PASSWORD
+// ===============================
+
+async function changePassword() {
+
+
+    if (!currentStudent) {
+
+        alert("Please login first.");
+
         return;
+
     }
 
-    window.location.href =
-        "tracking.html?id=" +
-        encodeURIComponent(id);
+
+    const currentPassword =
+        document.getElementById(
+            "currentPassword"
+        ).value;
+
+
+    const newPassword =
+        document.getElementById(
+            "newPassword"
+        ).value;
+
+
+    const confirmPassword =
+        document.getElementById(
+            "confirmPassword"
+        ).value;
+
+
+    const passwordMessage =
+        document.getElementById(
+            "passwordMessage"
+        );
+
+
+    if (
+        !currentPassword ||
+        !newPassword ||
+        !confirmPassword
+    ) {
+
+        passwordMessage.textContent =
+            "Please fill in all password fields.";
+
+
+        passwordMessage.style.color =
+            "#ff4d6d";
+
+
+        return;
+
+    }
+
+
+    if (newPassword !== confirmPassword) {
+
+        passwordMessage.textContent =
+            "New passwords do not match.";
+
+
+        passwordMessage.style.color =
+            "#ff4d6d";
+
+
+        return;
+
+    }
+
+
+    if (newPassword.length < 4) {
+
+        passwordMessage.textContent =
+            "New password must be at least 4 characters.";
+
+
+        passwordMessage.style.color =
+            "#ff4d6d";
+
+
+        return;
+
+    }
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/api/change-password",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        studentId:
+                            currentStudent.id,
+
+                        currentPassword:
+                            currentPassword,
+
+                        newPassword:
+                            newPassword
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to change password."
+            );
+
+        }
+
+
+        passwordMessage.textContent =
+            "Password changed successfully.";
+
+
+        passwordMessage.style.color =
+            "#00ff99";
+
+
+        document.getElementById(
+            "currentPassword"
+        ).value = "";
+
+
+        document.getElementById(
+            "newPassword"
+        ).value = "";
+
+
+        document.getElementById(
+            "confirmPassword"
+        ).value = "";
+
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+
+        passwordMessage.textContent =
+            error.message ||
+            "Could not change password.";
+
+
+        passwordMessage.style.color =
+            "#ff4d6d";
+
+    }
+
 }
+
+
 </script>
 
 
