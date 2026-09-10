@@ -1491,116 +1491,140 @@ function collectSubjects() {
     }
 
 
-    return subjects;
-
+  return subjects;
 }
 
-
-
-/* ================================
-   SAVE STUDENT
-================================ */
-
 studentForm.addEventListener(
-    "submit",
+          "submit",
     async function (event) {
 
         event.preventDefault();
 
-
         const student = {
 
             id:
-                document
-                    .getElementById("studentId")
-                    .value
-                    .trim(),
+                studentId.value.trim() ||
+                "ST" + Date.now(),
 
             name:
-                document
-                    .getElementById("studentName")
-                    .value
-                    .trim(),
+                studentName.value.trim(),
 
-           className: studentClass.value,
-           
+            className:
+                studentClass.value,
+
             password:
-                document
-                    .getElementById("studentPassword")
-                    .value,
+                studentPassword.value.trim(),
 
             parentName:
-                document
-                    .getElementById("parentName")
-                    .value
-                    .trim(),
+                parentNameInput.value.trim(),
 
             parentPhone:
-                document
-                    .getElementById("parentPhone")
-                    .value
-                    .trim(),
+                parentPhoneInput.value.trim(),
 
             medicalInfo:
-                document
-                    .getElementById("medicalInfo")
-                    .value
-                    .trim(),
-photo: studentPhoto.files[0]
-    ? URL.createObjectURL(studentPhoto.files[0])
-    : "",
+                medicalInfo.value.trim(),
+
             subjects:
                 collectSubjects(),
 
-            arrivalDate: "",
-
-            arrivalTime: "",
-
-            departureDate: "",
-
-            departureTime: "",
+            attendance: "",
 
             performance: "",
 
-            trackingStatus: "Not Tracking",
+            status: "ACTIVE",
 
-            latitude: "",
+            feesBalance: "0",
 
-            longitude: "",
-
-            lastUpdated: ""
+            photo: ""
 
         };
 
 
         try {
 
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "name",
+                student.name
+            );
+
+            formData.append(
+                "id",
+                student.id
+            );
+
+            formData.append(
+                "className",
+                student.className
+            );
+
+            formData.append(
+                "password",
+                student.password
+            );
+
+            formData.append(
+                "parentName",
+                student.parentName
+            );
+
+            formData.append(
+                "parentPhone",
+                student.parentPhone
+            );
+
+            formData.append(
+                "medicalInfo",
+                student.medicalInfo
+            );
+
+            formData.append(
+                "subjects",
+                JSON.stringify(
+                    student.subjects
+                )
+            );
+
+            formData.append(
+                "attendance",
+                ""
+            );
+
+            formData.append(
+                "performance",
+                ""
+            );
+
+            formData.append(
+                "status",
+                "ACTIVE"
+            );
+
+            formData.append(
+                "feesBalance",
+                "0"
+            );
+
+
+            if (studentPhoto.files[0]) {
+
+                formData.append(
+                    "photo",
+                    studentPhoto.files[0]
+                );
+
+            }
+
+
             const response =
                 await fetch(
                     "/api/students",
                     {
-
                         method: "POST",
-const formData = new FormData();
-
-formData.append("name", student.name);
-formData.append("id", student.id);
-formData.append("className", student.className);
-formData.append("password", student.password);
-formData.append("parentName", student.parentName);
-formData.append("parentPhone", student.parentPhone);
-formData.append("medicalInfo", student.medicalInfo);
-formData.append("subjects", JSON.stringify(student.subjects));
-formData.append("attendance", student.attendance);
-formData.append("performance", student.performance);
-formData.append("status", student.status);
-formData.append("feesBalance", student.feesBalance || "0");
-
-if (studentPhoto.files[0]) {
-    formData.append("photo", studentPhoto.files[0]);
-}
-
-body: formData
+                        body: formData
                     }
                 );
 
@@ -1631,19 +1655,19 @@ body: formData
 
             studentForm.reset();
 
-            subjectOptions.innerHTML = "";
+            subjectOptions.innerHTML =
+                "";
 
             subjectSection.style.display =
                 "none";
 
 
-            loadStudents();
+            await loadStudents();
 
         }
         catch (error) {
 
             console.error(error);
-
 
             message.className =
                 "message error";
@@ -1659,8 +1683,6 @@ body: formData
 
     }
 );
-
-
 
 /* ================================
    LOAD STUDENTS
@@ -1883,14 +1905,13 @@ function renderStudent(student) {
             </div>
 
 
-            <button
-                class="delete-btn"
-                onclick="deleteStudent('${escapeHTML(student.id)}')">
+         <button onclick="editStudent('${student.id}')" class="edit-btn">
+    ✏️ Edit
+</button>
 
-                DELETE STUDENT
-
-            </button>
-
+<button onclick="deleteStudent('${student.id}')">
+    🗑️ Delete
+</button> 
         </div>
 
     `;
