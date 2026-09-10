@@ -117,8 +117,7 @@ app.get("/api/status", (req, res) => {
    REGISTER STUDENT
 ===================================================== */
 
-app.post("/api/students", (req, res) => {
-
+app.post("/api/students", upload.single("photo"), (req, res) => {
     try {
 
  const {
@@ -201,8 +200,12 @@ app.post("/api/students", (req, res) => {
             performance:
                 String(performance || "").trim(),
 
-            status: String(status || "ACTIVE").trim(),
-photo: String(photo || ""),
+           status: String(status || "ACTIVE").trim(),
+
+photo: req.file
+    ? "/uploads/" + req.file.filename
+    : "",
+
 feesBalance: String(feesBalance || "0"),
 arrivalTime: null,
 arrivalDate: null,
