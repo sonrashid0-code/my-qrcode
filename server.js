@@ -252,7 +252,7 @@ createdAt: new Date().toISOString()        };
                 id: student.id,
 
                 className: student.className,subjects: student.subjects || [],
-
+photo: student.photo || "",
                 parentName: student.parentName,
 
                 parentPhone: student.parentPhone,
