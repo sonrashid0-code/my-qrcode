@@ -477,7 +477,10 @@
                             id="parentPhone"
                             placeholder="Enter phone number">
                     </div>
-
+<div class="form-group">
+    <label for="studentPhoto">Student Photo</label>
+    <input type="file" id="studentPhoto" accept="image/*">
+</div>
                     <div class="form-group full">
 
                         <label>Medical Information</label>
@@ -551,7 +554,7 @@ const studentForm = document.getElementById("studentForm");
 const message = document.getElementById("message");
 const studentsList = document.getElementById("studentsList");
 const totalStudents = document.getElementById("totalStudents");
-
+const studentPhoto = document.getElementById("studentPhoto");
 /* ================================
    SUBJECT LISTS
 ================================ */
@@ -1519,9 +1522,8 @@ studentForm.addEventListener(
                     .value
                     .trim(),
 
-            class:
-                studentClass.value,
-
+           className: studentClass.value,
+           
             password:
                 document
                     .getElementById("studentPassword")
@@ -1544,7 +1546,9 @@ studentForm.addEventListener(
                     .getElementById("medicalInfo")
                     .value
                     .trim(),
-
+photo: studentPhoto.files[0]
+    ? URL.createObjectURL(studentPhoto.files[0])
+    : "",
             subjects:
                 collectSubjects(),
 

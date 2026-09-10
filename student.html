@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -573,7 +573,16 @@
 
                 </div>
 
+<div class="info-item">
+    <span class="info-label">Student Photo</span>
+    <img id="recordPhoto" src="" alt="Student Photo"
+         style="width:80px;height:80px;border-radius:12px;object-fit:cover;">
+</div>
 
+<div class="info-item">
+    <span class="info-label">Fees Balance</span>
+    <span class="info-value" id="recordFees">UGX 0</span>
+</div>
                 <!-- ATTENDANCE -->
 
                 <div class="info-panel">
@@ -1424,6 +1433,10 @@ const recordStatus =
     document.getElementById("recordStatus");
 
 
+const recordPhoto = document.getElementById("recordPhoto");
+const recordFees = document.getElementById("recordFees");
+
+
 const recordID =
     document.getElementById("recordID");
 
@@ -1741,7 +1754,13 @@ function showStudentRecord(student) {
     recordStatus.textContent =
         student.status || "Active";
 
+if (student.photo) {
+    recordPhoto.src = student.photo;
+} else {
+    recordPhoto.src = "";
+}
 
+recordFees.textContent = "UGX " + Number(student.feesBalance || 0).toLocaleString();
     recordID.textContent =
         student.id || "-";
 

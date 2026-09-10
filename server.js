@@ -1,11 +1,27 @@
-// server.js
+﻿// server.js
 
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-
+const multer = require("multer");
 const app = express();
+const uploadDir = path.join(__dirname, "uploads");
 
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        const extension = path.extname(file.originalname);
+        cb(null, Date.now() + "-" + Math.round(Math.random() * 1E9) + extension);
+    }
+});
+
+const upload = multer({ storage });
 app.use(express.json());
 app.use(express.static(__dirname));
 
@@ -105,20 +121,21 @@ app.post("/api/students", (req, res) => {
 
     try {
 
-        const {
-            name,
-            id,
-            className,
-            parentName,
-            parentPhone,
-            medicalInfo,
-            password,
-            attendance,
-            performance,
-            status
-        } = req.body;
-
-
+ const {
+    name,
+    id,
+    className,
+    subjects,
+    parentName,
+    parentPhone,
+    medicalInfo,
+    password,
+    attendance,
+    performance,
+    status,
+    photo,
+    feesBalance
+} = req.body;    
         if (!name || !id || !className || !password) {
 
             return res.status(400).json({
@@ -164,6 +181,7 @@ app.post("/api/students", (req, res) => {
 
             className:
                 String(className).trim(),
+                subjects: Array.isArray(subjects) ? subjects : [],
 
             parentName:
                 String(parentName || "").trim(),
@@ -183,21 +201,18 @@ app.post("/api/students", (req, res) => {
             performance:
                 String(performance || "").trim(),
 
-            status:
-                String(status || "ACTIVE").trim(),
+            status: String(status || "ACTIVE").trim(),
+photo: String(photo || ""),
+feesBalance: String(feesBalance || "0"),
+arrivalTime: null,
+arrivalDate: null,
+lastScan: null,
+departureTime: null,
 
-            arrivalTime: null,
+// Daily attendance
+attendanceRecords: {},
 
-            arrivalDate: null,
-
-            lastScan: null,
-
-            departureTime: null,
-
-            createdAt:
-                new Date().toISOString()
-
-        };
+createdAt: new Date().toISOString()        };
 
 
         students.push(student);
@@ -224,7 +239,7 @@ app.post("/api/students", (req, res) => {
 
                 id: student.id,
 
-                className: student.className,
+                className: student.className,subjects: student.subjects || [],
 
                 parentName: student.parentName,
 
@@ -301,6 +316,7 @@ app.get("/api/students", (req, res) => {
             performance: student.performance,
 
             status: student.status,
+            attendanceRecords: student.attendanceRecords || {},
 
             arrivalTime: student.arrivalTime,
 
@@ -469,7 +485,16 @@ const arrivalDate = now.toLocaleDateString("en-UG", {
         student.lastScan =
             scanTimestamp;
 
+// Mark the student present for today
+const today = now.toLocaleDateString("en-CA", {
+    timeZone: "Africa/Kampala"
+});
 
+if (!student.attendanceRecords) {
+    student.attendanceRecords = {};
+}
+
+student.attendanceRecords[today] = "Present";
         // SAVE UPDATED ARRIVAL
         saveStudents();
 
@@ -554,7 +579,60 @@ const arrivalDate = now.toLocaleDateString("en-UG", {
 
 });
 
+/* DAILY ATTENDANCE */
+app.post("/api/attendance", (req, res) => {
+    try {
+        const { studentID, status, date } = req.body;
 
+        if (!studentID || !status) {
+            return res.status(400).json({
+                success: false,
+                message: "Student ID and attendance status are required."
+            });
+        }
+
+        const student = students.find(
+            item =>
+                item.id.toLowerCase() ===
+                String(studentID).trim().toLowerCase()
+        );
+
+        if (!student) {
+            return res.status(404).json({
+                success: false,
+                message: "Student not found."
+            });
+        }
+
+        const attendanceDate = date || new Date().toLocaleDateString("en-CA", {
+            timeZone: "Africa/Kampala"
+        });
+
+        if (!student.attendanceRecords) {
+            student.attendanceRecords = {};
+        }
+
+        student.attendanceRecords[attendanceDate] = status;
+
+        saveStudents();
+
+        res.json({
+            success: true,
+            message: "Daily attendance saved successfully.",
+            studentID: student.id,
+            date: attendanceDate,
+            status: status
+        });
+
+    } catch (error) {
+        console.error("Attendance error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to save attendance."
+        });
+    }
+});
 /* =====================================================
    STUDENT PASSWORD LOGIN
 ===================================================== */
@@ -657,6 +735,11 @@ app.post("/api/student-login", (req, res) => {
 
             status:
                 student.status,
+
+
+photo: student.photo || "",
+feesBalance: student.feesBalance || "0",
+
 
             arrivalTime:
                 student.arrivalTime,
