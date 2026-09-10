@@ -555,6 +555,23 @@ const message = document.getElementById("message");
 const studentsList = document.getElementById("studentsList");
 const totalStudents = document.getElementById("totalStudents");
 const studentPhoto = document.getElementById("studentPhoto");
+const studentName =
+    document.getElementById("studentName");
+
+const studentId =
+    document.getElementById("studentId");
+
+const studentPassword =
+    document.getElementById("studentPassword");
+
+const parentNameInput =
+    document.getElementById("parentName");
+
+const parentPhoneInput =
+    document.getElementById("parentPhone");
+
+const medicalInfoInput =
+    document.getElementById("medicalInfo");
 /* ================================
    SUBJECT LISTS
 ================================ */
@@ -1495,7 +1512,7 @@ function collectSubjects() {
 }
 
 studentForm.addEventListener(
-          "submit",
+    "submit",
     async function (event) {
 
         event.preventDefault();
@@ -1522,7 +1539,7 @@ studentForm.addEventListener(
                 parentPhoneInput.value.trim(),
 
             medicalInfo:
-                medicalInfo.value.trim(),
+                medicalInfoInput.value.trim(),
 
             subjects:
                 collectSubjects(),
@@ -1588,26 +1605,6 @@ studentForm.addEventListener(
                 )
             );
 
-            formData.append(
-                "attendance",
-                ""
-            );
-
-            formData.append(
-                "performance",
-                ""
-            );
-
-            formData.append(
-                "status",
-                "ACTIVE"
-            );
-
-            formData.append(
-                "feesBalance",
-                "0"
-            );
-
 
             if (studentPhoto.files[0]) {
 
@@ -1619,14 +1616,43 @@ studentForm.addEventListener(
             }
 
 
-            const response =
-                await fetch(
-                    "/api/students",
-                    {
-                        method: "POST",
-                        body: formData
-                    }
-                );
+            let response;
+
+
+            /* ============================
+               UPDATE EXISTING STUDENT
+            ============================ */
+
+            if (editingStudentId) {
+
+                response =
+                    await fetch(
+                        `/api/students/${encodeURIComponent(editingStudentId)}`,
+                        {
+                            method: "PUT",
+                            body: formData
+                        }
+                    );
+
+            }
+
+
+            /* ============================
+               REGISTER NEW STUDENT
+            ============================ */
+
+            else {
+
+                response =
+                    await fetch(
+                        "/api/students",
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+            }
 
 
             const data =
@@ -1647,10 +1673,15 @@ studentForm.addEventListener(
                 "message success";
 
             message.textContent =
-                "Student saved successfully.";
+                editingStudentId
+                    ? "Student updated successfully."
+                    : "Student saved successfully.";
 
             message.style.display =
                 "block";
+
+
+            editingStudentId = null;
 
 
             studentForm.reset();
@@ -1683,7 +1714,6 @@ studentForm.addEventListener(
 
     }
 );
-
 /* ================================
    LOAD STUDENTS
 ================================ */
@@ -1740,7 +1770,46 @@ async function loadStudents() {
             <div class="no-students">
                 Unable to load students.
             </div>
+<div class="student-card">
 
+    ${
+        student.photo
+        ? `
+            <img
+                src="${escapeHTML(student.photo)}"
+                alt="Student Photo"
+                style="
+                    width:120px;
+                    height:120px;
+                    object-fit:cover;
+                    border-radius:50%;
+                    display:block;
+                    margin:0 auto 15px;
+                    border:3px solid var(--primary);
+                "
+            >
+        `
+        : `
+            <div style="
+                width:120px;
+                height:120px;
+                border-radius:50%;
+                margin:0 auto 15px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#111a2f;
+                border:3px solid var(--border);
+                font-size:40px;
+            ">
+                👤
+            </div>
+        `
+    }
+
+    <h3>
+        ${escapeHTML(student.name || "Unnamed Student")}
+    </h3>
         `;
 
     }
