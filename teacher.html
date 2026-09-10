@@ -1,0 +1,1951 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher - SMART STUDENT MANAGEMENT</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #070b16;
+            --panel: #0d1324;
+            --panel2: #111a2f;
+            --border: #202b46;
+            --text: #ffffff;
+            --muted: #9aa7c7;
+            --accent: #7c5cff;
+            --accent2: #00d4ff;
+            --danger: #ff4d67;
+            --success: #27e28b;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(124, 92, 255, 0.16), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(0, 212, 255, 0.10), transparent 35%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            background: rgba(13, 19, 36, 0.95);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--accent2);
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--muted);
+        }
+
+        .panel {
+            background: rgba(13, 19, 36, 0.94);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .panel h2 {
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: var(--muted);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--panel2);
+            color: white;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 13px 20px;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), #5f45d9);
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .save-btn {
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .success {
+            background: rgba(39, 226, 139, 0.12);
+            border: 1px solid rgba(39, 226, 139, 0.3);
+            color: var(--success);
+        }
+
+        .error {
+            background: rgba(255, 77, 103, 0.12);
+            border: 1px solid rgba(255, 77, 103, 0.3);
+            color: #ff8093;
+        }
+
+        /* SUBJECT AREA */
+
+        #subjectSection {
+            margin-top: 10px;
+        }
+
+        #subjectOptions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .subject-row {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) 160px 180px;
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .subject-name {
+            font-weight: bold;
+            color: white;
+        }
+
+        .section-title {
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: var(--accent2);
+            font-weight: bold;
+        }
+
+        .small-note {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        /* S5/S6 SCIENCE / ARTS */
+
+        .stream-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .stream-btn {
+            flex: 1;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        .stream-btn.active {
+            background: linear-gradient(135deg, var(--accent), #5f45d9);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .stream-section {
+            display: none;
+        }
+
+        .stream-section.active {
+            display: block;
+        }
+
+        .checkbox-subject {
+            display: grid;
+            grid-template-columns: 35px 1fr 140px 160px;
+            gap: 10px;
+            align-items: center;
+            padding: 12px;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-subject input[type=checkbox] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-subject label {
+            margin: 0;
+            color: white;
+            font-weight: bold;
+        }
+
+        .career-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(124, 92, 255, 0.08);
+        }
+
+        .career-box h3 {
+            margin-bottom: 10px;
+        }
+
+        .career-list {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        /* REGISTERED STUDENTS */
+
+        .student-card {
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .student-card h3 {
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .student-info strong {
+            color: white;
+        }
+
+        .student-subjects {
+            margin-top: 15px;
+        }
+
+        .student-subjects h4 {
+            margin-bottom: 10px;
+        }
+
+        .subject-chip {
+            display: inline-block;
+            padding: 7px 10px;
+            margin: 4px;
+            border-radius: 8px;
+            background: rgba(124, 92, 255, 0.12);
+            border: 1px solid var(--border);
+            color: white;
+            font-size: 13px;
+        }
+
+        .career-display {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(0, 212, 255, 0.06);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .delete-btn {
+            margin-top: 15px;
+            background: var(--danger);
+        }
+
+        .no-students {
+            color: var(--muted);
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subject-row {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-subject {
+                grid-template-columns: 30px 1fr;
+            }
+
+            .checkbox-subject input[type=number], .checkbox-subject select {
+                grid-column: 2;
+            }
+
+            .student-info {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 0 15px;
+            }
+
+            nav a {
+                margin-left: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            SMART <span>STUDENT MANAGEMENT</span>
+        </div>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="teacher.html">Teacher</a>
+            <a href="qr-generator.html">QR Generator</a>
+            <a href="tracking.html">Tracking</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>Teacher Dashboard</h1>
+            <p>Register students and manage their academic information.</p>
+        </div>
+
+        <!-- REGISTER STUDENT -->
+
+        <div class="panel">
+
+            <h2>Register Student</h2>
+
+            <form id="studentForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Student Name</label>
+                        <input
+                            type="text"
+                            id="studentName"
+                            placeholder="Enter student name"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Student ID</label>
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="Example: ST001"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Class</label>
+
+                        <select id="studentClass" required>
+                            <option value="">Select class</option>
+                            <option value="S1">S1</option>
+                            <option value="S2">S2</option>
+                            <option value="S3">S3</option>
+                            <option value="S4">S4</option>
+                            <option value="S5">S5</option>
+                            <option value="S6">S6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            id="studentPassword"
+                            placeholder="Create student password"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Parent / Guardian Name</label>
+                        <input
+                            type="text"
+                            id="parentName"
+                            placeholder="Enter parent or guardian name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Parent / Guardian Phone</label>
+                        <input
+                            type="text"
+                            id="parentPhone"
+                            placeholder="Enter phone number">
+                    </div>
+
+                    <div class="form-group full">
+
+                        <label>Medical Information</label>
+
+                        <input
+                            type="text"
+                            id="medicalInfo"
+                            placeholder="Enter medical information">
+
+                    </div>
+
+                    <!-- SUBJECT SECTION -->
+
+                    <div
+                        class="form-group full"
+                        id="subjectSection"
+                        style="display:none;">
+
+                        <label>Subjects / Combination</label>
+
+                        <div
+                            id="subjectOptions">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="save-btn">
+                    SAVE STUDENT
+                </button>
+
+                <div
+                    id="message"
+                    class="message">
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- REGISTERED STUDENTS -->
+
+        <div class="panel">
+
+            <h2>Registered Students</h2>
+<p style="color:var(--muted); margin-bottom:15px;">
+    Total students in the school:
+    <strong id="totalStudents">0</strong>
+</p>
+            <div id="studentsList">
+                <div class="no-students">
+                    Loading students...
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+<script>
+
+const studentClass = document.getElementById("studentClass");
+const subjectSection = document.getElementById("subjectSection");
+const subjectOptions = document.getElementById("subjectOptions");
+const studentForm = document.getElementById("studentForm");
+const message = document.getElementById("message");
+const studentsList = document.getElementById("studentsList");
+const totalStudents = document.getElementById("totalStudents");
+
+/* ================================
+   SUBJECT LISTS
+================================ */
+
+
+/* S1 - S2
+   12 subjects
+*/
+
+const lowerSubjects = [
+    "English",
+    "Mathematics",
+    "Biology",
+    "Chemistry",
+    "Physics",
+    "Geography",
+    "History & Political Education",
+    "Kiswahili",
+    "Physical Education",
+    "Religious Education",
+    "Entrepreneurship",
+    "Literature"
+];
+
+
+
+/* S3 - S4
+   7 compulsory
+   + 2 electives
+*/
+
+const compulsorySubjects = [
+    "English",
+    "Mathematics",
+    "Biology",
+    "Chemistry",
+    "Physics",
+    "Geography",
+    "History & Political Education"
+];
+
+const electiveSubjects = [
+    "Literature",
+    "Kiswahili",
+    "Entrepreneurship",
+    "Religious Education",
+    "Physical Education",
+    "Agriculture",
+    "ICT",
+    "Art & Design",
+    "French",
+    "German",
+    "Arabic",
+    "Chinese"
+];
+
+
+
+/* S5 - S6 SCIENCE */
+
+const scienceSubjects = [
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Agriculture",
+    "ICT",
+    "Subsidiary Mathematics"
+];
+
+
+
+/* S5 - S6 ARTS */
+
+const artsSubjects = [
+    "History",
+    "Geography",
+    "Economics",
+    "Literature",
+    "Entrepreneurship",
+    "Religious Education",
+    "Kiswahili",
+    "French",
+    "German",
+    "Arabic",
+    "Chinese",
+    "Art & Design"
+];
+
+
+
+/* ================================
+   PERFORMANCE SELECT
+================================ */
+
+function performanceSelect() {
+
+    return `
+        <select class="subject-grade">
+
+            <option value="">Select Level</option>
+
+            <option value="Basic">
+                Basic
+            </option>
+
+            <option value="Moderate">
+                Moderate
+            </option>
+
+            <option value="Outstanding">
+                Outstanding
+            </option>
+
+        </select>
+    `;
+}
+
+
+
+/* ================================
+   S5/S6 GRADE SELECT
+   A B C D E
+================================ */
+
+function seniorGradeSelect() {
+
+    return `
+        <select class="subject-grade">
+
+            <option value="">
+                Select Grade
+            </option>
+
+            <option value="A">A</option>
+
+            <option value="B">B</option>
+
+            <option value="C">C</option>
+
+            <option value="D">D</option>
+
+            <option value="E">E</option>
+
+        </select>
+    `;
+}
+
+
+
+/* ================================
+   CREATE NORMAL SUBJECT ROW
+================================ */
+
+function createNormalSubject(subject) {
+
+    return `
+
+        <div
+            class="subject-row"
+            data-subject="${subject}">
+
+            <div class="subject-name">
+                ${subject}
+            </div>
+
+            <input
+                type="number"
+                class="subject-mark"
+                min="0"
+                max="100"
+                placeholder="Mark">
+
+            ${performanceSelect()}
+
+        </div>
+
+    `;
+}
+
+
+
+/* ================================
+   CREATE S5/S6 SUBJECT ROW
+================================ */
+
+function createSeniorSubject(subject) {
+
+    return `
+
+        <div
+            class="checkbox-subject"
+            data-subject="${subject}">
+
+            <input
+                type="checkbox"
+                class="senior-subject-check">
+
+            <label>
+                ${subject}
+            </label>
+
+            <input
+                type="number"
+                class="senior-subject-mark"
+                min="0"
+                max="100"
+                placeholder="Mark">
+
+            ${seniorGradeSelect()}
+
+        </div>
+
+    `;
+}
+
+
+
+/* ================================
+   CLASS CHANGED
+================================ */
+
+studentClass.addEventListener("change", function () {
+
+    const selectedClass = this.value;
+
+    subjectOptions.innerHTML = "";
+
+    if (!selectedClass) {
+
+        subjectSection.style.display = "none";
+
+        return;
+    }
+
+    subjectSection.style.display = "block";
+
+
+    /* ============================
+       S1 - S2
+    ============================ */
+
+    if (
+        selectedClass === "S1" ||
+        selectedClass === "S2"
+    ) {
+
+        subjectOptions.innerHTML = `
+
+            <div class="section-title">
+                12 SUBJECTS
+            </div>
+
+            <div class="small-note">
+                Enter the mark and select the performance level
+                for each subject.
+            </div>
+
+            ${lowerSubjects
+                .map(subject => createNormalSubject(subject))
+                .join("")
+            }
+
+        `;
+
+    }
+
+
+    /* ============================
+       S3 - S4
+    ============================ */
+
+    else if (
+        selectedClass === "S3" ||
+        selectedClass === "S4"
+    ) {
+
+        subjectOptions.innerHTML = `
+
+            <div class="section-title">
+                7 COMPULSORY SUBJECTS
+            </div>
+
+            <div class="small-note">
+                These subjects are compulsory.
+            </div>
+
+            ${compulsorySubjects
+                .map(subject => createNormalSubject(subject))
+                .join("")
+            }
+
+
+            <div class="section-title">
+                2 ELECTIVES
+            </div>
+
+            <div class="small-note">
+                Select up to 2 elective subjects.
+            </div>
+
+            <div id="electiveRows">
+
+                ${electiveSubjects
+                    .map(subject => `
+
+                        <div
+                            class="checkbox-subject elective-row"
+                            data-subject="${subject}">
+
+                            <input
+                                type="checkbox"
+                                class="elective-check">
+
+                            <label>
+                                ${subject}
+                            </label>
+
+                            <input
+                                type="number"
+                                class="elective-mark"
+                                min="0"
+                                max="100"
+                                placeholder="Mark">
+
+                            ${performanceSelect()}
+
+                        </div>
+
+                    `)
+                    .join("")
+                }
+
+            </div>
+
+        `;
+
+
+        /* Limit electives to exactly 2 */
+
+        document
+            .querySelectorAll(".elective-check")
+            .forEach(check => {
+
+                check.addEventListener("change", function () {
+
+                    const checked =
+                        document.querySelectorAll(
+                            ".elective-check:checked"
+                        );
+
+                    if (checked.length > 2) {
+
+                        this.checked = false;
+
+                        alert(
+                            "You can select only 2 electives."
+                        );
+
+                    }
+
+                });
+
+            });
+
+    }
+
+
+    /* ============================
+       S5 - S6
+    ============================ */
+
+    else if (
+        selectedClass === "S5" ||
+        selectedClass === "S6"
+    ) {
+
+        subjectOptions.innerHTML = `
+
+            <div class="section-title">
+                SUBJECT COMBINATION
+            </div>
+
+            <div class="small-note">
+                Choose SCIENCE or ARTS, then select the
+                student's subjects and enter the marks
+                and grades.
+            </div>
+
+
+            <div class="stream-buttons">
+
+                <button
+                    type="button"
+                    class="stream-btn"
+                    id="scienceBtn">
+
+                    SCIENCE
+
+                </button>
+
+                <button
+                    type="button"
+                    class="stream-btn"
+                    id="artsBtn">
+
+                    ARTS
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="scienceSection"
+                class="stream-section">
+
+                <div class="section-title">
+                    SCIENCE SUBJECTS
+                </div>
+
+                ${scienceSubjects
+                    .map(subject =>
+                        createSeniorSubject(subject)
+                    )
+                    .join("")
+                }
+
+            </div>
+
+
+            <div
+                id="artsSection"
+                class="stream-section">
+
+                <div class="section-title">
+                    ARTS SUBJECTS
+                </div>
+
+                ${artsSubjects
+                    .map(subject =>
+                        createSeniorSubject(subject)
+                    )
+                    .join("")
+                }
+
+            </div>
+
+
+            <div
+                id="careerBox"
+                class="career-box"
+                style="display:none;">
+
+                <h3>
+                    Possible Career Paths
+                </h3>
+
+                <div
+                    id="careerList"
+                    class="career-list">
+                </div>
+
+            </div>
+
+        `;
+
+
+        const scienceBtn =
+            document.getElementById("scienceBtn");
+
+        const artsBtn =
+            document.getElementById("artsBtn");
+
+        const scienceSection =
+            document.getElementById("scienceSection");
+
+        const artsSection =
+            document.getElementById("artsSection");
+
+
+        scienceBtn.addEventListener(
+            "click",
+            function () {
+
+                scienceBtn.classList.add("active");
+                artsBtn.classList.remove("active");
+
+                scienceSection.classList.add("active");
+                artsSection.classList.remove("active");
+
+                updateCareers();
+
+            }
+        );
+
+
+        artsBtn.addEventListener(
+            "click",
+            function () {
+
+                artsBtn.classList.add("active");
+                scienceBtn.classList.remove("active");
+
+                artsSection.classList.add("active");
+                scienceSection.classList.remove("active");
+
+                updateCareers();
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(".senior-subject-check")
+            .forEach(check => {
+
+                check.addEventListener(
+                    "change",
+                    updateCareers
+                );
+
+            });
+
+    }
+
+});
+
+
+
+/* ================================
+   CAREER MAPPING
+================================ */
+
+function getCareersForSubjects(subjects) {
+
+    const careers = new Set();
+
+
+    subjects.forEach(subject => {
+
+        if (
+            subject === "Mathematics" ||
+            subject === "Physics"
+        ) {
+
+            careers.add("Engineering");
+            careers.add("Architecture");
+
+        }
+
+
+        if (
+            subject === "Biology" ||
+            subject === "Chemistry"
+        ) {
+
+            careers.add("Medicine and Health Sciences");
+            careers.add("Laboratory Science");
+
+        }
+
+
+        if (
+            subject === "Agriculture"
+        ) {
+
+            careers.add("Agriculture");
+            careers.add("Agricultural Science");
+
+        }
+
+
+        if (
+            subject === "ICT"
+        ) {
+
+            careers.add("Software Development");
+            careers.add("Information Technology");
+            careers.add("Computer Science");
+
+        }
+
+
+        if (
+            subject === "Economics"
+        ) {
+
+            careers.add("Economics");
+            careers.add("Banking and Finance");
+            careers.add("Business");
+
+        }
+
+
+        if (
+            subject === "Geography"
+        ) {
+
+            careers.add("Geography");
+            careers.add("Environmental Management");
+
+        }
+
+
+        if (
+            subject === "History" ||
+            subject === "History & Political Education"
+        ) {
+
+            careers.add("Law");
+            careers.add("Public Administration");
+
+        }
+
+
+        if (
+            subject === "Literature"
+        ) {
+
+            careers.add("Journalism");
+            careers.add("Writing and Communication");
+
+        }
+
+
+        if (
+            subject === "Art & Design"
+        ) {
+
+            careers.add("Graphic Design");
+            careers.add("Creative Arts");
+
+        }
+
+
+        if (
+            subject === "French" ||
+            subject === "German" ||
+            subject === "Arabic" ||
+            subject === "Chinese"
+        ) {
+
+            careers.add("Translation and Interpretation");
+            careers.add("Languages and Communication");
+
+        }
+
+
+        if (
+            subject === "Entrepreneurship"
+        ) {
+
+            careers.add("Entrepreneurship");
+            careers.add("Business Management");
+
+        }
+
+
+        if (
+            subject === "Religious Education"
+        ) {
+
+            careers.add("Religious Studies");
+            careers.add("Community Development");
+
+        }
+
+    });
+
+
+    return Array.from(careers);
+
+}
+
+
+
+/* ================================
+   UPDATE CAREERS
+================================ */
+
+function updateCareers() {
+
+    const careerBox =
+        document.getElementById("careerBox");
+
+    const careerList =
+        document.getElementById("careerList");
+
+    if (!careerBox || !careerList) {
+        return;
+    }
+
+
+    const selectedSubjects =
+        Array.from(
+            document.querySelectorAll(
+                ".senior-subject-check:checked"
+            )
+        )
+        .map(check =>
+            check.closest(".checkbox-subject")
+                .dataset.subject
+        );
+
+
+    const careers =
+        getCareersForSubjects(
+            selectedSubjects
+        );
+
+
+    if (careers.length === 0) {
+
+        careerBox.style.display = "none";
+
+        careerList.innerHTML = "";
+
+        return;
+    }
+
+
+    careerBox.style.display = "block";
+
+
+    careerList.innerHTML =
+        careers
+            .map(career =>
+                `<div>• ${escapeHTML(career)}</div>`
+            )
+            .join("");
+
+}
+
+
+
+/* ================================
+   ESCAPE HTML
+================================ */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* ================================
+   COLLECT SUBJECTS
+================================ */
+
+function collectSubjects() {
+
+    const selectedClass =
+        studentClass.value;
+
+    const subjects = [];
+
+
+    /* ============================
+       S1 - S2
+    ============================ */
+
+    if (
+        selectedClass === "S1" ||
+        selectedClass === "S2"
+    ) {
+
+        document
+            .querySelectorAll(".subject-row")
+            .forEach(row => {
+
+                const subject =
+                    row.dataset.subject;
+
+                const mark =
+                    row.querySelector(
+                        ".subject-mark"
+                    ).value;
+
+                const grade =
+                    row.querySelector(
+                        ".subject-grade"
+                    ).value;
+
+                subjects.push({
+
+                    subject: subject,
+
+                    mark: mark,
+
+                    grade: grade
+
+                });
+
+            });
+
+    }
+
+
+    /* ============================
+       S3 - S4
+    ============================ */
+
+    else if (
+        selectedClass === "S3" ||
+        selectedClass === "S4"
+    ) {
+
+        document
+            .querySelectorAll(
+                "#subjectOptions .subject-row"
+            )
+            .forEach(row => {
+
+                const subject =
+                    row.dataset.subject;
+
+                const mark =
+                    row.querySelector(
+                        ".subject-mark"
+                    ).value;
+
+                const grade =
+                    row.querySelector(
+                        ".subject-grade"
+                    ).value;
+
+                subjects.push({
+
+                    subject: subject,
+
+                    mark: mark,
+
+                    grade: grade
+
+                });
+
+            });
+
+
+        document
+            .querySelectorAll(
+                ".elective-check:checked"
+            )
+            .forEach(check => {
+
+                const row =
+                    check.closest(
+                        ".elective-row"
+                    );
+
+                const subject =
+                    row.dataset.subject;
+
+                const mark =
+                    row.querySelector(
+                        ".elective-mark"
+                    ).value;
+
+                const grade =
+                    row.querySelector(
+                        ".subject-grade"
+                    ).value;
+
+                subjects.push({
+
+                    subject: subject,
+
+                    mark: mark,
+
+                    grade: grade
+
+                });
+
+            });
+
+    }
+
+
+    /* ============================
+       S5 - S6
+       A B C D E
+    ============================ */
+
+    else if (
+        selectedClass === "S5" ||
+        selectedClass === "S6"
+    ) {
+
+        document
+            .querySelectorAll(
+                ".senior-subject-check:checked"
+            )
+            .forEach(check => {
+
+                const row =
+                    check.closest(
+                        ".checkbox-subject"
+                    );
+
+                const subject =
+                    row.dataset.subject;
+
+                const mark =
+                    row.querySelector(
+                        ".senior-subject-mark"
+                    ).value;
+
+                const grade =
+                    row.querySelector(
+                        ".subject-grade"
+                    ).value;
+
+
+                subjects.push({
+
+                    subject: subject,
+
+                    mark: mark,
+
+                    grade: grade
+
+                });
+
+            });
+
+    }
+
+
+    return subjects;
+
+}
+
+
+
+/* ================================
+   SAVE STUDENT
+================================ */
+
+studentForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        const student = {
+
+            id:
+                document
+                    .getElementById("studentId")
+                    .value
+                    .trim(),
+
+            name:
+                document
+                    .getElementById("studentName")
+                    .value
+                    .trim(),
+
+            class:
+                studentClass.value,
+
+            password:
+                document
+                    .getElementById("studentPassword")
+                    .value,
+
+            parentName:
+                document
+                    .getElementById("parentName")
+                    .value
+                    .trim(),
+
+            parentPhone:
+                document
+                    .getElementById("parentPhone")
+                    .value
+                    .trim(),
+
+            medicalInfo:
+                document
+                    .getElementById("medicalInfo")
+                    .value
+                    .trim(),
+
+            subjects:
+                collectSubjects(),
+
+            arrivalDate: "",
+
+            arrivalTime: "",
+
+            departureDate: "",
+
+            departureTime: "",
+
+            performance: "",
+
+            trackingStatus: "Not Tracking",
+
+            latitude: "",
+
+            longitude: "",
+
+            lastUpdated: ""
+
+        };
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/students",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(student)
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Failed to save student."
+                );
+
+            }
+
+
+            message.className =
+                "message success";
+
+            message.textContent =
+                "Student saved successfully.";
+
+            message.style.display =
+                "block";
+
+
+            studentForm.reset();
+
+            subjectOptions.innerHTML = "";
+
+            subjectSection.style.display =
+                "none";
+
+
+            loadStudents();
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+
+            message.className =
+                "message error";
+
+            message.textContent =
+                error.message ||
+                "Could not save student.";
+
+            message.style.display =
+                "block";
+
+        }
+
+    }
+);
+
+
+
+/* ================================
+   LOAD STUDENTS
+================================ */
+
+async function loadStudents() {
+
+    try {
+
+        const response =
+            await fetch("/api/students");
+
+
+        const data =
+            await response.json();
+
+
+        const students =
+            data.students || [];
+            totalStudents.textContent = students.length;
+
+
+        if (students.length === 0) {
+
+            studentsList.innerHTML = `
+
+                <div class="no-students">
+                    No students registered yet.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        studentsList.innerHTML =
+            students
+                .map(student =>
+                    renderStudent(student)
+                )
+                .join("");
+
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        studentsList.innerHTML = `
+
+            <div class="no-students">
+                Unable to load students.
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+/* ================================
+   RENDER STUDENT
+================================ */
+
+function renderStudent(student) {
+
+    const subjects =
+        student.subjects || [];
+
+
+    const subjectHTML =
+        subjects.length
+            ? subjects
+                .map(item => `
+
+                    <span class="subject-chip">
+
+                        ${escapeHTML(item.subject)}
+
+                        ${
+                            item.mark !== undefined &&
+                            item.mark !== ""
+                            ? ` - ${escapeHTML(item.mark)}`
+                            : ""
+                        }
+
+                        ${
+                            item.grade
+                            ? ` (${escapeHTML(item.grade)})`
+                            : ""
+                        }
+
+                    </span>
+
+                `)
+                .join("")
+            : "<span>No subjects recorded</span>";
+
+
+    const careerSubjects =
+        subjects.map(item =>
+            item.subject
+        );
+
+
+    const careers =
+        getCareersForSubjects(
+            careerSubjects
+        );
+
+
+    const careersHTML =
+        careers.length
+            ? careers
+                .map(career =>
+                    `<div>• ${escapeHTML(career)}</div>`
+                )
+                .join("")
+            : "No career paths available yet.";
+
+
+    return `
+
+        <div class="student-card">
+
+            <h3>
+                ${escapeHTML(student.name || "Unnamed Student")}
+            </h3>
+
+
+            <div class="student-info">
+
+                <div>
+                    <strong>Student ID:</strong>
+                    ${escapeHTML(student.id || "")}
+                </div>
+
+                <div>
+                    <strong>Class:</strong>
+                    ${escapeHTML(student.class || "")}
+                </div>
+
+                <div>
+                    <strong>Parent:</strong>
+                    ${escapeHTML(student.parentName || "")}
+                </div>
+
+                <div>
+                    <strong>Parent Phone:</strong>
+                    ${escapeHTML(student.parentPhone || "")}
+                </div>
+
+                <div>
+                    <strong>Medical:</strong>
+                    ${escapeHTML(student.medicalInfo || "")}
+                </div>
+
+                <div>
+                    <strong>Arrival Date:</strong>
+                    ${escapeHTML(student.arrivalDate || "Not scanned")}
+                </div>
+
+                <div>
+                    <strong>Arrival Time:</strong>
+                    ${escapeHTML(student.arrivalTime || "Not scanned")}
+                </div>
+
+                <div>
+                    <strong>Tracking:</strong>
+                    ${escapeHTML(student.trackingStatus || "Not Tracking")}
+                </div>
+
+                <div>
+                    <strong>Latitude:</strong>
+                    ${escapeHTML(student.latitude || "N/A")}
+                </div>
+
+                <div>
+                    <strong>Longitude:</strong>
+                    ${escapeHTML(student.longitude || "N/A")}
+                </div>
+
+                <div>
+                    <strong>Last Updated:</strong>
+                    ${escapeHTML(student.lastUpdated || "N/A")}
+                </div>
+
+            </div>
+
+
+            <div class="student-subjects">
+
+                <h4>
+                    Subjects, Marks & Grades
+                </h4>
+
+                ${subjectHTML}
+
+            </div>
+
+
+            <div class="career-display">
+
+                <strong>
+                    Possible Career Paths
+                </strong>
+
+                <div class="career-list">
+
+                    ${careersHTML}
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="delete-btn"
+                onclick="deleteStudent('${escapeHTML(student.id)}')">
+
+                DELETE STUDENT
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* ================================
+   DELETE STUDENT
+================================ */
+
+async function deleteStudent(id) {
+
+    if (!confirm(
+        "Are you sure you want to delete this student?"
+    )) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/students/${encodeURIComponent(id)}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Failed to delete student."
+            );
+
+        }
+
+
+        loadStudents();
+
+    }
+    catch (error) {
+
+        alert(
+            error.message ||
+            "Could not delete student."
+        );
+
+    }
+
+}
+
+
+
+/* ================================
+   INITIAL LOAD
+================================ */
+
+loadStudents();
+
+</script>
+
+</body>
+
+</html>
