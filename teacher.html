@@ -1918,7 +1918,87 @@ function renderStudent(student) {
 
 }
 
+/* ================================
+   EDIT STUDENT
+================================ */
 
+async function editStudent(id) {
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/students/${encodeURIComponent(id)}`
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Could not load student."
+            );
+
+        }
+
+        const student =
+            data.student;
+
+        studentName.value =
+            student.name || "";
+
+        studentId.value =
+            student.id || "";
+
+        studentClass.value =
+            student.className || "";
+
+        studentPassword.value =
+            student.password || "";
+
+        parentNameInput.value =
+            student.parentName || "";
+
+        parentPhoneInput.value =
+            student.parentPhone || "";
+
+        medicalInfoInput.value =
+            student.medicalInfo || "";
+
+        message.className =
+            "message success";
+
+        message.textContent =
+            "Student loaded for editing.";
+
+        message.style.display =
+            "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            error.message ||
+            "Could not load student.";
+
+        message.style.display =
+            "block";
+
+    }
+
+}
 
 /* ================================
    DELETE STUDENT
