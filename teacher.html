@@ -1581,15 +1581,26 @@ photo: studentPhoto.files[0]
                     {
 
                         method: "POST",
+const formData = new FormData();
 
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
+formData.append("name", student.name);
+formData.append("id", student.id);
+formData.append("className", student.className);
+formData.append("password", student.password);
+formData.append("parentName", student.parentName);
+formData.append("parentPhone", student.parentPhone);
+formData.append("medicalInfo", student.medicalInfo);
+formData.append("subjects", JSON.stringify(student.subjects));
+formData.append("attendance", student.attendance);
+formData.append("performance", student.performance);
+formData.append("status", student.status);
+formData.append("feesBalance", student.feesBalance || "0");
 
-                        body:
-                            JSON.stringify(student)
+if (studentPhoto.files[0]) {
+    formData.append("photo", studentPhoto.files[0]);
+}
 
+body: formData
                     }
                 );
 
