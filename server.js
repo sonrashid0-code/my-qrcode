@@ -180,8 +180,17 @@ app.post("/api/students", upload.single("photo"), (req, res) => {
 
             className:
                 String(className).trim(),
-                subjects: Array.isArray(subjects) ? subjects : [],
-
+                subjects: (() => {
+    try {
+        return typeof subjects === "string"
+            ? JSON.parse(subjects)
+            : Array.isArray(subjects)
+                ? subjects
+                : [];
+    } catch {
+        return [];
+    }
+})(),
             parentName:
                 String(parentName || "").trim(),
 
