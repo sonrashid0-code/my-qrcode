@@ -2058,11 +2058,8 @@ async function editStudent(id) {
     try {
 
         const response =
-            await fetch(
-                `/api/students/${encodeURIComponent(id)}`
-            );
-
-        const data =
+            await fetch(`https://my-qrcode.onrender.com/api/students/${encodeURIComponent(editingStudentId)}`, {
+            const data =
             await response.json();
 
         if (!response.ok) {
@@ -2150,10 +2147,8 @@ async function deleteStudent(id) {
     try {
 
         const response =
-            await fetch(
-                `/api/students/${encodeURIComponent(id)}`,
-                {
-                    method: "DELETE"
+            await   fetch(`https://my-qrcode.onrender.com/api/students/${encodeURIComponent(editingStudentId)}`, { 
+            method: "DELETE"
                 }
             );
 
