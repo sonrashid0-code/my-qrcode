@@ -477,10 +477,29 @@
                             id="parentPhone"
                             placeholder="Enter phone number">
                     </div>
-<div class="form-group">
+                    <div class="form-group">
     <label for="studentPhoto">Student Photo</label>
-    <input type="file" id="studentPhoto" accept="image/*">
+
+    <input
+        type="file"
+        id="studentPhoto"
+        accept="image/*">
+
+    <img
+        id="photoPreview"
+        src=""
+        alt="Student Photo Preview"
+        style="
+            display:none;
+            width:120px;
+            height:120px;
+            object-fit:cover;
+            border-radius:50%;
+            margin-top:12px;
+            border:3px solid var(--accent2);
+        ">
 </div>
+
                     <div class="form-group full">
 
                         <label>Medical Information</label>
@@ -555,6 +574,33 @@ const message = document.getElementById("message");
 const studentsList = document.getElementById("studentsList");
 const totalStudents = document.getElementById("totalStudents");
 const studentPhoto = document.getElementById("studentPhoto");
+const photoPreview =
+    document.getElementById("photoPreview");
+
+studentPhoto.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) {
+        photoPreview.src = "";
+        photoPreview.style.display = "none";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        photoPreview.src = event.target.result;
+
+        photoPreview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
 const studentName =
     document.getElementById("studentName");
 
@@ -1882,6 +1928,22 @@ function renderStudent(student) {
     return `
 
         <div class="student-card">
+        
+        ${student.photo ? `
+    <img
+        src="${student.photo}"
+        alt="Student Photo"
+        style="
+            width:90px;
+            height:90px;
+            object-fit:cover;
+            border-radius:50%;
+            display:block;
+            margin:0 auto 15px;
+            border:3px solid var(--accent2);
+        "
+    >
+` : ""}
 
             <h3>
                 ${escapeHTML(student.name || "Unnamed Student")}
@@ -1894,7 +1956,7 @@ function renderStudent(student) {
                     <strong>Student ID:</strong>
                     ${escapeHTML(student.id || "")}
                 </div>
-
+s
                 <div>
                     <strong>Class:</strong>
                     ${escapeHTML(student.class || "")}
@@ -2014,6 +2076,7 @@ async function editStudent(id) {
 
         const student =
             data.student;
+editingStudentId = student.id;
 
         studentName.value =
             student.name || "";

@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 app.use(express.json());
 app.use(express.static(__dirname));
-
+app.use("/uploads", express.static(uploadDir));
 const PORT = process.env.PORT || 5000;
 
 
@@ -264,7 +264,7 @@ photo: student.photo || "",
                 performance: student.performance,
 
                 status: student.status,
-
+                
                 arrivalTime: student.arrivalTime,
 
                 arrivalDate: student.arrivalDate,
