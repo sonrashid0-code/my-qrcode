@@ -1672,15 +1672,14 @@ studentForm.addEventListener(
 
             if (editingStudentId) {
 
-                response =
-                    await fetch(
-                        `/api/students/${encodeURIComponent(editingStudentId)}`,
-                        {
-                            method: "PUT",
-                            body: formData
-                        }
-                    );
-
+             response =
+    await fetch(
+        `https://my-qrcode.onrender.com/api/students/${encodeURIComponent(editingStudentId)}`,
+        {
+            method: "PUT",
+            body: formData
+        }
+    );   
             }
 
 
@@ -1770,7 +1769,7 @@ async function loadStudents() {
     try {
 
         const response =
-            await fetch("/api/students");
+            await fetch("https://my-qrcode.onrender.com/api/students");
 
 
         const data =
