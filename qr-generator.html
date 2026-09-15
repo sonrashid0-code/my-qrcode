@@ -864,8 +864,7 @@ const downloadBtn =
 /* =====================================================
    LOAD STUDENTS
    ===================================================== */
-
-function loadStudents() {
+async function loadStudents() {
 
     studentSelect.innerHTML = `
         <option value="">
@@ -873,94 +872,75 @@ function loadStudents() {
         </option>
     `;
 
-
     try {
 
-        students =
-            JSON.parse(
-                localStorage.getItem(
-                    "schoolStudents"
-                )
-            ) || [];
-
-    }
-
-    catch(error) {
-
-        students = [];
-
-    }
-
-
-
-    /*
-       TEST STUDENT
-
-       If there are no registered students yet,
-       create one test student.
-    */
-
-    if (
-        !Array.isArray(students) ||
-        students.length === 0
-    ) {
-
-        students = [
-
-            {
-                id: "ST001",
-                name: "Demo Student",
-                className: "Senior 3"
-            }
-
-        ];
-
-        localStorage.setItem(
-            "schoolStudents",
-            JSON.stringify(students)
+        const response = await fetch(
+            "https://my-qrcode.onrender.com/api/students"
         );
 
-    }
+        const data = await response.json();
 
+        if (!data.success || !Array.isArray(data.students)) {
 
+            throw new Error("Could not load students.");
 
-    students.forEach(
-        function(student) {
+        }
+
+        students = data.students;
+
+        if (students.length === 0) {
+
+            studentSelect.innerHTML = `
+                <option value="">
+                    No registered students
+                </option>
+            `;
+
+            return;
+        }
+
+        students.forEach(function(student) {
 
             if (!student.id) {
                 return;
             }
 
-
             const option =
-                document.createElement(
-                    "option"
-                );
+                document.createElement("option");
 
-
-            option.value =
-                student.id;
-
+            option.value = student.id;
 
             option.textContent =
-                (student.name || "Student")
-                +
-                " — "
-                +
+                (student.name || "Student") +
+                " — " +
                 student.id;
 
+            studentSelect.appendChild(option);
 
-            studentSelect.appendChild(
-                option
-            );
+        });
 
-        }
-    );
+    }
 
+    catch (error) {
+
+        console.error(
+            "Error loading students:",
+            error
+        );
+
+        studentSelect.innerHTML = `
+            <option value="">
+                Unable to load students
+            </option>
+        `;
+
+        message.textContent =
+            "Could not load students from the server.";
+
+        message.style.color =
+            "#ff9b9b";
+    }
 }
-
-
-
 /* =====================================================
    SELECT STUDENT
    ===================================================== */
