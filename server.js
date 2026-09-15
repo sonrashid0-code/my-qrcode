@@ -352,7 +352,6 @@ app.get("/api/students", (req, res) => {
     });
 
 });
-
 /* =====================================================
    EDIT STUDENT
    ===================================================== */
@@ -364,14 +363,16 @@ app.put("/api/students/:studentID", upload.single("photo"), (req, res) => {
         const studentID =
             String(req.params.studentID || "").trim();
 
-        const student =
-            students.find(
-                item =>
-                    item.id.toLowerCase() ===
-                    studentID.toLowerCase()
-            );
+        const body = req.body || {};
 
-        if (!student) {
+        const index = students.findIndex(
+            student =>
+                student &&
+                String(student.id || "").trim().toLowerCase() ===
+                studentID.toLowerCase()
+        );
+
+        if (index === -1) {
 
             return res.status(404).json({
                 success: false,
@@ -380,28 +381,43 @@ app.put("/api/students/:studentID", upload.single("photo"), (req, res) => {
 
         }
 
-        student.name =
-            req.body.name || student.name;
+        const student = students[index];
 
-        student.className =
-            req.body.className || student.className;
+        if (body.name !== undefined) {
+            student.name = body.name;
+        }
 
-        student.password =
-            req.body.password || student.password;
+        if (body.className !== undefined) {
+            student.className = body.className;
+        }
 
-        student.parentName =
-            req.body.parentName || "";
+        if (body.password) {
+            student.password = body.password;
+        }
 
-        student.parentPhone =
-            req.body.parentPhone || "";
+        if (body.parentName !== undefined) {
+            student.parentName = body.parentName;
+        }
 
-        student.medicalInfo =
-            req.body.medicalInfo || "";
+        if (body.parentPhone !== undefined) {
+            student.parentPhone = body.parentPhone;
+        }
 
-        student.subjects =
-            req.body.subjects
-                ? JSON.parse(req.body.subjects)
-                : (student.subjects || []);
+        if (body.medicalInfo !== undefined) {
+            student.medicalInfo = body.medicalInfo;
+        }
+
+        if (body.subjects) {
+
+            try {
+                student.subjects =
+                    JSON.parse(body.subjects);
+            } catch (error) {
+                student.subjects =
+                    student.subjects || [];
+            }
+
+        }
 
         if (req.file) {
             student.photo =
@@ -410,22 +426,29 @@ app.put("/api/students/:studentID", upload.single("photo"), (req, res) => {
 
         saveStudents();
 
-        res.json({
+        return res.json({
             success: true,
             message: "Student updated successfully.",
-            student: student
+            student: {
+                name: student.name,
+                id: student.id,
+                className: student.className,
+                parentName: student.parentName,
+                parentPhone: student.parentPhone,
+                medicalInfo: student.medicalInfo,
+                status: student.status,
+                photo: student.photo || ""
+            }
         });
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Student update error:",
             error
         );
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Unable to update student."
         });
