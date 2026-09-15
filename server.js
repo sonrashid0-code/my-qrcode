@@ -1,4 +1,3 @@
-
 ﻿// server.js
 
 const express = require("express");
@@ -354,82 +353,86 @@ app.get("/api/students", (req, res) => {
 
 });
 
-
 /* =====================================================
-   GET ONE STUDENT
-===================================================== */
+   EDIT STUDENT
+   ===================================================== */
 
-app.get("/api/students/:studentID", (req, res) => {
+app.put("/api/students/:studentID", upload.single("photo"), (req, res) => {
 
-    const studentID =
-        String(
-            req.params.studentID || ""
-        ).trim();
+    try {
 
+        const studentID =
+            String(req.params.studentID || "").trim();
 
-    const student =
-        students.find(
-            item =>
-                item.id.toLowerCase() ===
-                studentID.toLowerCase()
-        );
+        const student =
+            students.find(
+                item =>
+                    item.id.toLowerCase() ===
+                    studentID.toLowerCase()
+            );
 
+        if (!student) {
 
-    if (!student) {
+            return res.status(404).json({
+                success: false,
+                message: "Student not found."
+            });
 
-        return res.status(404).json({
+        }
 
-            success: false,
+        student.name =
+            req.body.name || student.name;
 
-            message:
-                "Student not found."
+        student.className =
+            req.body.className || student.className;
 
+        student.password =
+            req.body.password || student.password;
+
+        student.parentName =
+            req.body.parentName || "";
+
+        student.parentPhone =
+            req.body.parentPhone || "";
+
+        student.medicalInfo =
+            req.body.medicalInfo || "";
+
+        student.subjects =
+            req.body.subjects
+                ? JSON.parse(req.body.subjects)
+                : (student.subjects || []);
+
+        if (req.file) {
+            student.photo =
+                "/uploads/" + req.file.filename;
+        }
+
+        saveStudents();
+
+        res.json({
+            success: true,
+            message: "Student updated successfully.",
+            student: student
         });
 
     }
 
+    catch (error) {
 
-    res.json({
+        console.error(
+            "Student update error:",
+            error
+        );
 
-        success: true,
+        res.status(500).json({
+            success: false,
+            message: "Unable to update student."
+        });
 
-        student: {
-
-            name: student.name,
-
-            id: student.id,
-
-            className: student.className,
-
-            parentName: student.parentName,
-
-            parentPhone: student.parentPhone,
-
-            medicalInfo: student.medicalInfo,
-
-            attendance: student.attendance,
-
-            performance: student.performance,
-
-            status: student.status,
-
-            arrivalTime: student.arrivalTime,
-
-            arrivalDate: student.arrivalDate,
-
-            lastScan: student.lastScan,
-
-            departureTime: student.departureTime,
-
-            createdAt: student.createdAt
-
-        }
-
-    });
+    }
 
 });
-
-
 /* =====================================================
    QR SCAN
    AUTOMATIC ARRIVAL TIME
@@ -1028,6 +1031,20 @@ app.use(
 
     }
 );
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`School Tracking Server running at http://localhost:${PORT}`);
-});
+
+
+/* =====================================================
+   START SERVER
+===================================================== */
+
+app.listen(
+    PORT,
+    "0.0.0.0",
+    () => {
+
+        console.log(
+            `School Tracking Server running on port ${PORT}`
+        );
+
+    }
+);
