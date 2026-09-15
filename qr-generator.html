@@ -1108,12 +1108,9 @@ generateBtn.addEventListener(
            with that student's ID.
         */
 
-       const qrData = new URL(
-    "http://192.168.43.47:5000/student.html?id=" + encodeURIComponent(student.id),
-    window.location.href
-).href;
-
-
+ const qrData =
+    "https://my-qrcode.onrender.com/student.html?id=" +
+    encodeURIComponent(student.id);
 
         qrcode.innerHTML = "";
 
