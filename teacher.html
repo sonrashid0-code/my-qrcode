@@ -1153,38 +1153,38 @@ studentClass.addEventListener(
 
                 <div class="stream-buttons">
 
-                    <button
-                        type="button"
-                        class="stream-btn"
-                        id="scienceBtn">
+    <button
+        type="button"
+        class="stream-btn"
+        id="scienceBtn">
 
-                        SCIENCE
+        SCIENCE
 
-                    </button>
+    </button>
 
+    <button
+        type="button"
+        class="stream-btn"
+        id="artsBtn">
 
-                    <button
-                        type="button"
-                        class="stream-btn"
-                        id="artsBtn">
+        ARTS
 
-                        ARTS
+    </button>
 
-                    </button>
+</div>
 
-                </div>
 
 <div
     id="scienceSection"
     class="stream-section">
 
     <div class="section-title">
-        SCIENCE COMBINATIONS
+        SCIENCE COMBINATION
     </div>
 
     <select id="scienceCombination">
         <option value="">
-            Select a combination
+            Select combination
         </option>
 
         ${scienceCombinations
@@ -1194,11 +1194,18 @@ studentClass.addEventListener(
                 </option>
             `)
             .join("")}
+
     </select>
 
-    <div class="section-title" style="margin-top:20px;">
+
+    <div
+        class="section-title"
+        style="margin-top:20px;">
+
         SCIENCE SUBJECTS
+
     </div>
+
 
     <div id="scienceSubjectsContainer">
 
@@ -1209,24 +1216,42 @@ studentClass.addEventListener(
     </div>
 
 </div>
-                <div
-                    id="careerBox"
-                    class="career-box"
-                    style="display:none;">
 
-                    <h3>
-                        Possible Career Paths
-                    </h3>
 
-                    <div
-                        id="careerList"
-                        class="career-list">
-                    </div>
 
-                </div>
 
-            `;
+   <div
+    id="artsSection"
+    class="stream-section">
 
+    <div class="section-title">
+        ARTS SUBJECTS
+    </div>
+
+    ${artsSubjects
+        .map(createSeniorSubject)
+        .join("")}
+
+</div>
+
+
+<div
+    id="careerBox"
+    class="career-box"
+    style="display:none;">
+
+    <h3>
+        Possible Career Paths
+    </h3>
+
+    <div
+        id="careerList"
+        class="career-list">
+    </div>
+
+</div>
+
+`;             
 
             const scienceBtn =
                 document.getElementById(
