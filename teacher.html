@@ -1174,37 +1174,41 @@ studentClass.addEventListener(
 
                 </div>
 
+<div
+    id="scienceSection"
+    class="stream-section">
 
-                <div
-                    id="scienceSection"
-                    class="stream-section">
+    <div class="section-title">
+        SCIENCE COMBINATIONS
+    </div>
 
-                    <div class="section-title">
-                        SCIENCE SUBJECTS
-                    </div>
+    <select id="scienceCombination">
+        <option value="">
+            Select a combination
+        </option>
 
-                    ${scienceSubjects
-                        .map(createSeniorSubject)
-                        .join("")}
+        ${scienceCombinations
+            .map(combination => `
+                <option value="${combination.name}">
+                    ${combination.name}
+                </option>
+            `)
+            .join("")}
+    </select>
 
-                </div>
+    <div class="section-title" style="margin-top:20px;">
+        SCIENCE SUBJECTS
+    </div>
 
+    <div id="scienceSubjectsContainer">
 
-                <div
-                    id="artsSection"
-                    class="stream-section">
+        ${scienceSubjects
+            .map(createSeniorSubject)
+            .join("")}
 
-                    <div class="section-title">
-                        ARTS SUBJECTS
-                    </div>
+    </div>
 
-                    ${artsSubjects
-                        .map(createSeniorSubject)
-                        .join("")}
-
-                </div>
-
-
+</div>
                 <div
                     id="careerBox"
                     class="career-box"
