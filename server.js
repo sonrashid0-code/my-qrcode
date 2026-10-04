@@ -1,21 +1,11 @@
 ﻿// server.js
 
 const express = require("express");
+const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
 const app = express();
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(200);
-    }
-
-    next();
-});
 const uploadDir = path.join(__dirname, "uploads");
 
 if (!fs.existsSync(uploadDir)) {
@@ -363,6 +353,78 @@ app.get("/api/students", (req, res) => {
     });
 
 });
+
+/* =====================================================
+   GET ONE STUDENT
+===================================================== */
+
+app.get("/api/students/:studentID", (req, res) => {
+
+    try {
+
+        const studentID =
+            String(
+                req.params.studentID || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const student =
+            students.find(
+                item =>
+                    String(item.id || "")
+                        .trim()
+                        .toLowerCase() ===
+                    studentID
+            );
+
+
+        if (!student) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message:
+                    "Student not found."
+
+            });
+
+        }
+
+
+        res.json({
+
+            success: true,
+
+            student: student
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Get student error:",
+            error
+        );
+
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Unable to load student."
+
+        });
+
+    }
+
+});
+
 /* =====================================================
    EDIT STUDENT
    ===================================================== */
