@@ -345,6 +345,9 @@ app.get("/api/students", (req, res) => {
             performance: student.performance,
 
             status: student.status,
+
+subjects: student.subjects || [],
+            
             attendanceRecords: student.attendanceRecords || {},
 
             arrivalTime: student.arrivalTime,
