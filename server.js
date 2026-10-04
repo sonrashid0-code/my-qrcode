@@ -472,7 +472,35 @@ app.put("/api/students/:studentID", upload.single("photo"), (req, res) => {
             });
 
         }
+        // Allow changing the student ID
+        if (body.id !== undefined) {
 
+            const newID =
+                String(body.id || "").trim();
+
+            if (!newID) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Student ID cannot be empty."
+                });
+            }
+
+            const duplicate = students.some(
+                (item, itemIndex) =>
+                    itemIndex !== index &&
+                    String(item.id || "").trim().toLowerCase() ===
+                    newID.toLowerCase()
+            );
+
+            if (duplicate) {
+                return res.status(409).json({
+                    success: false,
+                    message: "A student with this ID already exists."
+                });
+            }
+
+            student.id = newID;
+        }
         const student = students[index];
 
         if (body.name !== undefined) {
